@@ -5,35 +5,32 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/compras.css' %}">
+    <link rel="stylesheet" href="{% static 'css/prestamos.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="shortcut icon" href="{%  static 'img/favicon.ico' %}">
-    <title>Gastron-O-Matic</title>
+    <!-- <link rel="shortcut icon" href="{%  static 'img/favicon.ico' %}"> -->
+    <title>Prest.Ar</title>
   </head>
 
 <body>
   <nav>
   		<div class="menu">
-  		<div class="menuheader"><img src="{% static "img/logoGOM_med.png" %}" alt="Gastr-O-Matic"></div>
+  		<div class="menuheader"><img src="" alt="Prest.Ar"></div>
   		{% if user.is_authenticated %}
-      <a href="{% url 'producto_new' %}"><div class="botones button1"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;NUEVO PRODUCTO</div></a>
-      <a href="{% url 'factura_new' %}"><div class="botones button2"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;NUEVA FACTURA</div></a>
-  		<a href="{% url 'proveedor_new' %}"><div class="botones button3"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;NUEVO PROVEEDOR</div></a>
+      <a href="{% url 'simulacion_new' %}"><div class="botones button1"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;NUEVA SIMULACIÓN</div></a>
+
       {% else %}
-      <div class="botones button1"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;NUEVO PRODUCTO</div>
-      <div class="botones button2"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;NUEVA FACTURA</div>
-      <div class="botones button3"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;NUEVO PROVEEDOR</div>
+      <div class="botones button1"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;NUEVA SIMULACIÓN</div>
+
       {% endif %}
-      <a href="{% url 'product_list' %}"><div class="botones button4"><span class="glyphicon glyphicon-barcode"></span>&nbsp;&nbsp;&nbsp;VER PRODUCTOS</div></a>
-  		<a href="{% url 'proveedor_list' %}"><div class="botones button5"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;VER PROVEEDORES</div></a>
-      <a href="{% url 'factura_list' %}"><div class="botones button6"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;VER FACTURAS</div></a>
+      <a href="{% url 'simulaciones_list' %}"><div class="botones button4"><span class="glyphicon glyphicon-barcode"></span>&nbsp;&nbsp;&nbsp;VER SIMULACIONES</div></a>
+
 
   	</div>
     <div class="menu menufooter">
       {% if user.is_authenticated %}
       <p class="mayus">USUARIO: {{ user.username }}</p>
       <br>
-      <p><a href="{% url 'logout' %}">CERRAR SESIÓN&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-log-out"></span></a><p>
+      <p><a href="">CERRAR SESIÓN&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-log-out"></span></a><p>
       {% else %}
       <div>EL USUARIO NO SE ENCUENTRA AUTENTICADO</div>
       <br>
@@ -48,7 +45,7 @@
   {% endblock %}
 
   <footer>
-    <div style="padding-top:20px"><img src="{% static "img/logo_chicoBN.png" %}" alt="Gastr-O-Matic"> | Godoy & Bertuzzi Inc. © MMXIX</div>
+    <div style="padding-top:20px"><img src="" alt="Prest.Ar"> | Avedaño, Bertuzzi, Congreado & Eyria © MMXXI</div>
   </footer>
 
   </body>

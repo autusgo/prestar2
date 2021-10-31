@@ -1,0 +1,40 @@
+{% extends 'simulador/base.html' %}
+
+{% block content %}
+<header>
+	SIMULACIÓN (simulacion_detail.html)
+</header>
+
+<main>
+  {% if user.is_authenticated %}
+    <p>The user is authenticated</p>
+  {% endif %}
+
+<form target="_self" class="simulacion">{% csrf_token %}
+			<div class="caja">
+     			<div class="grid-item titulo mayus">{{ simulacion.nom_ape }}
+						{% if user.is_authenticated %}
+            <div style="text-align:right"><a href="{% url 'simulacion_edit' pk=simulacion.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;&nbsp;
+							{% if proveedor.deuda == 0 %}
+            <a onclick="return confirm('¿Está seguro de que desea eliminar la simulación?');" href="{% url 'simulacion_remove' pk=simulacion.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
+							{% endif %}
+						</div>
+						{% endif %}
+					</div>
+          <div class="grid-item texto">NOMBRE y APELLIDO</div>
+          <div class="grid-item">{{ simulacion.nom_ape }}</div>
+          <div class="grid-item texto">MONTO SOLICITADO</div>
+          <div class="grid-item">{{ simulacion.monto}}</div>
+          <div class="grid-item texto">TASA de INTERÉS</div>
+          <div class="grid-item">3%</div>
+          <div class="grid-item texto">TELÉFONO</div>
+          <div class="grid-item">{{ proveedor.teléfono }}</div>
+          <div class="grid-item texto">CORREO ELECTRÓNICO</div>
+          <div class="grid-item">{{ proveedor.correo_electrónico }}</div>
+					<div class="grid-item texto">DEUDA TOTAL</div>
+					<div class="grid-item">$ {{ proveedor.deuda }}</div>
+			</div>
+	</form>
+
+</main>
+{% endblock %}
