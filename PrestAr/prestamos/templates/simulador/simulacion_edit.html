@@ -5,9 +5,9 @@
 </header>
 
 <main>
-<form target="_self"  method="POST" class="proveedor-form">{% csrf_token %}
+<form target="_self"  method="POST" class="simulacion-form">{% csrf_token %}
 			<div class="caja">
-     			<div class="grid-item titulo">DATOS DEL PROVEEDOR</div>
+     			<div class="grid-item titulo">DATOS DEL EMPRENDEDOR</div>
 
           <div class="grid-item texto">NOMBRE y APELLIDO</div>
           <div class="grid-item">{{ form.nom_ape }}</div>
@@ -16,7 +16,7 @@
           <div class="grid-item texto">CANTIDAD de CUOTAS</div>
           <div class="grid-item">{{ form.cant_cuotas }}</div>
           <div class="grid-item texto">TASA de INTERÉS</div>
-          <div class="grid-item">3%</div>
+          <div class="grid-item">{{ form.tasa_anual }}</div>
 			</div>
 		<button class="save btn btn-default">ENVIAR</button>
 	</form>

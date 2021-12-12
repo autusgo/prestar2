@@ -5,7 +5,7 @@ from django.utils import timezone
 
 class Simulacion(models.Model):
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     nom_ape = models.CharField(max_length=200)
     monto = models.IntegerField()
     created_date = models.DateTimeField(default=timezone.now)
