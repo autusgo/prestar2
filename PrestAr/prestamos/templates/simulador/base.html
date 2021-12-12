@@ -30,7 +30,7 @@
       {% if user.is_authenticated %}
       <p class="mayus"><span class="glyphicon glyphicon-user">&nbsp;</span>USUARIO: {{ user.username }}</p>
       <br>
-      <p><a href=""><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;&nbsp;CERRAR SESIÓN</span></a><p>
+      <p><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;&nbsp;CERRAR SESIÓN</span></a><p>
       {% else %}
       <div>EL USUARIO NO SE ENCUENTRA AUTENTICADO</div>
       <br>
