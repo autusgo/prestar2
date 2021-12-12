@@ -49,3 +49,17 @@ def simulacion_edit(request, pk):
     else:
         form = SimulacionForm(instance=simulacion)
     return render(request, 'simulador/simulacion_edit.html', {'form': form})
+
+
+def sobre_conami(request):
+    simulaciones = SimulacionFilter(
+        request.GET, queryset=Simulacion.objects.all())
+
+    return render(request, 'simulador/sobre_conami.html', {'filter': simulaciones})
+
+
+def sobre_creditos(request):
+    simulaciones = SimulacionFilter(
+        request.GET, queryset=Simulacion.objects.all())
+
+    return render(request, 'simulador/sobre_creditos.html', {'filter': simulaciones})
