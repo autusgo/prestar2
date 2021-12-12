@@ -12,24 +12,24 @@
 
 <form target="_self" class="simulacion">{% csrf_token %}
 			<div class="caja">
-     			<div class="grid-item titulo mayus">{{ simulacion.nom_ape }}
+        <div class="grid-item titulo mayus"><span><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;SIMULACIÓN #{{ simulacion.id }}</span>
 						{% if user.is_authenticated %}
-            <div style="text-align:right"><a href="{% url 'simulacion_edit' pk=simulacion.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;&nbsp;
+            <!-- <div style="text-align:right"><a href="{% url 'simulacion_edit' pk=simulacion.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;&nbsp;
 							{% if proveedor.deuda == 0 %}
             <a onclick="return confirm('¿Está seguro de que desea eliminar la simulación?');" href="{% url 'simulacion_remove' pk=simulacion.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
 							{% endif %}
-						</div>
+						</div> -->
 						{% endif %}
 					</div>
           <div class="grid-item texto">NOMBRE y APELLIDO</div>
           <div class="grid-item">{{ simulacion.nom_ape }}</div>
           <div class="grid-item texto">MONTO SOLICITADO</div>
-          <div class="grid-item">{{ simulacion.monto}}</div>
+          <div class="grid-item">$ {{ simulacion.monto}}</div>
           <div class="grid-item texto">TASA de INTERÉS</div>
           <div class="grid-item">{{ simulacion.tasa_anual }}% T.E.A.</div>
-          <div class="grid-item texto">CANTIDAD DE CUOTAS</div>
+          <div class="grid-item texto">CANTIDAD de CUOTAS</div>
           <div class="grid-item">{{ simulacion.cant_cuotas }}</div>
-          <div class="grid-item texto">VALOR DE LA CUOTA</div>
+          <div class="grid-item texto">VALOR de la CUOTA</div>
           <div class="grid-item">$ {{ simulacion.calculo_cuota }}</div>
           <div class="grid-item texto">CORREO ELECTRÓNICO</div>
           <div class="grid-item">{{ simulacion.created_date }}</div>

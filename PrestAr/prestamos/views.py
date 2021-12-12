@@ -5,6 +5,13 @@ from .forms import *
 from .models import *
 
 
+def sim_index(request):
+    simulaciones = SimulacionFilter(
+        request.GET, queryset=Simulacion.objects.all())
+
+    return render(request, 'simulador/sim_index.html', {'filter': simulaciones})
+
+
 def simulaciones_list(request):
     simulaciones = SimulacionFilter(
         request.GET, queryset=Simulacion.objects.all())

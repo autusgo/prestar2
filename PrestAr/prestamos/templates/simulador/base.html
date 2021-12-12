@@ -22,7 +22,7 @@
       <div class="botones button1"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;NUEVA SIMULACIÓN</div>
 
       {% endif %}
-      <a href="{% url 'simulaciones_list' %}"><div class="botones button4"><span class="glyphicon glyphicon-barcode"></span>&nbsp;&nbsp;&nbsp;VER SIMULACIONES</div></a>
+      <a href="{% url 'simulaciones_list' %}"><div class="botones button4"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;VER SIMULACIONES</div></a>
 
 
   	</div>
@@ -30,7 +30,7 @@
       {% if user.is_authenticated %}
       <p class="mayus"><span class="glyphicon glyphicon-user">&nbsp;</span>USUARIO: {{ user.username }}</p>
       <br>
-      <p><a href="">CERRAR SESIÓN&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-log-out"></span></a><p>
+      <p><a href=""><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;&nbsp;CERRAR SESIÓN</span></a><p>
       {% else %}
       <div>EL USUARIO NO SE ENCUENTRA AUTENTICADO</div>
       <br>

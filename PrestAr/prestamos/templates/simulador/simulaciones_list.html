@@ -20,7 +20,7 @@
 
 <form target="_self"  method="POST" class="simulacion">
 			<div class="caja">
-     			<div class="grid-item titulo mayus"><a href="{% url 'simulacion_detail' pk=simulacion.pk %}"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;{{ simulacion.nom_ape }}</a></div>
+     			<div class="grid-item titulo mayus"><a href="{% url 'simulacion_detail' pk=simulacion.pk %}"><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;SIMULACIÓN #{{ simulacion.id }}</a></div>
 
           <div class="grid-item texto">NOMBRE</div>
           <div class="grid-item">{{ simulacion.nom_ape }}</div>
