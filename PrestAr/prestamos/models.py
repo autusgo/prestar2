@@ -5,12 +5,15 @@ from django.utils import timezone
 
 class Simulacion(models.Model):
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
-    nom_ape = models.CharField(max_length=200)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    nom_ape = models.CharField(max_length=200,)
     monto = models.IntegerField()
-    created_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(
+        default=timezone.now)
     tasa_anual = models.SmallIntegerField()
     cant_cuotas = models.SmallIntegerField()
+    telefono = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
 
     def publish(self):
         self.created_date = timezone.now()

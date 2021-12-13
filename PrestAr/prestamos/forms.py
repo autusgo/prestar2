@@ -5,7 +5,7 @@ from .models import *
 class SimulacionForm(forms.ModelForm):
     class Meta:
         model = Simulacion
-        fields = ['nom_ape', 'monto',
+        fields = ['nom_ape', 'telefono', 'email', 'monto',
                   'cant_cuotas', 'tasa_anual']
         initial = 3
 

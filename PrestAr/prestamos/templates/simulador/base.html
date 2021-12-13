@@ -31,13 +31,12 @@
   	</div>
     <div class="menu menufooter">
       {% if user.is_authenticated %}
-      <p class="mayus"><span class="glyphicon glyphicon-user">&nbsp;</span>USUARIO: {{ user.username }}</p>
+      <p class="mayus"><span class="glyphicon glyphicon-user">&nbsp;</span>{{ user.username }}</p>
       <br>
       <p><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;&nbsp;CERRAR SESIÓN</span></a><p>
       {% else %}
       <div>EL USUARIO NO SE ENCUENTRA AUTENTICADO</div>
       <br>
-      <div>MODO SÓLO LECTURA</div>
       <br>
       <p><a href="{% url 'login' %}">ACCEDER&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-log-in"></span></a><p>
       {% endif %}

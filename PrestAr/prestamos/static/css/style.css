@@ -47,8 +47,8 @@ a:hover {
 }
 
 .menufooter {
-  padding: 70px 35px 70px 35px;
-  text-align: center;
+  padding: 220px 35px 70px 35px;
+  text-align: left;
   font-size: 15px;
 }
 
@@ -91,12 +91,13 @@ a:hover {
 nav {
   grid-area: menu;
   background-color: #daebfb;
+  min-height: 900px;
 }
 
 header {
   grid-area: header;
   font-size: 40px;
-  padding: 70px 70px 100px 70px;
+  padding: 70px 70px 70px 70px;
   text-align: center;
 }
 
@@ -109,7 +110,7 @@ footer {
 
 main {
   grid-area: main;
-  padding-bottom: 150px;
+  padding-bottom: 50px;
   padding-left: 300px;
   padding-right: 300px;
 }
