@@ -51,6 +51,12 @@ def simulacion_edit(request, pk):
     return render(request, 'simulador/simulacion_edit.html', {'form': form})
 
 
+def simulacion_remove(request, pk):
+    simulacion = get_object_or_404(Simulacion, pk=pk)
+    simulacion.delete()
+    return render(request, 'simulador/simulaciones_list.html', {'filter': simulacion})
+
+
 def sobre_conami(request):
     simulaciones = SimulacionFilter(
         request.GET, queryset=Simulacion.objects.all())
