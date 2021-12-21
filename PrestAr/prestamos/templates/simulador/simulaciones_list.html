@@ -15,8 +15,16 @@
 		<div class="box2" value="SIMULACION">{{ filter.form.nom_ape }}</div>
 		<div class="box3"></div>
 		
-		<div class="box1" value="created_date">FECHA</div>
-		<div class="box2" value="FECHA">{{ filter.form.created_date }}</div>
+		<div class="box1" value="created_date">DESDE FECHA</div>
+		<div class="box2" value="FECHA">{{ filter.form.start_date }}</div>
+		<div class="box3"></div>
+
+		<div class="box1" value="created_date">HASTA FECHA</div>
+		<div class="box2" value="FECHA">{{ filter.form.end_date }}</div>
+		<div class="box3"></div>
+
+		<!-- <div class="box1" value="monto">MONTO</div>
+		<div class="box2" value="MONTO">{{ filter.form.monto_desde }}</div> -->
 		<div class="box3"><input class="save btn btn-default"  type="submit" value="FILTRAR" /></div>
 		
 
@@ -40,7 +48,7 @@
           <div class="grid-item texto">VALOR DE LA CUOTA</div>
           <div class="grid-item">$ {{ simulacion.calculo_cuota }}</div>
 					<div class="grid-item texto">SIMULADO EN</div>
-					<div class="grid-item">$ {{ simulacion.created_date }}</div>
+					<div class="grid-item">$ {{ simulacion.created_date | date }}</div>
 			</div>
 	</form>
   {% endfor %}
