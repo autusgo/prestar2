@@ -6,7 +6,7 @@ from django.utils import timezone
 class Simulacion(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    nom_ape = models.CharField(max_length=200,)
+    nom_ape = models.CharField(max_length=200)
     monto = models.IntegerField()
     created_date = models.DateTimeField(
         default=timezone.now)
@@ -25,4 +25,4 @@ class Simulacion(models.Model):
         return round(calculo_cuota, 2)
 
     def __unicode__(self):
-        return '{} {}'.format(self.nom_ape, self.created_date)
+        return '{} {} {}'.format(self.nom_ape, self.created_date, self.email)

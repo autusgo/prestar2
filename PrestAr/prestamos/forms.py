@@ -7,7 +7,7 @@ class SimulacionForm(forms.ModelForm):
         model = Simulacion
         fields = ['nom_ape', 'telefono', 'email', 'monto',
                   'cant_cuotas', 'tasa_anual']
-        initial = 3
+        # initial = 3
 
     def __init__(self, *args, **kwargs):
         super(SimulacionForm, self).__init__(*args, **kwargs)

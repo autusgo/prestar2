@@ -8,13 +8,20 @@
 
 
 
-	<!-- <form method="GET">
+	<form method="GET">
 		<div class="busqueda_pro">
-		 <div class="box1" value="APELLIDO">APELLIDO</div>
-		 <div class="box2" value="PROVEEDOR">{{ filter.form.apellido }}</div>
-		 <div class="box3"><input class="save btn btn-default"  type="submit" value="FILTRAR" /></div>
+
+		<div class="box1" value="APELLIDO">APELLIDO</div>
+		<div class="box2" value="SIMULACION">{{ filter.form.nom_ape }}</div>
+		<div class="box3"></div>
+		
+		<div class="box1" value="created_date">FECHA</div>
+		<div class="box2" value="FECHA">{{ filter.form.created_date }}</div>
+		<div class="box3"><input class="save btn btn-default"  type="submit" value="FILTRAR" /></div>
+		
+
 		</div>
-	</form> -->
+	</form>
 
   {% for simulacion in filter.qs %}
 
