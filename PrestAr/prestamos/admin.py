@@ -3,7 +3,7 @@ from .models import *
 
 
 class SimulacionAdmin(admin.ModelAdmin):
-    list_display = ['nom_ape', 'created_date', 'calculo_cuota']
+    list_display = ['apellido', 'created_date', 'dni', 'calculo_cuota']
 
 
 admin.site.register(Simulacion, SimulacionAdmin)

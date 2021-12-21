@@ -29,8 +29,8 @@ def simulacion_new(request):
         form = SimulacionForm(request.POST)
         if form.is_valid():
             simulacion = form.save(commit=False)
-            #post.author = request.user
-            #post.published_date = timezone.now()
+            if request.user.is_authenticated:
+                simulacion.author = request.user
             simulacion.save()
             return redirect('simulacion_detail', pk=simulacion.pk)
     else:

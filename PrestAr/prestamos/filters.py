@@ -10,7 +10,7 @@ class DateInput(forms.DateInput):
 
 
 class SimulacionFilter(django_filters.FilterSet):
-    nom_ape = CharFilter(field_name="nom_ape", lookup_expr='icontains')
+    apellido = CharFilter(field_name="apellido", lookup_expr='icontains')
     start_date = DateFilter(field_name="created_date",
                             lookup_expr='gte', widget=DateInput)
     end_date = DateFilter(field_name="created_date",

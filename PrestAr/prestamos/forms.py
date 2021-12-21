@@ -5,8 +5,8 @@ from .models import *
 class SimulacionForm(forms.ModelForm):
     class Meta:
         model = Simulacion
-        fields = ['nom_ape', 'telefono', 'email', 'monto',
-                  'cant_cuotas', 'tasa_anual']
+        fields = ['apellido', 'nombre', 'telefono', 'email', 'monto',
+                  'cant_cuotas', 'tasa_anual', 'dni']
         # initial = 3
 
     def __init__(self, *args, **kwargs):
