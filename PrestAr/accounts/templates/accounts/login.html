@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+    
+<head>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/prestamos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<title>prest.ar</title>
+
+</head>
+<body>
+	<header>
+        <div><img class="logo" src="/static/img/prestarnegroHD@4x.png" alt="Prest.Ar"></div>
+        
+    </header>
+	<nav></nav>
+	<main>
+		<form target="_self" method="POST" class="login">{% csrf_token %}
+					<div class="caja">
+						 <div class="grid-item titulo">PANEL DE ACCESO
+		
+							</div>
+				  <div class="grid-item texto">USUARIO</div>
+				  <div class="grid-item"><input type="text" name="username"></div>
+				  <div class="grid-item texto">CONTRASEÑA</div>
+				  <div class="grid-item"><input type="password" name="password"></div>
+				  
+					</div>
+			  <button class="save btn btn-default">ACCEDER</button>
+			</form>
+
+
+				<div class="d-flex justify-content-center links">
+					¿No tenés cuenta? <a href="{% url 'register' %}" class="ml-2">Registrate</a>
+				</div>
+
+
+		</main>
+
+
+
+
+	<div class="container h-100">
+	
+				{% for message in messages %}
+					<p id="messages">{{message}}</p>
+				{% endfor %}			
+		
+	</div>
+
+	<footer>
+		<div style="padding-top:20px"><img src="/static/img/prestar_negro_CHICO.png" alt="Prest.Ar"> | Avedaño, Bertuzzi, Congreado & Eyria © MMXXI</div>
+	</footer>
+
+</body>
+
+</html>
+{% endblock %}

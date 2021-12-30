@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # own
     'prestamos',
+    'accounts',
     # third party
     'django_filters',
 ]

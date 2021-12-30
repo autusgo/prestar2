@@ -3,6 +3,19 @@ from django.utils import timezone
 from .filters import SimulacionFilter
 from .forms import *
 from .models import *
+from django.contrib.auth.forms import UserCreationForm
+
+
+# def register(resquest):
+#     form = UserCreationForm()
+
+#     if request.method == 'POST':
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+
+#     context = {'form': form}
+#     return render(request, 'registration/register.html', context)
 
 
 def sim_index(request):
