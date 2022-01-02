@@ -22,6 +22,7 @@ urlpatterns = [
     path('', include('prestamos.urls')),
     path('', include('accounts.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
 
     # path('register/', include('django.contrib.auth.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
