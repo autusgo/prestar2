@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 from .models import *
 from .forms import *
-from .filters import OrderFilter
+# from .filters import OrderFilter
 
 
 def registerPage(request):
@@ -28,6 +28,8 @@ def registerPage(request):
                 messages.success(request, 'Account was created for ' + user)
 
                 return redirect('login')
+            else:
+                messages.info(request, 'invalid registration details')
 
         context = {'form': form}
         return render(request, 'accounts/register.html', context)
