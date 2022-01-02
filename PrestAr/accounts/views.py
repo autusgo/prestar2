@@ -15,6 +15,29 @@ from .forms import *
 # from .filters import OrderFilter
 
 
+# @login_required
+# def registerPage(request):
+#     if request.method == 'POST':
+#         user_form = CreateUserForm(request.POST, instance=request.user)
+#         emprendedor_form = EmprendedorForm(
+#             request.POST, instance=request.user.emprendedor)
+#         if user_form.is_valid() and emprendedor_form.is_valid():
+#             user_form.save()
+#             emprendedor_form.save()
+#             messages.success(request, _(
+#                 'Your emprendedor was successfully updated!'))
+#             return redirect('settings:emprendedor')
+#         else:
+#             messages.error(request, _('Please correct the error below.'))
+#     else:
+#         user_form = CreateUserForm(instance=request.user)
+#         emprendedor_form = EmprendedorForm(instance=request.user.emprendedor)
+#     return render(request, 'accounts/register.html', {
+#         'user_form': user_form,
+#         'emprendedor_form': emprendedor_form
+#     })
+
+
 def registerPage(request):
     if request.user.is_authenticated:
         return redirect('home')
