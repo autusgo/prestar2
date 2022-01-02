@@ -25,11 +25,11 @@ def registerPage(request):
             if form.is_valid():
                 form.save()
                 user = form.cleaned_data.get('username')
-                messages.success(request, 'Account was created for ' + user)
+                messages.success(request, 'Se creó la cuenta para ' + user)
 
                 return redirect('login')
             else:
-                messages.info(request, 'invalid registration details')
+                messages.info(request, 'Datos inválidos')
 
         context = {'form': form}
         return render(request, 'accounts/register.html', context)
@@ -49,7 +49,7 @@ def loginPage(request):
                 login(request, user)
                 return redirect('home')
             else:
-                messages.info(request, 'Username OR password is incorrect')
+                messages.info(request, 'Usuario o contraseña incorrectos')
 
         context = {}
         return render(request, 'accounts/login.html', context)

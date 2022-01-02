@@ -36,6 +36,13 @@
 				  
 					</div>
 			  <button class="save btn btn-default">ACCEDER</button>
+			  <div class="text" style="color:red">
+	
+				{% for message in messages %}
+					<p id="messages">{{message}}</p>
+				{% endfor %}			
+		
+	</div>
 			</form>
 
 
@@ -45,17 +52,6 @@
 
 
 		</main>
-
-
-
-
-	<div class="container h-100">
-	
-				{% for message in messages %}
-					<p id="messages">{{message}}</p>
-				{% endfor %}			
-		
-	</div>
 
 	<footer>
 		<div style="padding-top:20px"><img src="/static/img/prestar_negro_CHICO.png" alt="Prest.Ar"> | Avedaño, Bertuzzi, Congreado & Eyria © MMXXI</div>
