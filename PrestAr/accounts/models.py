@@ -1,20 +1,58 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-
+from django import forms
 # Create your models here.
 
 
-class Emprendedor(models.Model):
-    nombre = models.CharField(max_length=200)
-    apellido = models.CharField(max_length=200)
-    dni = models.IntegerField()
-    telefono = models.IntegerField()
-    celular = models.BooleanField()
-    email = models.CharField(max_length=200)
+# class Emprendedor(AbstractUser):
+#     pass
+#     # add additional fields in here
 
-    provincia = models.CharField(max_length=200)
+#     def __str__(self):
+#         return self.username
+
+
+class Emprendedor(AbstractUser):
+    PROVINCIAS_LISTA = [
+        ('buenosaires', 'Buenos Aires'),
+        ('caba', 'Ciudad Autónoma de Buenos Aires'),
+        ('catamarca', 'Catamarca'),
+        ('chaco', 'Chaco'),
+        ('chubut', 'Chubut'),
+        ('cordoba', 'Córdoba'),
+        ('honeydew', 'Honeydews'),
+        ('corrientes', 'Corrientes'),
+        ('entrerios', 'Entre Ríos'),
+        ('formosa', 'Formosa'),
+        ('jujuy', 'Jujuy'),
+        ('lapampa', 'La Pampa'),
+        ('larioja', 'La Rioja'),
+        ('mendoza', 'Mendoza'),
+        ('misiones', 'Misiones'),
+        ('neuquen', 'Neuquén'),
+        ('rionegro', 'Río Negro'),
+        ('salta', 'Salta'),
+        ('sanjuan', 'San Juan'),
+        ('sanluis', 'San Luis'),
+        ('santacruz', 'Santa Cruz'),
+        ('santafe', 'Santa Fe'),
+        ('santiagoestero', 'Santiago del Estero'),
+        ('tierafuego', 'Tierra del Fuego'),
+        ('tucuman', 'Tucumán'),
+    ]
+
+    nombre = models.CharField(max_length=200, null=True)
+    apellido = models.CharField(max_length=200, null=True)
+    dni = models.IntegerField(null=True)
+    telefono = models.IntegerField(null=True)
+    celular = models.BooleanField(null=True, default=True)
+    email = models.CharField(max_length=200, null=True)
+
+    provincia = models.CharField(
+        max_length=200, choices=PROVINCIAS_LISTA)
 
     def __str__(self):
-        return self.name
+        return self.username
 
 
 # class Customer(models.Model):

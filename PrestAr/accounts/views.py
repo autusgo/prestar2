@@ -6,6 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 
 from django.contrib import messages
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView
 
 from django.contrib.auth.decorators import login_required
 
@@ -15,24 +17,30 @@ from .forms import *
 # from .filters import OrderFilter
 
 
-def registerPage(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-    else:
-        form = CreateUserForm()
-        if request.method == 'POST':
-            form = CreateUserForm(request.POST)
-            if form.is_valid():
-                form.save()
-                user = form.cleaned_data.get('username')
-                messages.success(request, 'Se creó la cuenta para ' + user)
+class SignUpView(CreateView):
+    form_class = EmprendedorCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'accounts/register.html'
 
-                return redirect('login')
-            else:
-                messages.info(request, 'Datos inválidos')
 
-        context = {'form': form}
-        return render(request, 'accounts/register.html', context)
+# def registerPage(request):
+#     if request.user.is_authenticated:
+#         return redirect('home')
+#     else:
+#         form = CreateUserForm()
+#         if request.method == 'POST':
+#             form = CreateUserForm(request.POST)
+#             if form.is_valid():
+#                 form.save()
+#                 user = form.cleaned_data.get('username')
+#                 messages.success(request, 'Se creó la cuenta para ' + user)
+
+#                 return redirect('login')
+#             else:
+#                 messages.info(request, 'Datos inválidos')
+
+#         context = {'form': form}
+#         return render(request, 'accounts/register.html', context)
 
 
 def loginPage(request):

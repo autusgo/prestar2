@@ -26,7 +26,7 @@
 	<main>
 		<form target="_self" method="POST" class="login">{% csrf_token %}
 					<div class="caja">
-						<div class="grid-item titulo">REGISTRO DE NUEVA CUENTA</div>
+						<div class="grid-item titulo">REGISTRAR UNA CUENTA NUEVA</div>
 				  
 						<div class="grid-item texto">CORREO ELECTRÓNICO</div>
 						<div class="grid-item">{{form.username}}</div>
@@ -34,8 +34,18 @@
 						<div class="grid-item">{{form.password1}}</div>
 						<div class="grid-item texto">REPETIR CONTRASEÑA</div>
 						<div class="grid-item">{{form.password2}}</div>
-						<!-- <div class="grid-item texto">CORREO ELECTRÓNICO</div>
-						<div class="grid-item">{{form.email}}</div> -->
+						<div class="grid-item texto">NOMBRE/S</div>
+						<div class="grid-item">{{form.nombre}}</div>
+						<div class="grid-item texto">APELLIDO/S</div>
+						<div class="grid-item">{{form.apellido}}</div>
+						<div class="grid-item texto">DNI</div>
+						<div class="grid-item">{{form.dni}}</div>
+						<div class="grid-item texto">TELÉFONO</div>
+						<div class="grid-item">{{form.telefono}}</div>
+						<div class="grid-item texto">¿ES UN CELULAR?</div>
+						<div class="grid-item">{{form.celular}}</div>
+						<div class="grid-item texto">PROVINCIA</div>
+						<div class="grid-item">{{form.provincia}}</div>
 				  
 					</div>
 					<button class="save btn btn-default">ENVIAR</button>
