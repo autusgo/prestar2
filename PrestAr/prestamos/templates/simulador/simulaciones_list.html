@@ -1,4 +1,4 @@
-{% extends 'simulador/base.html' %}
+{% extends 'base.html' %}
 {% block content %}
 <header>
 	SIMULACIONES REALIZADAS
@@ -6,15 +6,36 @@
 
 <main>
 
-
-
-	<!-- <form method="GET">
+	<form method="GET">
 		<div class="busqueda_pro">
-		 <div class="box1" value="APELLIDO">APELLIDO</div>
-		 <div class="box2" value="PROVEEDOR">{{ filter.form.apellido }}</div>
-		 <div class="box3"><input class="save btn btn-default"  type="submit" value="FILTRAR" /></div>
+
+		<div class="box1" value="APELLIDO">APELLIDO</div>
+		<div class="box2" value="SIMULACION">{{ filter.form.apellido }}</div>
+		<div class="box3"></div>
+
+		<div class="box1" value="APELLIDO">DNI</div>
+		<div class="box2" value="SIMULACION">{{ filter.form.dni }}</div>
+		<div class="box3"></div>
+		
+		<div class="box1" value="created_date">DESDE FECHA</div>
+		<div class="box2" value="FECHA">{{ filter.form.start_date }}</div>
+		<div class="box3"></div>
+
+		<div class="box1" value="created_date">HASTA FECHA</div>
+		<div class="box2" value="FECHA">{{ filter.form.end_date }}</div>
+		<div class="box3"></div>
+
+		<div class="box1" value="monto">DESDE MONTO</div>
+		<div class="box2" value="MONTO">{{ filter.form.monto_desde }}</div>
+		<div class="box3"></div>
+
+		<div class="box1" value="monto">HASTA MONTO</div>
+		<div class="box2" value="MONTO">{{ filter.form.monto_hasta }}</div>
+		<div class="box3"><input class="save btn btn-default"  type="submit" value="FILTRAR" /></div>
+		
+
 		</div>
-	</form> -->
+	</form>
 
   {% for simulacion in filter.qs %}
 
@@ -23,7 +44,7 @@
      			<div class="grid-item titulo mayus"><a href="{% url 'simulacion_detail' pk=simulacion.pk %}"><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;#{{ simulacion.id|stringformat:"09d" }}</a></div>
 
           <div class="grid-item texto">NOMBRE</div>
-          <div class="grid-item">{{ simulacion.nom_ape }}</div>
+          <div class="grid-item">{{ simulacion.apellido }}</div>
           <div class="grid-item texto">MONTO SOLICITADO</div>
           <div class="grid-item">$ {{ simulacion.monto}}</div>
           <div class="grid-item texto">TASA ANUAL</div>
@@ -33,9 +54,11 @@
           <div class="grid-item texto">VALOR DE LA CUOTA</div>
           <div class="grid-item">$ {{ simulacion.calculo_cuota }}</div>
 					<div class="grid-item texto">SIMULADO EN</div>
-					<div class="grid-item">$ {{ simulacion.created_date }}</div>
+					<div class="grid-item">$ {{ simulacion.created_date | date }}</div>
 			</div>
 	</form>
+  {% empty %}
+	<div class="grid-item texto">AÚN NO HAY SIMULACIONES CARGADAS</div>
   {% endfor %}
 </main>
 {% endblock %}

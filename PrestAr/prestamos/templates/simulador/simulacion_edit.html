@@ -1,28 +1,34 @@
-{% extends 'simulador/base.html' %}
+{% extends 'base.html' %}
 {% block content %}
 <header>
 	REALIZAR SIMULACIÓN
 </header>
 
 <main>
-<form target="_self"  method="POST" class="simulacion-form">{% csrf_token %}
+    <form target="_self"  method="POST" class="simulacion-form">{% csrf_token %}
 			<div class="caja">
      			<div class="grid-item titulo">DATOS DEL EMPRENDEDOR</div>
 
-          <div class="grid-item texto">NOMBRE Y APELLIDO</div>
-          <div class="grid-item">{{ form.nom_ape }}</div>
-          <div class="grid-item texto">TELÉFONO</div>
-          <div class="grid-item">{{ form.telefono }}</div>
-          <div class="grid-item texto">CORREO ELECTRÓNICO</div>
-          <div class="grid-item">{{ form.email }}</div>
-          <div class="grid-item texto">MONTO SOLICITADO</div>
-          <div class="grid-item">{{ form.monto }}</div>
-          <div class="grid-item texto">CANTIDAD DE CUOTAS</div>
-          <div class="grid-item">{{ form.cant_cuotas }}</div>
-          <div class="grid-item texto">TASA DE INTERÉS %</div>
-          <div class="grid-item">{{ form.tasa_anual }}</div>
+                <div class="grid-item texto">NOMBRE</div>
+                <div class="grid-item">{{ form.nombre }}</div>
+                <div class="grid-item texto">APELLIDO</div>
+                <div class="grid-item">{{ form.apellido }}</div>
+                <div class="grid-item texto">DNI</div>
+                <div class="grid-item">{{ form.dni }}</div>
+                <div class="grid-item texto">TELÉFONO</div>
+                <div class="grid-item">{{ form.telefono }}</div>
+                <div class="grid-item texto">CORREO ELECTRÓNICO</div>
+                <div class="grid-item">{{ form.email }}</div>
+                <div class="grid-item texto">MONTO SOLICITADO</div>
+                <div class="grid-item">{{ form.monto }}</div>
+                <div class="grid-item texto">CANTIDAD DE CUOTAS</div>
+                <div class="grid-item">{{ form.cant_cuotas }}</div>
+                <div class="grid-item texto">TASA DE INTERÉS %</div>
+                <div class="grid-item">{{ form.tasa_anual }}</div>
 			</div>
+
 		<button class="save btn btn-default">ENVIAR</button>
+        
 	</form>
 </main>
 {% endblock %}

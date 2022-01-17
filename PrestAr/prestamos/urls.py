@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+
     path('', views.sim_index, name='sim_index'),
     path('simulador/', views.sim_index, name='sim_index'),
     path('simulador/list/', views.simulaciones_list, name='simulaciones_list'),
@@ -11,6 +12,7 @@ urlpatterns = [
     path('simulador/<pk>/remove/', views.simulacion_remove,
          name='simulacion_remove'),
     path('simulador/sobre_conami', views.sobre_conami, name='sobre_conami'),
-    path('simulador/sobre_creditos', views.sobre_creditos, name='sobre_creditos')
+    path('simulador/sobre_creditos', views.sobre_creditos, name='sobre_creditos'),
+
     # path('login/', views.LoginView.as_view(), name='login'),
 ]

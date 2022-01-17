@@ -1,12 +1,16 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.core.validators import MaxValueValidator
 
 
 class Simulacion(models.Model):
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    nom_ape = models.CharField(max_length=200,)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+    nombre = models.CharField(max_length=200)
+    apellido = models.CharField(max_length=200)
+    dni = models.IntegerField(validators=[
+                              MaxValueValidator(99999999)])
     monto = models.IntegerField()
     created_date = models.DateTimeField(
         default=timezone.now)
@@ -17,6 +21,7 @@ class Simulacion(models.Model):
 
     def publish(self):
         self.created_date = timezone.now()
+        self.author = request.user.is_authenticated
         self.save()
 
     def calculo_cuota(self):
@@ -25,4 +30,4 @@ class Simulacion(models.Model):
         return round(calculo_cuota, 2)
 
     def __unicode__(self):
-        return '{} {}'.format(self.nom_ape, self.created_date)
+        return '{} {} {}'.format(self.apellido, self.dni, self.created_date)

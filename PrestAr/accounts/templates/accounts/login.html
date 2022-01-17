@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+    
+<head>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/prestamos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<title>prest.ar</title>
+
+</head>
+<body>
+	<header>
+        <div><img class="logo" src="/static/img/prestarnegroHD@4x.png" alt="Prest.Ar"></div>
+        
+    </header>
+
+	<main>
+		<form target="_self" method="POST" class="login">{% csrf_token %}
+					<div class="caja">
+						 <div class="grid-item titulo">PANEL DE ACCESO
+		
+							</div>
+				  <div class="grid-item texto">USUARIO</div>
+				  <div class="grid-item"><input type="text" name="username"></div>
+				  <div class="grid-item texto">CONTRASEÑA</div>
+				  <div class="grid-item"><input type="password" name="password"></div>
+				  
+					</div>
+			  <button class="save btn btn-default">ACCEDER</button>
+			  <div class="text" style="color:red">
+	
+				{% for message in messages %}
+					<p id="messages">{{message}}</p>
+				{% endfor %}			
+		
+	</div>
+			</form>
+
+
+			<div class="copete texto">
+				¿No tenés cuenta? <a href="{% url 'register' %}" style="color:#87baea">Registrate</a>
+			</div>
+
+
+		</main>
+
+	<footer>
+		<div style="padding-top:20px"><img src="/static/img/prestar_negro_CHICO.png" alt="Prest.Ar"> | Avedaño, Bertuzzi, Congreado & Eyria © MMXXI</div>
+	</footer>
+
+</body>
+
+</html>
+{% endblock %}
