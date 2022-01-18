@@ -15,8 +15,8 @@ class EmprendedorCreationForm(UserCreationForm):
 
     class Meta:
         model = Emprendedor
-        fields = ('username', 'nombre', 'apellido',
-                  'dni', 'celular', 'provincia', 'telefono')
+        fields = ('username', 'nombre', 'apellido', 'genero', 'identidad', 'dni',
+                  'fec_nac', 'estado_civil', 'telefono', 'celular', 'educacion', 'provincia')
 
 
 class EmprendedorChangeForm(UserChangeForm):

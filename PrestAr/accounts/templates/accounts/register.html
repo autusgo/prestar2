@@ -43,18 +43,30 @@
 						<div class="grid-item">{{form.nombre}}</div>
 						<div class="grid-item texto">APELLIDOS</div>
 						<div class="grid-item">{{form.apellido}}</div>
+						<div class="grid-item texto">FECHA DE NACIMIENTO</div>
+						<div class="grid-item"><input type="date" {{form.fec_nac}} </div>
+						<div class="grid-item texto">GÉNERO</div>
+						<div class="grid-item">{{form.genero}}</div>
+						<div class="grid-item texto">IDENTIDAD AUTOPERCIBIDA *</div>
+						<div class="grid-item">{{form.identidad}}</div>
 						<div class="grid-item texto">DNI</div>
 						<div class="grid-item">{{form.dni}}</div>
 						<div class="grid-item texto">TELÉFONO</div>
 						<div class="grid-item">{{form.telefono}}</div>
 						<div class="grid-item texto">¿ES UN CELULAR?</div>
 						<div class="grid-item">{{form.celular}}</div>
+						<div class="grid-item texto">NIVEL EDUCATIVO ALCANZADO</div>
+						<div class="grid-item">{{form.educacion}}</div>
 						<div class="grid-item texto">PROVINCIA</div>
 						<div class="grid-item">{{form.provincia}}</div>
 				  
 					</div>
 					<button class="save btn btn-default">ENVIAR</button>
+					<div class="texto">
+						<p>* Opcional</p>
+					</div>
 					<div class="texto" style="color:red">
+						
 						{% if form.non_field_errors %}
 						{% for error in form.non_field_errors %}
 							{{ error }}
