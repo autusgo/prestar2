@@ -72,75 +72,23 @@ class Emprendedor(AbstractUser):
         ('uni_comp', 'Universitario completo'),
     ]
 
-    nombre = models.CharField(max_length=200, null=True)
-    apellido = models.CharField(max_length=200, null=True)
-    genero = models.CharField(max_length=200, choices=GENEROS_LISTA, null=True)
+    nombre = models.CharField(max_length=200)
+    apellido = models.CharField(max_length=200)
+    genero = models.CharField(max_length=200, choices=GENEROS_LISTA)
     identidad = models.CharField(
-        max_length=200, choices=IDENTIDAD_LISTA, null=True)
-    dni = models.IntegerField(null=True)
-    fec_nac = models.DateField(null=True)
+        max_length=200, choices=IDENTIDAD_LISTA, blank=True, null=True)
+    dni = models.IntegerField()
+    fec_nac = models.DateField()
     estado_civil = models.CharField(
-        max_length=200, choices=ESTADO_CIVIL, null=True)
-    telefono = models.IntegerField(null=True)
+        max_length=200, choices=ESTADO_CIVIL)
+    telefono = models.IntegerField()
     celular = models.BooleanField(default=True)
     email = models.CharField(max_length=200, null=True)
     educacion = models.CharField(
-        max_length=200, choices=NIVEL_EDUCATIVO, null=True)
+        max_length=200, choices=NIVEL_EDUCATIVO)
 
     provincia = models.CharField(
-        max_length=200, choices=PROVINCIAS_LISTA, null=True)
+        max_length=200, choices=PROVINCIAS_LISTA)
 
     def __str__(self):
         return self.username
-
-
-# class Customer(models.Model):
-#     name = models.CharField(max_length=200, null=True)
-#     phone = models.CharField(max_length=200, null=True)
-#     email = models.CharField(max_length=200, null=True)
-#     date_created = models.DateTimeField(auto_now_add=True, null=True)
-
-#     def __str__(self):
-#         return self.name
-
-
-# class Tag(models.Model):
-#     name = models.CharField(max_length=200, null=True)
-
-#     def __str__(self):
-#         return self.name
-
-
-# class Product(models.Model):
-#     CATEGORY = (
-#         ('Indoor', 'Indoor'),
-#         ('Out Door', 'Out Door'),
-#     )
-
-#     name = models.CharField(max_length=200, null=True)
-#     price = models.FloatField(null=True)
-#     category = models.CharField(max_length=200, null=True, choices=CATEGORY)
-#     description = models.CharField(max_length=200, null=True, blank=True)
-#     date_created = models.DateTimeField(auto_now_add=True, null=True)
-#     tags = models.ManyToManyField(Tag)
-
-#     def __str__(self):
-#         return self.name
-
-
-# class Order(models.Model):
-#     STATUS = (
-#         ('Pending', 'Pending'),
-#         ('Out for delivery', 'Out for delivery'),
-#         ('Delivered', 'Delivered'),
-#     )
-
-#     customer = models.ForeignKey(
-#         Customer, null=True, on_delete=models.SET_NULL)
-#     product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
-#     date_created = models.DateTimeField(auto_now_add=True, null=True)
-#     status = models.CharField(max_length=200, null=True, choices=STATUS)
-#     note = models.CharField(max_length=1000, null=True)
-
-#     def __str__(self):
-#         return self.product.name
