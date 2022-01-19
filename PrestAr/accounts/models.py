@@ -72,23 +72,23 @@ class Emprendedor(AbstractUser):
         ('uni_comp', 'Universitario completo'),
     ]
 
-    nombre = models.CharField(max_length=200)
-    apellido = models.CharField(max_length=200)
+    nombre = models.CharField(max_length=200, null=True)
+    apellido = models.CharField(max_length=200, null=True)
     genero = models.CharField(max_length=200, choices=GENEROS_LISTA)
     identidad = models.CharField(
         max_length=200, choices=IDENTIDAD_LISTA, blank=True, null=True)
-    dni = models.IntegerField()
-    fec_nac = models.DateField()
+    dni = models.IntegerField(null=True)
+    fec_nac = models.DateField(null=True)
     estado_civil = models.CharField(
-        max_length=200, choices=ESTADO_CIVIL)
-    telefono = models.IntegerField()
+        max_length=200, choices=ESTADO_CIVIL, null=True)
+    telefono = models.IntegerField(null=True)
     celular = models.BooleanField(default=True)
     email = models.CharField(max_length=200, null=True)
     educacion = models.CharField(
-        max_length=200, choices=NIVEL_EDUCATIVO)
+        max_length=200, choices=NIVEL_EDUCATIVO, null=True)
 
     provincia = models.CharField(
-        max_length=200, choices=PROVINCIAS_LISTA)
+        max_length=200, choices=PROVINCIAS_LISTA, null=True)
 
     def __str__(self):
         return self.username

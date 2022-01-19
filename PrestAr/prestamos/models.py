@@ -4,6 +4,38 @@ from django.utils import timezone
 from django.core.validators import MaxValueValidator
 
 
+class SMVM(models.Model):
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    monto = models. IntegerField()
+    created_date = models.DateTimeField(
+        default=timezone.now)
+
+    def publish(self):
+        self.created_date = timezone.now()
+        self.author = request.user.is_authenticated
+        self.save()
+
+    def __unicode__(self):
+        return '{}'.format(self.monto)
+
+
+class TasaInteres(models.Model):
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    tasa = models. SmallIntegerField()
+    created_date = models.DateTimeField(
+        default=timezone.now)
+
+    def publish(self):
+        self.created_date = timezone.now()
+        self.author = request.user.is_authenticated
+        self.save()
+
+    def __unicode__(self):
+        return '{}'.format(self.tasa)
+
+
 class Simulacion(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

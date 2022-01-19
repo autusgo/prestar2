@@ -18,5 +18,16 @@ urlpatterns = [
     path('solicitudes/<int:pk>/edit/',
          views.solicitud_edit, name='solicitud_edit'),
 
+    path('configuracion/smvm/new/', views.smvm_new, name='smvm_new'),
+    path('configuracion/smvm/<int:pk>/', views.smvm_detail, name='smvm_detail'),
+    path('configuracion/smvm/<int:pk>/edit/',
+         views.smvm_edit, name='smvm_edit'),
+
+    path('configuracion/tasa/new/', views.tasa_new, name='tasa_new'),
+    path('configuracion/tasa/<int:pk>/', views.tasa_detail, name='tasa_detail'),
+    path('configuracion/tasa/<int:pk>/edit/',
+         views.tasa_edit, name='tasa_edit'),
+
+
     # path('login/', views.LoginView.as_view(), name='login'),
 ]

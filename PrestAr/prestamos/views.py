@@ -114,3 +114,69 @@ def solicitud_edit(request, pk):
     else:
         form = SolicitudForm(instance=solicitud)
     return render(request, 'solicitudes/solicitud_edit.html', {'form': form})
+
+
+# CONFIGURACIONES
+
+def smvm_new(request):
+    if request.method == "POST":
+        form = SMVMForm(request.POST)
+        if form.is_valid():
+            smvm = form.save(commit=False)
+            if request.user.is_authenticated:
+                smvm.author = request.user
+            smvm.save()
+            return redirect('smvm_edit', pk=smvm.pk)
+    else:
+        form = SMVMForm()
+    return render(request, 'configuracion/smvm/smvm_edit.html', {'form': form})
+
+
+def smvm_detail(request, pk):
+    smvm = get_object_or_404(SMVM, pk=pk)
+    return render(request, 'configuracion/smvm_detail.html', {'smvm': smvm})
+
+
+def smvm_edit(request, pk):
+    smvm = get_object_or_404(SMVM, pk=pk)
+    if request.method == "POST":
+        form = SMVMForm(request.POST, instance=smvm)
+        if form.is_valid():
+            smvm = form.save(commit=False)
+            smvm.save()
+            return redirect('smvm_detail', pk=smvm.pk)
+    else:
+        form = SMVMForm(instance=smvm)
+    return render(request, 'configuracion/smvm_edit.html', {'form': form})
+
+
+def tasa_new(request):
+    if request.method == "POST":
+        form = TasaInteresForm(request.POST)
+        if form.is_valid():
+            tasa = form.save(commit=False)
+            if request.user.is_authenticated:
+                tasa.author = request.user
+            tasa.save()
+            return redirect('tasa/tasa_edit', pk=tasa.pk)
+    else:
+        form = TasaInteresForm()
+    return render(request, 'configuracion/tasa_edit.html', {'form': form})
+
+
+def tasa_detail(request, pk):
+    tasa = get_object_or_404(TasaInteres, pk=pk)
+    return render(request, 'configuracion/tasa_detail.html', {'tasa': tasa})
+
+
+def tasa_edit(request, pk):
+    tasa = get_object_or_404(TasaInteres, pk=pk)
+    if request.method == "POST":
+        form = TasaInteresForm(request.POST, instance=tasa)
+        if form.is_valid():
+            tasa = form.save(commit=False)
+            tasa.save()
+            return redirect('tasa_detail', pk=tasa.pk)
+    else:
+        form = TasaInteresForm(instance=tasa)
+    return render(request, 'configuracion/tasa_edit.html', {'form': form})

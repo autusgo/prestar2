@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<header>
+	SALARIO MÍNIMO VITAL Y MÓVIL
+</header>
+
+<main>
+    <form target="_self"  method="POST" class="simulacion-form">{% csrf_token %}
+			<div class="caja">
+     			<div class="grid-item titulo">MODIFICAR EL MONTO DEL SALARIO MÍNIMO VITAL Y MÓVIL</div>
+
+                <div class="grid-item texto" style="text-align:center">NUEVO MONTO $</div>
+                <div class="grid-item">{{ form.monto }}</div>
+
+			</div>
+
+		<button class="save btn btn-default">ENVIAR</button>
+        
+	</form>
+</main>
+{% endblock %}

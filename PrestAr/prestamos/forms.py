@@ -23,3 +23,15 @@ class SolicitudForm(forms.ModelForm):
 
     # def __init__(self, *args, **kwargs):
     #     super(SolicitudForm, self).__init__(*args, **kwargs)
+
+
+class SMVMForm(forms.ModelForm):
+    class Meta:
+        model = SMVM
+        fields = ['monto']
+
+
+class TasaInteresForm(forms.ModelForm):
+    class Meta:
+        model = TasaInteres
+        fields = ['tasa']
