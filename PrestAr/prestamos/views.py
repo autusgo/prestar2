@@ -77,11 +77,40 @@ def sobre_conami(request):
     simulaciones = SimulacionFilter(
         request.GET, queryset=Simulacion.objects.all())
 
-    return render(request, 'simulador/sobre_conami.html', {'filter': simulaciones})
+    return render(request, 'sobre_conami.html', {'filter': simulaciones})
 
 
 def sobre_creditos(request):
     simulaciones = SimulacionFilter(
         request.GET, queryset=Simulacion.objects.all())
 
-    return render(request, 'simulador/sobre_creditos.html', {'filter': simulaciones})
+    return render(request, 'sobre_creditos.html', {'filter': simulaciones})
+
+
+# SOLICITUDES
+
+def solicitud_new(request):
+    if request.method == "POST":
+        form = SolicitudForm(request.POST)
+        if form.is_valid():
+            solicitud = form.save(commit=False)
+            if request.user.is_authenticated:
+                solicitud.author = request.user
+            solicitud.save()
+            return redirect('solicitud_detail', pk=solicitud.pk)
+    else:
+        form = SolicitudForm()
+    return render(request, 'solicitudes/solicitud_edit.html', {'form': form})
+
+
+def solicitud_edit(request, pk):
+    solicitud = get_object_or_404(Solicitud, pk=pk)
+    if request.method == "POST":
+        form = SolicitudForm(request.POST, instance=solicitud)
+        if form.is_valid():
+            solicitud = form.save(commit=False)
+            solicitud.save()
+            return redirect('solicitud_detail', pk=solicitud.pk)
+    else:
+        form = SolicitudForm(instance=solicitud)
+    return render(request, 'solicitudes/solicitud_edit.html', {'form': form})
