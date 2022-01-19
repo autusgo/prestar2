@@ -118,6 +118,11 @@ def solicitud_edit(request, pk):
 
 # CONFIGURACIONES
 
+def configuracion(request):
+
+    return render(request, 'configuracion.html', {'filter': configuracion})
+
+
 def smvm_new(request):
     if request.method == "POST":
         form = SMVMForm(request.POST)
@@ -143,6 +148,7 @@ def smvm_edit(request, pk):
         form = SMVMForm(request.POST, instance=smvm)
         if form.is_valid():
             smvm = form.save(commit=False)
+            smvm.created_date = timezone.now()
             smvm.save()
             return redirect('smvm_detail', pk=smvm.pk)
     else:
@@ -175,6 +181,7 @@ def tasa_edit(request, pk):
         form = TasaInteresForm(request.POST, instance=tasa)
         if form.is_valid():
             tasa = form.save(commit=False)
+            tasa.created_date = timezone.now()
             tasa.save()
             return redirect('tasa_detail', pk=tasa.pk)
     else:

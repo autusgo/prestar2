@@ -18,6 +18,8 @@ urlpatterns = [
     path('solicitudes/<int:pk>/edit/',
          views.solicitud_edit, name='solicitud_edit'),
 
+    path('configuracion/', views.configuracion, name='configuracion'),
+
     path('configuracion/smvm/new/', views.smvm_new, name='smvm_new'),
     path('configuracion/smvm/<int:pk>/', views.smvm_detail, name='smvm_detail'),
     path('configuracion/smvm/<int:pk>/edit/',
