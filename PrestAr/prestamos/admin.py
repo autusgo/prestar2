@@ -7,3 +7,17 @@ class SimulacionAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Simulacion, SimulacionAdmin)
+
+
+class TasaInteresAdmin(admin.ModelAdmin):
+    list_display = ['tasa', 'created_date', 'author']
+
+
+admin.site.register(TasaInteres, TasaInteresAdmin)
+
+
+class SMVMAdmin(admin.ModelAdmin):
+    list_display = ['monto', 'created_date', 'author']
+
+
+admin.site.register(SMVM, SMVMAdmin)

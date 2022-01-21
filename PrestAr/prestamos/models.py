@@ -16,6 +16,9 @@ class SMVM(models.Model):
         self.author = request.user.is_authenticated
         self.save()
 
+    def __str__(self):
+        return '{}'.format(self.monto)
+
     def __unicode__(self):
         return '{}'.format(self.monto)
 
@@ -23,7 +26,7 @@ class SMVM(models.Model):
 class TasaInteres(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    tasa = models. SmallIntegerField()
+    tasa = models.SmallIntegerField()
     created_date = models.DateTimeField(
         default=timezone.now)
 
@@ -31,6 +34,9 @@ class TasaInteres(models.Model):
         self.created_date = timezone.now()
         self.author = request.user.is_authenticated
         self.save()
+
+    def __str__(self):
+        return '{}'.format(self.tasa)
 
     def __unicode__(self):
         return '{}'.format(self.tasa)
@@ -38,7 +44,7 @@ class TasaInteres(models.Model):
 
 class Simulacion(models.Model):
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)  # Acá tiene que quedar el null=True porque se tiene que poder hacer simulaciones sin registrarse
     nombre = models.CharField(max_length=200)
     apellido = models.CharField(max_length=200)
     dni = models.IntegerField(validators=[
@@ -46,10 +52,15 @@ class Simulacion(models.Model):
     monto = models.IntegerField()
     created_date = models.DateTimeField(
         default=timezone.now)
-    tasa_anual = models.SmallIntegerField()
+    tasa_anual = models.ForeignKey(
+        TasaInteres, on_delete=models.CASCADE, null=True, default=1)
     cant_cuotas = models.SmallIntegerField()
     telefono = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
+    smvm = models.ForeignKey(
+        SMVM, on_delete=models.CASCADE, null=True)
+    cuota_final = models.DecimalField(
+        decimal_places=2, max_digits=9, null=True)
 
     def publish(self):
         self.created_date = timezone.now()
@@ -57,8 +68,9 @@ class Simulacion(models.Model):
         self.save()
 
     def calculo_cuota(self):
-        calculo_cuota = round(self.monto*(0.03/12) /
-                              (1-(1+(0.03/12))**(-self.cant_cuotas)), 2)
+        interes = int(self.tasa_anual.tasa)/100
+        calculo_cuota = round(self.monto*(interes/12) /
+                              (1-(1+(interes/12))**(-self.cant_cuotas)), 2)
         return round(calculo_cuota, 2)
 
     def __unicode__(self):
