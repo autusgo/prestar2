@@ -4,6 +4,7 @@ from .filters import SimulacionFilter
 from .forms import *
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 
 # def register(resquest):
@@ -48,6 +49,10 @@ def simulacion_new(request):
                     simulacion.author = request.user
                 simulacion.save()
                 return redirect('simulacion_detail', pk=simulacion.pk)
+            else:
+                maximo = str(12*(simulacion.smvm.monto))
+                messages.error(
+                    request, f'El monto solicitado supera los 12 salarios mínimos. Ingresar un monto inferior a ${maximo}')
     else:
         form = SimulacionForm()
     return render(request, 'simulador/simulacion_edit.html', {'form': form})
@@ -96,10 +101,15 @@ def solicitud_new(request):
         form = SolicitudForm(request.POST)
         if form.is_valid():
             solicitud = form.save(commit=False)
-            if request.user.is_authenticated:
-                solicitud.author = request.user
-            solicitud.save()
-            return redirect('solicitud_detail', pk=solicitud.pk)
+            if solicitud.monto <= solicitud.smvm.monto:
+                if request.user.is_authenticated:
+                    solicitud.author = request.user
+                solicitud.save()
+                return redirect('solicitud_detail', pk=solicitud.pk)
+            else:
+                maximo = str(12*(solicitud.smvm.monto))
+                messages.error(
+                    request, f'El monto solicitado supera los 12 salarios mínimos. Ingresar un monto inferior a ${maximo}')
     else:
         form = SolicitudForm()
     return render(request, 'solicitudes/solicitud_edit.html', {'form': form})

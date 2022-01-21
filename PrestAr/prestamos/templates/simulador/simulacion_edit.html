@@ -28,7 +28,18 @@
 			</div>
 
 		<button class="save btn btn-default">ENVIAR</button>
-        
+        <div class="texto" style="color:red">
+						
+            {% if messages %}
+            <div class="span12">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message|safe }}
+                </div>
+            {% endfor %}
+            </div>
+            {% endif %}
+        </div>
 	</form>
 </main>
 {% endblock %}
