@@ -1,7 +1,8 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.core.validators import MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db.models import Max
 
 
 class SMVM(models.Model):
@@ -43,13 +44,16 @@ class TasaInteres(models.Model):
 
 
 class Simulacion(models.Model):
+    smvm = models.ForeignKey(
+        SMVM, on_delete=models.CASCADE, null=True, default=1)
+
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)  # Acá tiene que quedar el null=True porque se tiene que poder hacer simulaciones sin registrarse
     nombre = models.CharField(max_length=200)
     apellido = models.CharField(max_length=200)
     dni = models.IntegerField(validators=[
                               MaxValueValidator(99999999)])
-    monto = models.IntegerField()
+    monto = models.PositiveIntegerField()
     created_date = models.DateTimeField(
         default=timezone.now)
     tasa_anual = models.ForeignKey(
@@ -57,8 +61,6 @@ class Simulacion(models.Model):
     cant_cuotas = models.SmallIntegerField()
     telefono = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
-    smvm = models.ForeignKey(
-        SMVM, on_delete=models.CASCADE, null=True)
     cuota_final = models.DecimalField(
         decimal_places=2, max_digits=9, null=True)
 
@@ -72,6 +74,11 @@ class Simulacion(models.Model):
         calculo_cuota = round(self.monto*(interes/12) /
                               (1-(1+(interes/12))**(-self.cant_cuotas)), 2)
         return round(calculo_cuota, 2)
+
+    def save(self, *args, **kwargs):
+        # Toma el resultado de la función y lo guarda en el modelo
+        self.cuota_final = self.calculo_cuota()
+        super(Simulacion, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return '{} {} {}'.format(self.apellido, self.dni, self.created_date)
@@ -152,7 +159,7 @@ class Solicitud(models.Model):
     resultado_familiar = models.IntegerField()
     resultado_total = models.IntegerField()
     notas = models.TextField()
-    importe_solicitado = models.IntegerField()
+    importe_solicitado = models.PositiveIntegerField()
     cant_cuotas = models.IntegerField()
     tasa_interes = models.IntegerField()
     destino1_texto = models.CharField(max_length=50)

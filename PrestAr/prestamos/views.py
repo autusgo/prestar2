@@ -42,10 +42,11 @@ def simulacion_new(request):
         form = SimulacionForm(request.POST)
         if form.is_valid():
             simulacion = form.save(commit=False)
-            if request.user.is_authenticated:
-                simulacion.author = request.user
-            simulacion.save()
-            return redirect('simulacion_detail', pk=simulacion.pk)
+            if simulacion.monto <= simulacion.smvm.monto:
+                if request.user.is_authenticated:
+                    simulacion.author = request.user
+                simulacion.save()
+                return redirect('simulacion_detail', pk=simulacion.pk)
     else:
         form = SimulacionForm()
     return render(request, 'simulador/simulacion_edit.html', {'form': form})
