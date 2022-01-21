@@ -42,6 +42,7 @@ def simulacion_new(request):
         form = SimulacionForm(request.POST)
         if form.is_valid():
             simulacion = form.save(commit=False)
+            # Acá chequea que el monto de la simulación no super el SMVM, pero no tirar error de aviso
             if simulacion.monto <= simulacion.smvm.monto:
                 if request.user.is_authenticated:
                     simulacion.author = request.user
