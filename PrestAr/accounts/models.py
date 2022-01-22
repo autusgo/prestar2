@@ -13,33 +13,6 @@ from django import forms
 
 
 class Emprendedor(AbstractUser):
-    PROVINCIAS_LISTA = [
-        ('buenosaires', 'Buenos Aires'),
-        ('caba', 'Ciudad Autónoma de Buenos Aires'),
-        ('catamarca', 'Catamarca'),
-        ('chaco', 'Chaco'),
-        ('chubut', 'Chubut'),
-        ('cordoba', 'Córdoba'),
-        ('honeydew', 'Honeydews'),
-        ('corrientes', 'Corrientes'),
-        ('entrerios', 'Entre Ríos'),
-        ('formosa', 'Formosa'),
-        ('jujuy', 'Jujuy'),
-        ('lapampa', 'La Pampa'),
-        ('larioja', 'La Rioja'),
-        ('mendoza', 'Mendoza'),
-        ('misiones', 'Misiones'),
-        ('neuquen', 'Neuquén'),
-        ('rionegro', 'Río Negro'),
-        ('salta', 'Salta'),
-        ('sanjuan', 'San Juan'),
-        ('sanluis', 'San Luis'),
-        ('santacruz', 'Santa Cruz'),
-        ('santafe', 'Santa Fe'),
-        ('santiagoestero', 'Santiago del Estero'),
-        ('tierafuego', 'Tierra del Fuego'),
-        ('tucuman', 'Tucumán'),
-    ]
     GENEROS_LISTA = [
         ('femenino', 'Femenino'),
         ('masculino', 'Masculino'),
@@ -86,9 +59,7 @@ class Emprendedor(AbstractUser):
     email = models.CharField(max_length=200, null=True)
     educacion = models.CharField(
         max_length=200, choices=NIVEL_EDUCATIVO, null=True)
-
-    provincia = models.CharField(
-        max_length=200, choices=PROVINCIAS_LISTA, null=True)
+    provincia = models.CharField(max_length=20)
 
     def __str__(self):
         return self.username

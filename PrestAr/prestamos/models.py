@@ -138,14 +138,24 @@ class Domicilio(models.Model):
     cod_postal = models.CharField(max_length=20, blank=True)
     condicion = models.CharField(max_length=200, choices=CONDICION_LISTA)
 
+    def __str__(self):
+        return '{} {}'.format(self.calle, self.numero)
+
+    def __unicode__(self):
+        return '{} {}'.format(self.calle, self.numero)
+
 
 class Solicitud(models.Model):
+    smvm = models.ForeignKey(
+        SMVM, on_delete=models.CASCADE, null=True, default=1)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_date = models.DateTimeField(
+        default=timezone.now, null=True)
     descripcion_emp = models.TextField()
     inicio_actividad = models.DateField()
     domicilio_viv = models.ForeignKey(
-        Domicilio, on_delete=models.CASCADE, related_name='domicilioviv')
+        Domicilio, on_delete=models.CASCADE, related_name='domicilioviv', null=True)
     domicilio_emp = models.ForeignKey(
         Domicilio, on_delete=models.CASCADE, related_name='domicilioemp')
     datos_contacto = models.IntegerField(blank=True)
@@ -153,26 +163,38 @@ class Solicitud(models.Model):
     personal_nofamiliar = models.IntegerField()
     ingreso_emp_mes = models.IntegerField()
     gastos_emp = models.IntegerField()
-    resultado_emp = models.IntegerField()
+    resultado_emp = models.IntegerField(null=True)
     ingresos_familiares_mes = models.IntegerField()
     gastos_familiares_mes = models.IntegerField()
-    resultado_familiar = models.IntegerField()
-    resultado_total = models.IntegerField()
-    notas = models.TextField()
+    resultado_familiar = models.IntegerField(null=True)
+    resultado_total = models.IntegerField(null=True)
+    notas = models.TextField(blank=True)
     importe_solicitado = models.PositiveIntegerField()
     cant_cuotas = models.IntegerField()
-    tasa_interes = models.IntegerField()
-    destino1_texto = models.CharField(max_length=50)
-    destino1_monto = models.IntegerField()
-    destino2_texto = models.CharField(max_length=50)
-    destino2_monto = models.IntegerField()
-    destino3_texto = models.CharField(max_length=50)
-    destino3_monto = models.IntegerField()
+    tasa_interes = models.ForeignKey(
+        TasaInteres, on_delete=models.CASCADE, null=True, default=1)
+    destino1_texto = models.CharField(max_length=50, null=True)
+    destino1_monto = models.IntegerField(null=True)
+    destino2_texto = models.CharField(max_length=50, null=True)
+    destino2_monto = models.IntegerField(null=True)
+    destino3_texto = models.CharField(max_length=50, null=True)
+    destino3_monto = models.IntegerField(null=True)
 
     def publish(self):
         self.created_date = timezone.now()
         self.author = request.user.is_authenticated
         self.save()
+
+    def calculo_cuota(self):
+        interes = int(self.tasa_interes.tasa)/100
+        calculo_cuota = round(self.importe_solicitado*(interes/12) /
+                              (1-(1+(interes/12))**(-self.cant_cuotas)), 2)
+        return round(calculo_cuota, 2)
+
+    def save(self, *args, **kwargs):
+        # Toma el resultado de la función y lo guarda en el modelo
+        self.cuota_final = self.calculo_cuota()
+        super(Solicitud, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return '{}'.format(self.id)

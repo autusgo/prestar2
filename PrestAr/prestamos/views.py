@@ -101,7 +101,7 @@ def solicitud_new(request):
         form = SolicitudForm(request.POST)
         if form.is_valid():
             solicitud = form.save(commit=False)
-            if solicitud.monto <= solicitud.smvm.monto:
+            if solicitud.importe_solicitado <= solicitud.smvm.monto:
                 if request.user.is_authenticated:
                     solicitud.author = request.user
                 solicitud.save()
@@ -109,7 +109,7 @@ def solicitud_new(request):
             else:
                 maximo = str(12*(solicitud.smvm.monto))
                 messages.error(
-                    request, f'El monto solicitado supera los 12 salarios mínimos. Ingresar un monto inferior a ${maximo}')
+                    request, f'El monto solicitado supera los 12 salarios mínimos. Debe ser inferior a ${maximo}')
     else:
         form = SolicitudForm()
     return render(request, 'solicitudes/solicitud_edit.html', {'form': form})
@@ -126,6 +126,11 @@ def solicitud_edit(request, pk):
     else:
         form = SolicitudForm(instance=solicitud)
     return render(request, 'solicitudes/solicitud_edit.html', {'form': form})
+
+
+def solicitud_detail(request, pk):
+    solicitud = get_object_or_404(Solicitud, pk=pk)
+    return render(request, 'solicitudes/solicitud_detail.html', {'solicitud': solicitud})
 
 
 # CONFIGURACIONES

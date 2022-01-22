@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from .models import Emprendedor
+from prestamos.models import Domicilio
 from django import forms
 
 
@@ -24,3 +25,10 @@ class EmprendedorChangeForm(UserChangeForm):
     class Meta:
         model = Emprendedor
         fields = ('username', 'email', 'telefono')
+
+
+class DomicilioCreationForm(forms.ModelForm):
+    class Meta:
+        model = Domicilio
+        fields = ['calle', 'numero', 'piso', 'depto', 'monoblock', 'kilometro',
+                  'barrio', 'manzana', 'seccion', 'casa', 'provincia', 'departamento', 'municipio', 'localidad', 'cod_postal', 'condicion']

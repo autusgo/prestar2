@@ -17,6 +17,7 @@ urlpatterns = [
     path('solicitudes/new/', views.solicitud_new, name='solicitud_new'),
     path('solicitudes/<int:pk>/edit/',
          views.solicitud_edit, name='solicitud_edit'),
+    path('solicitudes/<int:pk>/', views.solicitud_detail, name='solicitud_detail'),
 
     path('configuracion/', views.configuracion, name='configuracion'),
 
