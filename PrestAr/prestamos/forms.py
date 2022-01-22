@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from prestamos.models import Emprendedor
 
 
 class SimulacionForm(forms.ModelForm):

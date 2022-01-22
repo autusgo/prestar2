@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Max
+from accounts.models import Emprendedor
 
 
 class SMVM(models.Model):
@@ -144,12 +145,16 @@ class Domicilio(models.Model):
     def __unicode__(self):
         return '{} {}'.format(self.calle, self.numero)
 
+#   SOLICITUDES
+
 
 class Solicitud(models.Model):
     smvm = models.ForeignKey(
         SMVM, on_delete=models.CASCADE, null=True, default=1)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    emprendedor = models.ForeignKey(
+        Emprendedor, on_delete=models.CASCADE, related_name='emprendedor')
     created_date = models.DateTimeField(
         default=timezone.now, null=True)
     descripcion_emp = models.TextField()

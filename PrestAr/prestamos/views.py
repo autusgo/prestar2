@@ -96,6 +96,11 @@ def sobre_creditos(request):
 
 # SOLICITUDES
 
+def solicitud_detail(request, pk):
+    solicitud = get_object_or_404(Solicitud, pk=pk)
+    return render(request, 'solicitudes/solicitud_detail.html', {'solicitud': solicitud})
+
+
 def solicitud_new(request):
     if request.method == "POST":
         form = SolicitudForm(request.POST)
@@ -126,11 +131,6 @@ def solicitud_edit(request, pk):
     else:
         form = SolicitudForm(instance=solicitud)
     return render(request, 'solicitudes/solicitud_edit.html', {'form': form})
-
-
-def solicitud_detail(request, pk):
-    solicitud = get_object_or_404(Solicitud, pk=pk)
-    return render(request, 'solicitudes/solicitud_detail.html', {'solicitud': solicitud})
 
 
 # CONFIGURACIONES

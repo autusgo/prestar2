@@ -1,1 +1,37 @@
-solicitd_detail
+{% extends 'base.html' %}
+
+{% block content %}
+<header>
+	DETALLE DE LA SOLICITUD DE CRÉDITO
+</header>
+
+<main>
+
+
+<form target="_self" class="solicitud">{% csrf_token %}
+			<div class="caja">
+        <div class="grid-item titulo mayus">
+          <span><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp; #{{ solicitud.id|stringformat:"09d" }}
+
+          </span>
+					</div>
+          <div class="grid-item texto">APELLIDO</div>
+          <div class="grid-item">{{ solicitud.emprendedor.apellido }}</div>
+          <div class="grid-item texto">NOMBRE</div>
+          <div class="grid-item">{{ solicitud.emprendedor.nombre }}</div>
+          <div class="grid-item texto">MONTO SOLICITADO</div>
+          <div class="grid-item">$ {{ solicitud.importe_solicitado}}</div>
+          <div class="grid-item texto">TASA DE INTERÉS</div>
+          <div class="grid-item">{{ solicitud.tasa_interes.tasa }}% T.E.A.</div>
+          <div class="grid-item texto">PAGOS</div>
+          <div class="grid-item">{{ solicitud.cant_cuotas }} cuotas</div>
+          <div class="grid-item texto">VALOR DE LA CUOTA</div>
+          <div class="grid-item">$ {{ solicitud.calculo_cuota }}</div>
+          <div class="grid-item texto">FECHA DE LA SOLICITUD</div>
+          <div class="grid-item">{{ solicitud.created_date }}</div>
+
+			</div>
+	</form>
+
+</main>
+{% endblock %}
