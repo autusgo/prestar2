@@ -19,6 +19,8 @@
           <div class="grid-item">{{ solicitud.emprendedor.apellido }}</div>
           <div class="grid-item texto">NOMBRE</div>
           <div class="grid-item">{{ solicitud.emprendedor.nombre }}</div>
+          <div class="grid-item texto">FECHA DE ENVÍO</div>
+          <div class="grid-item">{{ solicitud.created_date }}</div>
           <div class="grid-item texto">MONTO SOLICITADO</div>
           <div class="grid-item">$ {{ solicitud.importe_solicitado}}</div>
           <div class="grid-item texto">TASA DE INTERÉS</div>
@@ -27,8 +29,7 @@
           <div class="grid-item">{{ solicitud.cant_cuotas }} cuotas</div>
           <div class="grid-item texto">VALOR DE LA CUOTA</div>
           <div class="grid-item">$ {{ solicitud.calculo_cuota }}</div>
-          <div class="grid-item texto">FECHA DE LA SOLICITUD</div>
-          <div class="grid-item">{{ solicitud.created_date }}</div>
+
 
 			</div>
 	</form>
