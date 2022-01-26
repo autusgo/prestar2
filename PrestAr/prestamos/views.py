@@ -106,19 +106,24 @@ def solicitud_detail(request, pk):
 def solicitud_new(request):
     if request.method == "POST":
         form = SolicitudForm(request.POST)
+        # print(form)
         if form.is_valid():
             solicitud = form.save(commit=False)
             solicitud.emprendedor = request.user
-            print('prueba')
-            if solicitud.importe_solicitado <= int(12*(solicitud.smvm.monto)):
-                if request.user.is_authenticated:
-                    solicitud.author = request.user
-                solicitud.save()
-                return redirect('solicitud_detail', pk=solicitud.pk)
+            minimo = solicitud.minimo()
+            if minimo == True:
+                if solicitud.importe_solicitado <= int(12*(solicitud.smvm.monto)):
+                    if request.user.is_authenticated:
+                        solicitud.author = request.user
+                    solicitud.save()
+                    return redirect('solicitud_detail', pk=solicitud.pk)
+                else:
+                    maximo = str(12*(solicitud.smvm.importe_solicitado))
+                    messages.error(
+                        request, f'El monto solicitado supera los 12 salarios mínimos. Debe ser inferior a ${maximo}')
             else:
-                maximo = str(12*(solicitud.smvm.importe_solicitado))
                 messages.error(
-                    request, f'El monto solicitado supera los 12 salarios mínimos. Debe ser inferior a ${maximo}')
+                    request, 'El emprendimiento debe tener una antigüedad mayor a los 6 meses')
         else:
             messages.error(request, 'Algo no está bien')
     else:

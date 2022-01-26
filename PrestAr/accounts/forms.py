@@ -11,12 +11,23 @@ from django import forms
 #         model = User
 #         fields = ['username', 'password1', 'password2']
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
+class EmailInput(forms.EmailInput):
+    input_type = 'email'
+
 
 class EmprendedorCreationForm(UserCreationForm):
     class Meta:
         model = Emprendedor
         fields = ('username', 'nombre', 'apellido', 'genero', 'identidad', 'dni',
                   'fec_nac', 'estado_civil', 'telefono', 'celular', 'educacion', 'provincia')
+        widgets = {
+            'fec_nac': DateInput(),
+            'username': EmailInput(),
+        }
 
 
 class EmprendedorChangeForm(UserChangeForm):

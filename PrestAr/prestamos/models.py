@@ -163,7 +163,7 @@ class Solicitud(models.Model):
     domicilio_viv = models.ForeignKey(
         Domicilio, on_delete=models.CASCADE, related_name='domicilioviv', null=True)
     domicilio_emp = models.ForeignKey(
-        Domicilio, on_delete=models.CASCADE, related_name='domicilioemp')
+        Domicilio, on_delete=models.CASCADE, related_name='domicilioemp', null=True)
     datos_contacto = models.IntegerField(blank=True)
     personal_familiar = models.IntegerField()
     personal_nofamiliar = models.IntegerField()
@@ -198,6 +198,14 @@ class Solicitud(models.Model):
         calculo_cuota = round(self.importe_solicitado*(interes/12) /
                               (1-(1+(interes/12))**(-self.cant_cuotas)), 2)
         return round(calculo_cuota, 2)
+
+    def minimo(self):
+        minimo = float((date.today() - self.inicio_actividad).days / 365.25)
+        if minimo > 0.5:
+            minimo = True
+        else:
+            minimo = False
+        return minimo
 
     def save(self, *args, **kwargs):
         # Toma el resultado de la función y lo guarda en el modelo

@@ -5,6 +5,10 @@ from django.core.exceptions import ValidationError
 from django.core import validators
 
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
 class SimulacionForm(forms.ModelForm):
     class Meta:
         model = Simulacion
@@ -21,9 +25,11 @@ class SimulacionForm(forms.ModelForm):
 class SolicitudForm(forms.ModelForm):
     class Meta:
         model = Solicitud
-        fields = ['descripcion_emp', 'inicio_actividad', 'domicilio_emp', 'datos_contacto', 'personal_familiar', 'personal_nofamiliar',
+        fields = ['descripcion_emp', 'inicio_actividad', 'datos_contacto', 'personal_familiar', 'personal_nofamiliar',
                   'ingreso_emp_mes', 'gastos_emp', 'ingresos_familiares_mes', 'gastos_familiares_mes', 'notas', 'importe_solicitado', 'cant_cuotas', 'tasa_anual']
-
+        widgets = {
+            'inicio_actividad': DateInput(),
+        }
 
 # class EmprendedorForm(forms.ModelForm):
 #     class Meta:
