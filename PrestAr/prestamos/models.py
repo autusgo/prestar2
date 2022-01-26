@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Max
 from accounts.models import Emprendedor
+from datetime import date
 
 
 class SMVM(models.Model):
@@ -54,7 +55,7 @@ class Simulacion(models.Model):
     apellido = models.CharField(max_length=200)
     dni = models.IntegerField(validators=[
                               MaxValueValidator(99999999)])
-    monto = models.PositiveIntegerField()
+    importe_solicitado = models.PositiveIntegerField()
     created_date = models.DateTimeField(
         default=timezone.now)
     tasa_anual = models.ForeignKey(
@@ -72,7 +73,7 @@ class Simulacion(models.Model):
 
     def calculo_cuota(self):
         interes = int(self.tasa_anual.tasa)/100
-        calculo_cuota = round(self.monto*(interes/12) /
+        calculo_cuota = round(self.importe_solicitado*(interes/12) /
                               (1-(1+(interes/12))**(-self.cant_cuotas)), 2)
         return round(calculo_cuota, 2)
 
@@ -87,38 +88,38 @@ class Simulacion(models.Model):
 
 class Domicilio(models.Model):
     PROVINCIAS_LISTA = [
-        ('buenosaires', 'Buenos Aires'),
-        ('caba', 'Ciudad Autónoma de Buenos Aires'),
-        ('catamarca', 'Catamarca'),
-        ('chaco', 'Chaco'),
-        ('chubut', 'Chubut'),
-        ('cordoba', 'Córdoba'),
-        ('honeydew', 'Honeydews'),
-        ('corrientes', 'Corrientes'),
-        ('entrerios', 'Entre Ríos'),
-        ('formosa', 'Formosa'),
-        ('jujuy', 'Jujuy'),
-        ('lapampa', 'La Pampa'),
-        ('larioja', 'La Rioja'),
-        ('mendoza', 'Mendoza'),
-        ('misiones', 'Misiones'),
-        ('neuquen', 'Neuquén'),
-        ('rionegro', 'Río Negro'),
-        ('salta', 'Salta'),
-        ('sanjuan', 'San Juan'),
-        ('sanluis', 'San Luis'),
-        ('santacruz', 'Santa Cruz'),
-        ('santafe', 'Santa Fe'),
-        ('santiagoestero', 'Santiago del Estero'),
-        ('tierafuego', 'Tierra del Fuego'),
-        ('tucuman', 'Tucumán'),
+        ('Buenos Aires', 'Buenos Aires'),
+        ('Ciudad Autónoma de Buenos Aires', 'Ciudad Autónoma de Buenos Aires'),
+        ('Catamarca', 'Catamarca'),
+        ('Chaco', 'Chaco'),
+        ('Chubut', 'Chubut'),
+        ('Córdoba', 'Córdoba'),
+        ('Honeydews', 'Honeydews'),
+        ('Corrientes', 'Corrientes'),
+        ('Entre Ríos', 'Entre Ríos'),
+        ('Formosa', 'Formosa'),
+        ('Jujuy', 'Jujuy'),
+        ('La Pampa', 'La Pampa'),
+        ('La Rioja', 'La Rioja'),
+        ('Mendoza', 'Mendoza'),
+        ('Misiones', 'Misiones'),
+        ('Neuquén', 'Neuquén'),
+        ('Río Negro', 'Río Negro'),
+        ('Salta', 'Salta'),
+        ('San Juan', 'San Juan'),
+        ('San Luis', 'San Luis'),
+        ('Santa Cruz', 'Santa Cruz'),
+        ('Santa Fe', 'Santa Fe'),
+        ('Santiago del Estero', 'Santiago del Estero'),
+        ('Tierra del Fuego', 'Tierra del Fuego'),
+        ('Tucumán', 'Tucumán'),
     ]
     CONDICION_LISTA = [
-        ('propio', 'Propio'),
-        ('alquilado', 'Alquilado'),
-        ('prestado', 'Prestado'),
-        ('leasing', 'Leasing'),
-        ('otro', 'Otro'),
+        ('Propio', 'Propio'),
+        ('Alquilado', 'Alquilado'),
+        ('Prestado', 'Prestado'),
+        ('Leasing', 'Leasing'),
+        ('Otro', 'Otro'),
     ]
 
     calle = models.CharField(max_length=200)
@@ -176,7 +177,7 @@ class Solicitud(models.Model):
     notas = models.TextField(blank=True)
     importe_solicitado = models.PositiveIntegerField()
     cant_cuotas = models.IntegerField()
-    tasa_interes = models.ForeignKey(
+    tasa_anual = models.ForeignKey(
         TasaInteres, on_delete=models.CASCADE, null=True, default=1)
     destino1_texto = models.CharField(max_length=50, null=True)
     destino1_monto = models.IntegerField(null=True)
@@ -184,6 +185,8 @@ class Solicitud(models.Model):
     destino2_monto = models.IntegerField(null=True)
     destino3_texto = models.CharField(max_length=50, null=True)
     destino3_monto = models.IntegerField(null=True)
+    cuota_final = models.DecimalField(
+        decimal_places=2, max_digits=9, null=True)
 
     def publish(self):
         self.created_date = timezone.now()
@@ -191,7 +194,7 @@ class Solicitud(models.Model):
         self.save()
 
     def calculo_cuota(self):
-        interes = int(self.tasa_interes.tasa)/100
+        interes = int(self.tasa_anual.tasa)/100
         calculo_cuota = round(self.importe_solicitado*(interes/12) /
                               (1-(1+(interes/12))**(-self.cant_cuotas)), 2)
         return round(calculo_cuota, 2)

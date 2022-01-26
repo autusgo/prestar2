@@ -1,3 +1,4 @@
+from django.forms import formset_factory
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .filters import SimulacionFilter
@@ -44,13 +45,13 @@ def simulacion_new(request):
         if form.is_valid():
             simulacion = form.save(commit=False)
             # Acá chequea que el monto de la simulación no super el SMVM, pero no tirar error de aviso
-            if simulacion.monto <= simulacion.smvm.monto:
+            if simulacion.importe_solicitado <= int(12*(simulacion.smvm.importe_solicitado)):
                 if request.user.is_authenticated:
                     simulacion.author = request.user
                 simulacion.save()
                 return redirect('simulacion_detail', pk=simulacion.pk)
             else:
-                maximo = str(12*(simulacion.smvm.monto))
+                maximo = str(12*(simulacion.smvm.importe_solicitado))
                 messages.error(
                     request, f'El monto solicitado supera los 12 salarios mínimos. Ingresar un monto inferior a ${maximo}')
     else:
@@ -101,20 +102,25 @@ def solicitud_detail(request, pk):
     return render(request, 'solicitudes/solicitud_detail.html', {'solicitud': solicitud})
 
 
+# @login_required(login_url='accounts/login')
 def solicitud_new(request):
     if request.method == "POST":
         form = SolicitudForm(request.POST)
         if form.is_valid():
             solicitud = form.save(commit=False)
-            if solicitud.importe_solicitado <= solicitud.smvm.monto:
+            solicitud.emprendedor = request.user
+            print('prueba')
+            if solicitud.importe_solicitado <= int(12*(solicitud.smvm.monto)):
                 if request.user.is_authenticated:
                     solicitud.author = request.user
                 solicitud.save()
                 return redirect('solicitud_detail', pk=solicitud.pk)
             else:
-                maximo = str(12*(solicitud.smvm.monto))
+                maximo = str(12*(solicitud.smvm.importe_solicitado))
                 messages.error(
                     request, f'El monto solicitado supera los 12 salarios mínimos. Debe ser inferior a ${maximo}')
+        else:
+            messages.error(request, 'Algo no está bien')
     else:
         form = SolicitudForm()
     return render(request, 'solicitudes/solicitud_edit.html', {'form': form})

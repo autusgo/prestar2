@@ -36,7 +36,7 @@
            <div class="grid-item texto">CANTIDAD DE CUOTAS</div>
            <div class="grid-item">{{ form.cant_cuotas }}</div>
            <div class="grid-item texto">TASA DE INTERÉS</div>
-           <div class="grid-item">{{ form.tasa_interes }}</div>
+           <div class="grid-item">{{ form.tasa_anual }}</div>
 
         </div>
 
@@ -52,6 +52,21 @@
             {% endfor %}
             </div>
             {% endif %}
+
+            {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                {{ error }}
+            {% endfor %}
+        {% endif %}
+
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+
+        {% for field in form %}
+
+            {{ field.errors.as_ul }}
+        {% endfor %}
         </div>
 	</form>
 </main>

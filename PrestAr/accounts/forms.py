@@ -13,7 +13,6 @@ from django import forms
 
 
 class EmprendedorCreationForm(UserCreationForm):
-
     class Meta:
         model = Emprendedor
         fields = ('username', 'nombre', 'apellido', 'genero', 'identidad', 'dni',
