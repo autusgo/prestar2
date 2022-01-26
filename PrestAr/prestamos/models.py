@@ -150,6 +150,13 @@ class Domicilio(models.Model):
 
 
 class Solicitud(models.Model):
+
+    RUBRO_LISTA = [
+        ('Producción', 'Producción'),
+        ('Comercialización', 'Comercialización'),
+        ('Servicios', 'Servicios'),
+    ]
+
     smvm = models.ForeignKey(
         SMVM, on_delete=models.CASCADE, null=True, default=1)
     author = models.ForeignKey(
@@ -159,6 +166,7 @@ class Solicitud(models.Model):
     created_date = models.DateTimeField(
         default=timezone.now, null=True)
     descripcion_emp = models.TextField()
+    rubro = models.CharField(max_length=200, choices=RUBRO_LISTA)
     inicio_actividad = models.DateField()
     domicilio_viv = models.ForeignKey(
         Domicilio, on_delete=models.CASCADE, related_name='domicilioviv', null=True)
