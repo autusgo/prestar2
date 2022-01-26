@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header>
+	DETALLE DE LA SOLICITUD DE CRÉDITO
+</header>
+
+<main>
+
+
+<form target="_self" class="solicitud">{% csrf_token %}
+			<div class="caja">
+        <div class="grid-item titulo">DATOS DEL CRÉDITO</div>
+          <div class="grid-item texto">ID CRÉDITO</div>
+          <div class="grid-item">{{ solicitud.id }}</div>
+          <div class="grid-item texto">FECHA DE ENVÍO</div>
+          <div class="grid-item">{{ solicitud.created_date|date:"SHORT_DATE_FORMAT" }}</div>
+          <div class="grid-item texto">MONTO SOLICITADO</div>
+          <div class="grid-item">$ {{ solicitud.importe_solicitado}}</div>
+          <div class="grid-item texto">TASA DE INTERÉS</div>
+          <div class="grid-item">{{ solicitud.tasa_interes.tasa }}% T.E.A.</div>
+          <div class="grid-item texto">CANTIDAD DE PAGOS</div>
+          <div class="grid-item">{{ solicitud.cant_cuotas }} cuotas</div>
+          <div class="grid-item texto">VALOR DE LA CUOTA</div>
+          <div class="grid-item">$ {{ solicitud.calculo_cuota }}</div>
+			</div>
+
+      <div class="caja">
+        <div class="grid-item titulo">DATOS DEL EMPRENDIMIENTO</div>
+          <div class="grid-item texto">DESCRIPCIÓN</div>
+          <div class="grid-item">{{ solicitud.descripcion_emp }}</div>
+          <div class="grid-item texto">RUBRO ECONÓMICO</div>
+          <div class="grid-item"> {{ solicitud.rubro }}</div>
+          <div class="grid-item texto">INICIO DE LA ACTIVIDAD</div>
+          <div class="grid-item">{{ solicitud.inicio_actividad|date:"SHORT_DATE_FORMAT" }}</div>
+          <div class="grid-item texto">PERSONAL FAMILIAR</div>
+          <div class="grid-item">{{ solicitud.personal_familiar}}</div>
+          <div class="grid-item texto">PERSONAL NO FAMILIAR</div>
+          <div class="grid-item">{{ solicitud.personal_nofamiliar }}</div>
+          <div class="grid-item texto">INGRESOS TOTALES POR MES</div>
+          <div class="grid-item">{{ solicitud.ingreso_emp_mes }}</div>
+          <div class="grid-item texto">GASTOS TOTALES AL MES</div>
+          <div class="grid-item">{{ solicitud.gastos_emp }}</div>
+          <div class="grid-item texto">INGRESOS FAMILIARES AL MES</div>
+          <div class="grid-item">{{ solicitud.ingresos_familiares_mes }}</div>
+          <div class="grid-item texto">GASTOS FAMILIARES AL MES</div>
+          <div class="grid-item">{{ solicitud.gastos_familiares_mes }}</div>
+          <div class="grid-item texto">NOTAS</div>
+          <div class="grid-item">{{ solicitud.notas }}</div>
+          <div class="grid-item texto">IMPORTE SOLICITADO</div>
+          <div class="grid-item">{{ solicitud.importe_solicitado }}</div>
+          <div class="grid-item texto">CANTIDAD DE CUOTAS</div>
+          <div class="grid-item">{{ solicitud.cant_cuotas }}</div>
+          <div class="grid-item texto">TASA DE INTERÉS</div>
+          <div class="grid-item">{{ solicitud.tasa_anual }}% T.E.A.</div>
+			</div>
+
+      <div class="caja">
+        <div class="grid-item titulo">DATOS PERSONALES</div>
+      
+        <div class="grid-item texto">NOMBRE</div>
+        <div class="grid-item">{{ solicitud.emprendedor.nombre }}</div>
+        <div class="grid-item texto">APELLIDO</div>
+        <div class="grid-item">{{solicitud.emprendedor.apellido }}</div>
+        <div class="grid-item texto">EDAD</div>
+        <div class="grid-item">{{solicitud.emprendedor.age}}</div>
+        <div class="grid-item texto">FECHA DE NACIMIENTO</div>
+        <div class="grid-item">{{ solicitud.emprendedor.fec_nac|date:"SHORT_DATE_FORMAT" }} </div>
+        <div class="grid-item texto">GÉNERO</div>
+        <div class="grid-item">{{solicitud.emprendedor.genero}}</div>
+        <div class="grid-item texto">IDENTIDAD AUTOPERCIBIDA *</div>
+        <div class="grid-item">{{solicitud.emprendedor.identidad}}</div>
+        <div class="grid-item texto">DNI</div>
+        <div class="grid-item">{{solicitud.emprendedor.dni}}</div>
+        <div class="grid-item texto">ESTADO CIVIL</div>
+        <div class="grid-item">{{solicitud.emprendedor.estado_civil}}</div>
+        <div class="grid-item texto">TELÉFONO</div>
+        <div class="grid-item">{{solicitud.emprendedor.telefono}}</div>
+        <div class="grid-item texto">¿ES UN CELULAR?</div>
+        <div class="grid-item">{{solicitud.emprendedor.celular|yesno:"Sí,No"}}</div>
+        <div class="grid-item texto">NIVEL EDUCATIVO ALCANZADO</div>
+        <div class="grid-item">{{solicitud.emprendedor.educacion}}</div>
+      
+      </div>
+      
+      <div class="caja">
+        <div class="grid-item titulo">DATOS DEL DOMICILIO</div>
+      
+        <div class="grid-item texto">CALLE</div>
+        <div class="grid-item">{{ solicitud.domicilio_emp.calle }}</div>
+        <div class="grid-item texto">NÚMERO</div>
+        <div class="grid-item">{{solicitud.domicilio_emp.numero }}</div>
+        <div class="grid-item texto">PISO</div>
+        <div class="grid-item">{{ solicitud.domicilio_emp.piso }} </div>
+        <div class="grid-item texto">DEPTO</div>
+        <div class="grid-item">{{solicitud.domicilio_emp.depto}}</div>
+        <div class="grid-item texto">MONOBLOCK</div>
+        <div class="grid-item">{{solicitud.domicilio_emp.monoblock}}</div>
+        <div class="grid-item texto">KILÓMETRO</div>
+        <div class="grid-item">{{solicitud.domicilio_emp.kilometro}}</div>
+        <div class="grid-item texto">BARRIO</div>
+        <div class="grid-item">{{solicitud.domicilio_emp.barrio}}</div>
+        <div class="grid-item texto">MANZANA</div>
+        <div class="grid-item">{{solicitud.domicilio_emp.manzana}}</div>
+        <div class="grid-item texto">SECCIÓN</div>
+        <div class="grid-item">{{solicitud.domicilio_emp.seccion}}</div>
+        <div class="grid-item texto">CASA</div>
+        <div class="grid-item">{{solicitud.domicilio_emp.casa}}</div>
+        <div class="grid-item texto">PROVINCIA</div>
+        <div class="grid-item">{{solicitud.domicilio_emp.provincia}}</div>
+        <div class="grid-item texto">DEPARTAMENTO</div>
+        <div class="grid-item">{{solicitud.domicilio_emp.departamento}}</div>
+        <div class="grid-item texto">MUNICIPIO</div>
+        <div class="grid-item">{{solicitud.domicilio_emp.municipio}}</div>
+        <div class="grid-item texto">LOCALIDAD</div>
+        <div class="grid-item">{{solicitud.domicilio_emp.localidad}}</div>
+        <div class="grid-item texto">CÓDIGO POSTAL</div>
+        <div class="grid-item">{{solicitud.domicilio_emp.cod_postal}}</div>
+        <div class="grid-item texto">CONDICIÓN DEL INMUEBLE</div>
+        <div class="grid-item">{{solicitud.domicilio_emp.condicion}}</div>
+      
+      </div>
+
+      <!-- <div class="caja">
+        <div class="grid-item titulo">DOMICILIO DEL EMPRENDEDOR</div>
+      
+        <div class="grid-item texto">CALLE</div>
+        <div class="grid-item">{{ solicitud.domicilio_viv.calle }}</div>
+        <div class="grid-item texto">NÚMERO</div>
+        <div class="grid-item">{{solicitud.domicilio_viv.numero }}</div>
+        <div class="grid-item texto">PISO</div>
+        <div class="grid-item">{{ solicitud.domicilio_viv.piso }} </div>
+        <div class="grid-item texto">DEPTO</div>
+        <div class="grid-item">{{solicitud.domicilio_viv.depto}}</div>
+        <div class="grid-item texto">MONOBLOCK</div>
+        <div class="grid-item">{{solicitud.domicilio_viv.monoblock}}</div>
+        <div class="grid-item texto">KILÓMETRO</div>
+        <div class="grid-item">{{solicitud.domicilio_viv.kilometro}}</div>
+        <div class="grid-item texto">BARRIO</div>
+        <div class="grid-item">{{solicitud.domicilio_viv.barrio}}</div>
+        <div class="grid-item texto">MANZANA</div>
+        <div class="grid-item">{{solicitud.domicilio_viv.manzana}}</div>
+        <div class="grid-item texto">SECCIÓN</div>
+        <div class="grid-item">{{solicitud.domicilio_viv.seccion}}</div>
+        <div class="grid-item texto">CASA</div>
+        <div class="grid-item">{{solicitud.domicilio_viv.casa}}</div>
+        <div class="grid-item texto">PROVINCIA</div>
+        <div class="grid-item">{{solicitud.domicilio_viv.provincia}}</div>
+        <div class="grid-item texto">DEPARTAMENTO</div>
+        <div class="grid-item">{{solicitud.domicilio_viv.departamento}}</div>
+        <div class="grid-item texto">MUNICIPIO</div>
+        <div class="grid-item">{{solicitud.domicilio_viv.municipio}}</div>
+        <div class="grid-item texto">LOCALIDAD</div>
+        <div class="grid-item">{{solicitud.domicilio_viv.localidad}}</div>
+        <div class="grid-item texto">CÓDIGO POSTAL</div>
+        <div class="grid-item">{{solicitud.domicilio_viv.cod_postal}}</div>
+        <div class="grid-item texto">CONDICIÓN DEL INMUEBLE</div>
+        <div class="grid-item">{{solicitud.domicilio_viv.condicion}}</div>
+      
+      </div> -->
+
+	</form>
+
+</main>
+{% endblock %}

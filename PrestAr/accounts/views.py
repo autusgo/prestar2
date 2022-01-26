@@ -14,33 +14,44 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 from .models import *
 from .forms import *
+from prestamos.models import Domicilio
 # from .filters import OrderFilter
 
 
-class SignUpView(CreateView):
-    form_class = EmprendedorCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'accounts/register.html'
+# class SignUpView(CreateView):
+#     form_class = EmprendedorCreationForm
+#     success_url = reverse_lazy('login')
+#     template_name = 'accounts/register.html'
 
 
-# def registerPage(request):
-#     if request.user.is_authenticated:
-#         return redirect('home')
-#     else:
-#         form = CreateUserForm()
-#         if request.method == 'POST':
-#             form = CreateUserForm(request.POST)
-#             if form.is_valid():
-#                 form.save()
-#                 user = form.cleaned_data.get('username')
-#                 messages.success(request, 'Se creó la cuenta para ' + user)
+def registerPage(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        form = EmprendedorCreationForm()
+        form1 = DomicilioCreationForm()
+        if request.method == 'POST':
+            form = EmprendedorCreationForm(request.POST)
+            form1 = DomicilioCreationForm(request.POST)
+            if form.is_valid() and form1.is_valid():
+                validacion_edad = form.save(commit=False)
+                edad = validacion_edad.age()
+                if edad > 17:
+                    form.save()
+                    form1.save()
+                    user = form.cleaned_data.get('username')
+                    messages.success(request, 'Se creó la cuenta para ' + user)
 
-#                 return redirect('login')
-#             else:
-#                 messages.info(request, 'Datos inválidos')
+                    return redirect('login')
+                else:
+                    print('Es menor')
+                    messages.error(
+                        request, 'El emprendedor debe ser mayor de 18 años de edad.')
+            else:
+                messages.info(request, 'Datos inválidos')
 
-#         context = {'form': form}
-#         return render(request, 'accounts/register.html', context)
+        context = {'form': form, 'form1': form1}
+        return render(request, 'accounts/register.html', context)
 
 
 def loginPage(request):

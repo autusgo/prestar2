@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<header>
+	TASA EFECTIVA ANUAL 
+</header>
+
+<main>
+    <form target="_self"  method="POST" class="tasa-form">{% csrf_token %}
+			<div class="caja">
+     			<div class="grid-item titulo">MODIFICAR LA TASA DE INTERÉS DE LOS CRÉDITOS</div>
+
+                <div class="grid-item texto" style="text-align:center">NUEVA TASA DE INTERÉS %</div>
+                <div class="grid-item">{{ form.tasa }} </div>
+
+			</div>
+
+		<button class="save btn btn-default">ENVIAR</button>
+        
+	</form>
+</main>
+{% endblock %}

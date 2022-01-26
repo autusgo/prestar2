@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header>
+	TASA EFECTIVA ANUAL 
+</header>
+
+<main>
+
+
+<form target="_self" class="tasa">{% csrf_token %}
+			<div class="caja">
+        <div class="grid-item titulo mayus">
+          <span><span ></span>TASA DE INTERÉS
+						{% if user.is_authenticated %}
+              <a href="{% url 'tasa_edit' pk=tasa.pk %}"><span style="float:right" class="glyphicon glyphicon-pencil"></span></a>  
+						{% endif %}
+          </span>
+					</div>
+          <div class="grid-item texto" style="text-align:center">{{ tasa.tasa }} %</div>
+          <div class="grid-item" style="text-align:center">Última modificación {{ tasa.created_date }} por {{ tasa.author }}</div>
+
+
+			</div>
+	</form>
+
+</main>
+{% endblock %}
