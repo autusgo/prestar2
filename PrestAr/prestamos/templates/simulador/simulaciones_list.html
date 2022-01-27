@@ -5,37 +5,35 @@
 </header>
 
 <main>
-
+	{% if user.is_authenticated %}
 	<form method="GET">
-		<div class="busqueda_pro">
 
-		<div class="box1" value="APELLIDO">APELLIDO</div>
-		<div class="box2" value="SIMULACION">{{ filter.form.apellido }}</div>
-		<div class="box3"></div>
 
-		<div class="box1" value="APELLIDO">DNI</div>
-		<div class="box2" value="SIMULACION">{{ filter.form.dni }}</div>
-		<div class="box3"></div>
-		
-		<div class="box1" value="created_date">DESDE FECHA</div>
-		<div class="box2" value="FECHA">{{ filter.form.start_date }}</div>
-		<div class="box3"></div>
+		<div class="caja">
+			<div class="grid-item titulo mayus">
+				<span>BUSCAR SOLICITUDES<i style="float:right; padding-right:20px" class="bi bi-search"></i></span>
+			</div>
+			<div class="grid-item texto" value="APELLIDO">APELLIDO</div>
+			<div class="grid-item" value="SIMULACION">{{ filter.form.apellido }}</div>
+			<div class="grid-item texto" value="DNI">DNI</div>
+			<div class="grid-item" value="SIMULACION">{{ filter.form.dni }}</div>
 
-		<div class="box1" value="created_date">HASTA FECHA</div>
-		<div class="box2" value="FECHA">{{ filter.form.end_date }}</div>
-		<div class="box3"></div>
+			<div class="grid-item texto" value="created_date">DESDE FECHA</div>
+			<div class="grid-item" value="SIMULACION">{{ filter.form.start_date }}</div>
+			<div class="grid-item texto" value="created_date">HASTA FECHA</div>
+			<div class="grid-item" value="SIMULACION"> {{ filter.form.end_date }}</div>
 
-		<div class="box1" value="monto">DESDE MONTO</div>
-		<div class="box2" value="MONTO">{{ filter.form.monto_desde }}</div>
-		<div class="box3"></div>
-
-		<div class="box1" value="monto">HASTA MONTO</div>
-		<div class="box2" value="MONTO">{{ filter.form.monto_hasta }}</div>
-		<div class="box3"><input class="save btn btn-default"  type="submit" value="FILTRAR" /></div>
-		
+			<div class="grid-item texto" value="created_date">DESDE MONTO</div>
+			<div class="grid-item" value="FECHA">{{ filter.form.monto_desde }}</div>
+			<div class="grid-item texto" value="monto">HASTA MONTO</div>
+			<div class="grid-item" value="MONTO">{{ filter.form.monto_hasta }}</div>
 
 		</div>
+
+		<div class="box3"><input class="save btn btn-default"  type="submit" value="FILTRAR" /></div>
+
 	</form>
+	{% endif %}
 
   {% for simulacion in filter.qs %}
 
@@ -58,7 +56,7 @@
 			</div>
 	</form>
   {% empty %}
-	<div class="grid-item texto">AÚN NO HAY SIMULACIONES CARGADAS</div>
+	<div class="grid-item texto">NO HAY RESULTADOS PARA LA BÚSQUEDA</div>
   {% endfor %}
 </main>
 {% endblock %}

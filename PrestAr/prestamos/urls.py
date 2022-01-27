@@ -11,8 +11,8 @@ urlpatterns = [
     path('simulador/<int:pk>/edit/', views.simulacion_edit, name='simulacion_edit'),
     path('simulador/<pk>/remove/', views.simulacion_remove,
          name='simulacion_remove'),
-    path('/sobre_conami', views.sobre_conami, name='sobre_conami'),
-    path('/sobre_creditos', views.sobre_creditos, name='sobre_creditos'),
+    path('sobre_conami/', views.sobre_conami, name='sobre_conami'),
+    path('sobre_creditos/', views.sobre_creditos, name='sobre_creditos'),
 
     path('solicitudes/new/', views.solicitud_new, name='solicitud_new'),
     path('solicitudes/<int:pk>/edit/',
