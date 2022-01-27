@@ -41,12 +41,12 @@
 
 <form target="_self"  method="POST" class="simulacion">
 			<div class="caja">
-     			<div class="grid-item titulo mayus"><a href="{% url 'simulacion_detail' pk=simulacion.pk %}"><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;#{{ simulacion.id|stringformat:"09d" }}</a></div>
+     			<div class="grid-item titulo mayus"><a href="{% url 'simulacion_detail' pk=simulacion.pk %}"><i class="bi bi-bookmark"></i>&nbsp;&nbsp;#{{ simulacion.id|stringformat:"09d" }}</a></div>
 
           <div class="grid-item texto">NOMBRE</div>
           <div class="grid-item">{{ simulacion.apellido }}</div>
           <div class="grid-item texto">MONTO SOLICITADO</div>
-          <div class="grid-item">$ {{ simulacion.monto}}</div>
+          <div class="grid-item">$ {{ simulacion.importe_solicitado}}</div>
           <div class="grid-item texto">TASA ANUAL</div>
           <div class="grid-item">{{ simulacion.tasa_anual }}%</div>
           <div class="grid-item texto">PAGOS</div>

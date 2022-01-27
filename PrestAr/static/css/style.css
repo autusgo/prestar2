@@ -4,7 +4,7 @@ html {
 
 body {
   min-height: 100%;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Nunito Sans", sans-serif !important;
   display: grid;
   grid-template:
     "menu header"
@@ -36,6 +36,8 @@ a:hover {
     "button6";
   font-family: "Nunito Sans", sans-serif;
   font-weight: bold;
+  text-decoration: none;
+  list-style: none;
 }
 
 .menuheader {
@@ -236,4 +238,95 @@ main {
 
 .copete {
   padding-top: 70px;
+}
+
+/* Prueba con submenú */
+
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* define a fixed width for the entire menu */
+.navigation {
+  width: 300px;
+}
+
+/* reset our lists to remove bullet points and padding */
+.mainmenu,
+.submenu {
+  padding: 0;
+  margin: 0;
+}
+
+/* make ALL links (main and submenu) have padding and background color */
+
+/* add hover behaviour */
+/* .mainmenu a:hover {
+  background-color: #c5c5c5;
+} */
+
+/* when hovering over a .mainmenu item,
+display the submenu inside it.
+we're changing the submenu's max-height from 0 to 200px;
+*/
+
+.menu li:hover .submenu {
+  display: block;
+  max-height: 200px;
+}
+
+/*
+we now overwrite the background-color for .submenu links only.
+CSS reads down the page, so code at the bottom will overwrite the code at the top.
+*/
+
+/* .submenu a {
+  background-color: #999;
+  padding: 10px;
+} */
+
+/* hover behaviour for links inside .submenu */
+.submenu a:hover {
+  /* background-color: #666; */
+}
+
+/* this is the initial state of all submenus.
+we set it to max-height: 0, and hide the overflowed content.
+*/
+
+.submenu {
+  display: grid;
+  grid-template-areas:
+    "subbutton1"
+    "subbutton2"
+    "subbutton3"
+    "subbutton4"
+    "subbutton5"
+    "subbutton6";
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  list-style: none;
+  margin-left: 10px;
+  overflow: hidden;
+  max-height: 0;
+  -webkit-transition: all 0.5s ease-out;
+}
+
+.subbotones {
+  text-align: left;
+  padding: 20px;
+  font-size: 13px;
+}
+.subbotones:hover {
+  background-color: #ffffff;
+  color: #5980a2;
+  border-bottom: solid #87baea;
+}
+
+.subbutton1 {
+  grid-area: button1;
+  border-top: solid #eeeeee;
+  border-bottom: solid #eeeeee;
 }

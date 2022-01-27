@@ -11,9 +11,9 @@
 <form target="_self" class="simulacion">{% csrf_token %}
 			<div class="caja">
         <div class="grid-item titulo mayus">
-          <span><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp; #{{ simulacion.id|stringformat:"09d" }}
+          <span><i class="bi bi-bookmark"></i>&nbsp;&nbsp; #{{ simulacion.id|stringformat:"09d" }}
 						{% if user.is_authenticated %}
-              <a onclick="return confirm('¿Está seguro de que desea eliminar la simulación?')"; href="{% url 'simulacion_remove' pk=simulacion.pk %}"><span style="float:right" class="glyphicon glyphicon-trash"></span></a>
+              <a onclick="return confirm('¿Está seguro de que desea eliminar la simulación?')"; href="{% url 'simulacion_remove' pk=simulacion.pk %}"><span style="float:right" class="bi bi-trash"></span></a>
 						{% endif %}
           </span>
 					</div>

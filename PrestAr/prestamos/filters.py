@@ -16,8 +16,10 @@ class SimulacionFilter(django_filters.FilterSet):
                             lookup_expr='gte', widget=DateInput)
     end_date = DateFilter(field_name="created_date",
                           lookup_expr='lte', widget=DateInput)
-    monto_desde = NumberFilter(field_name="monto", lookup_expr='gte')
-    monto_hasta = NumberFilter(field_name="monto", lookup_expr='lte')
+    monto_desde = NumberFilter(
+        field_name="importe_solicitado", lookup_expr='gte')
+    monto_hasta = NumberFilter(
+        field_name="importe_solicitado", lookup_expr='lte')
 
     class Meta:
         model = Simulacion
