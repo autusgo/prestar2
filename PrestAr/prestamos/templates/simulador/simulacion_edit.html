@@ -13,18 +13,24 @@
                 <div class="grid-item">{{ user.nombre }}</div>
                 <div class="grid-item texto">APELLIDO</div>
                 <div class="grid-item">{{ user.apellido }}</div>
+                <div class="grid-item texto">DNI</div>
+                <div class="grid-item">{{ user.dni }}</div>
+                <div class="grid-item texto">TELÉFONO</div>
+                <div class="grid-item">{{ user.telefono }}</div>
+                <div class="grid-item texto">CORREO ELECTRÓNICO</div>
+                <div class="grid-item">{{ user.username }}</div>
                 {% else %}
                 <div class="grid-item texto">NOMBRE</div>
                 <div class="grid-item">{{ form.nombre }}</div>
                 <div class="grid-item texto">APELLIDO</div>
                 <div class="grid-item">{{ form.apellido }}</div>
-                {% endif %}
                 <div class="grid-item texto">DNI</div>
                 <div class="grid-item">{{ form.dni }}</div>
                 <div class="grid-item texto">TELÉFONO</div>
                 <div class="grid-item">{{ form.telefono }}</div>
                 <div class="grid-item texto">CORREO ELECTRÓNICO</div>
                 <div class="grid-item">{{ form.email }}</div>
+                {% endif %}
                 <div class="grid-item texto">MONTO SOLICITADO</div>
                 <div class="grid-item">{{ form.importe_solicitado }}</div>
                 <div class="grid-item texto">CANTIDAD DE CUOTAS</div>
@@ -33,19 +39,34 @@
                 <div class="grid-item">{{ form.tasa_anual }}</div>
 			</div>
 
-		<button class="save btn btn-default">ENVIAR</button>
-        <div class="texto" style="color:red">
+		        <button class="save btn btn-default">ENVIAR</button>
+                <div class="texto" style="color:red">
 						
-            {% if messages %}
-            <div class="span12">
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                    {{ message|safe }}
+                    {% if messages %}
+                    <div class="span12">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message|safe }}
+                        </div>
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+        
+                    {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                {% endif %}
+        
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+        
+                {% for field in form %}
+        
+                    {{ field.errors.as_ul }}
+                {% endfor %}
                 </div>
-            {% endfor %}
-            </div>
-            {% endif %}
-        </div>
 	</form>
 </main>
 {% endblock %}

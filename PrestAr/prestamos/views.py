@@ -45,13 +45,13 @@ def simulacion_new(request):
         if form.is_valid():
             simulacion = form.save(commit=False)
             # Acá chequea que el monto de la simulación no super el SMVM, pero no tirar error de aviso
-            if simulacion.importe_solicitado <= int(12*(simulacion.smvm.importe_solicitado)):
+            if simulacion.importe_solicitado <= int(12*(simulacion.smvm.monto)):
                 if request.user.is_authenticated:
                     simulacion.author = request.user
                 simulacion.save()
                 return redirect('simulacion_detail', pk=simulacion.pk)
             else:
-                maximo = str(12*(simulacion.smvm.importe_solicitado))
+                maximo = str(12*(simulacion.smvm.monto))
                 messages.error(
                     request, f'El monto solicitado supera los 12 salarios mínimos. Ingresar un monto inferior a ${maximo}')
     else:

@@ -10,7 +10,7 @@ from datetime import date
 class SMVM(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    monto = models. IntegerField()
+    monto = models. PositiveIntegerField()
     created_date = models.DateTimeField(
         default=timezone.now)
 
@@ -29,7 +29,7 @@ class SMVM(models.Model):
 class TasaInteres(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    tasa = models.SmallIntegerField()
+    tasa = models.PositiveIntegerField()
     created_date = models.DateTimeField(
         default=timezone.now)
 

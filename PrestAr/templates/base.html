@@ -7,8 +7,12 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/prestamos.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     <!-- <link rel="shortcut icon" href="{%  static 'img/favicon.ico' %}"> -->
     <title>prest.ar</title>
+
+
+
   </head>
 
 <body>
@@ -31,7 +35,7 @@
         
         <li><a href="{% url 'sobre_conami' %}"><div class="botones button1"><i class="bi bi-info-square"></i>&nbsp;&nbsp;&nbsp;SOBRE CONAMI</div></a></li>
         <!-- <li><a href="{% url 'sobre_creditos' %}"><div class="botones button3"><i class="bi bi-info-circle-fill"></i></span>&nbsp;&nbsp;&nbsp;SOBRE LOS CRÉDITOS</div></a></li> -->
-        <li><a href="http://servicios.infoleg.gob.ar/infolegInternet/anexos/115000-119999/118062/norma.htm"><div class="botones button4"><i class="bi bi-shield"></i></i>&nbsp;&nbsp;&nbsp;LEY 26.117</div></a></li>
+        <li><a target="_blank" href="http://servicios.infoleg.gob.ar/infolegInternet/anexos/115000-119999/118062/norma.htm"><div class="botones button4"><i class="bi bi-shield"></i></i>&nbsp;&nbsp;&nbsp;LEY 26.117</div></a></li>
 
         <li><a href="{% url 'sim_index' %}"><div class="botones button2"><i class="bi bi-camera-reels"></i>&nbsp;&nbsp;&nbsp;SIMULADOR</div></a>
         <ul class="submenu">
@@ -44,7 +48,7 @@
         
         
       {% if user.is_authenticated %}
-        <li><div class="botones button2"><i class="bi bi-journal-text"></i>&nbsp;&nbsp;&nbsp;SOLICITUDES</div>
+        <li><div class="botones button2"><i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;&nbsp;SOLICITUDES</div>
           <ul class="submenu">
             <li><a href="{% url 'solicitud_new' %}"><div class="subbotones subbutton4"><i class="bi bi-plus-lg"></i></span>&nbsp;&nbsp;&nbsp;NUEVA SOLICITUD</div></a></li>
           </ul>
@@ -69,7 +73,7 @@
   {% endblock %}
 
   <footer>
-    <div style="padding-top:20px"><img src="/static/img/prestar_negro_CHICO.png" alt="Prest.Ar"> | Avedaño, Bertuzzi, Congreado & Eyrea © MMXXI</div>
+    <div style="padding-top:20px"><img style="vertical-align:middle" src="/static/img/prestar_negro_CHICO.png" alt="Prest.Ar"> | Avedaño, Bertuzzi, Congreado & Eyrea © MMXXI</div>
   </footer>
 
   </body>

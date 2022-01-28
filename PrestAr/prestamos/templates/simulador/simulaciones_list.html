@@ -8,10 +8,9 @@
 	{% if user.is_authenticated %}
 	<form method="GET">
 
-
 		<div class="caja">
 			<div class="grid-item titulo mayus">
-				<span>BUSCAR SOLICITUDES<i style="float:right; padding-right:20px" class="bi bi-search"></i></span>
+				<span>FILTRAR SOLICITUDES<i style="float:right; padding-right:20px" class="bi bi-search"></i></span>
 			</div>
 			<div class="grid-item texto" value="APELLIDO">APELLIDO</div>
 			<div class="grid-item" value="SIMULACION">{{ filter.form.apellido }}</div>
@@ -27,15 +26,39 @@
 			<div class="grid-item" value="FECHA">{{ filter.form.monto_desde }}</div>
 			<div class="grid-item texto" value="monto">HASTA MONTO</div>
 			<div class="grid-item" value="MONTO">{{ filter.form.monto_hasta }}</div>
-
 		</div>
 
-		<div class="box3"><input class="save btn btn-default"  type="submit" value="FILTRAR" /></div>
+		<button class="save btn btn-outline-secondary" type="submit" value="FILTRAR">FILTRAR</button>
 
 	</form>
 	{% endif %}
 
-  {% for simulacion in filter.qs %}
+
+	<table>
+		<tr class="titulo mayus">
+		<th>ID #</th>
+		<th>APELLIDO</th>
+		<th>DNI</th>
+		<th>MONTO</th>
+		<th>CUOTAS</th>
+		<th>FECHA</th>
+		</tr>
+		{% for simulacion in filter.qs %}
+		<tr >
+		<td style="text-align: center;"><a href="{% url 'simulacion_detail' pk=simulacion.pk %}"><i class="bi bi-file-earmark-spreadsheet"></i>&nbsp;&nbsp;&nbsp;{{ simulacion.id|stringformat:"09d" }}</a></td>
+		<td>{{ simulacion.apellido }}</td>
+		<td>{{ simulacion.dni }}</td>
+		<td>{{ simulacion.importe_solicitado }}</td>
+		<td>{{ simulacion.cant_cuotas }}</td>
+		<td>{{ simulacion.created_date|date:"SHORT_DATE_FORMAT" }}</td>
+		</tr>
+		{% empty %}
+			<div class="grid-item texto">NO HAY RESULTADOS PARA LA BÚSQUEDA</div>
+	  {% endfor %}
+	  </table>
+
+
+  <!-- {% for simulacion in filter.qs %}
 
 <form target="_self"  method="POST" class="simulacion">
 			<div class="caja">
@@ -57,6 +80,6 @@
 	</form>
   {% empty %}
 	<div class="grid-item texto">NO HAY RESULTADOS PARA LA BÚSQUEDA</div>
-  {% endfor %}
+  {% endfor %} -->
 </main>
 {% endblock %}
