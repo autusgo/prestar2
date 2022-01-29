@@ -10,18 +10,18 @@
      			<div class="grid-item titulo">DATOS DEL EMPRENDEDOR</div>
                  {% if user.is_authenticated %}
                 <div class="grid-item texto">NOMBRE</div>
-                <div class="grid-item">{{ user.nombre }}</div>
+                <div class="grid-item"><input readonly {{ form.nombre }}</div>
                 <div class="grid-item texto">APELLIDO</div>
-                <div class="grid-item">{{ user.apellido }}</div>
+                <div class="grid-item"><input readonly {{ form.apellido }}</div>
                 <div class="grid-item texto">DNI</div>
-                <div class="grid-item">{{ user.dni }}</div>
+                <div class="grid-item"><input readonly {{ form.dni }}</div>
                 <div class="grid-item texto">TELÉFONO</div>
-                <div class="grid-item">{{ user.telefono }}</div>
+                <div class="grid-item"><input readonly {{ form.telefono }}</div>
                 <div class="grid-item texto">CORREO ELECTRÓNICO</div>
-                <div class="grid-item">{{ user.username }}</div>
+                <div class="grid-item"><input readonly {{ form.email }}</div>
                 {% else %}
                 <div class="grid-item texto">NOMBRE</div>
-                <div class="grid-item">{{ form.nombre }}</div>
+                <div class="grid-item"> {{ form.nombre }}</div>
                 <div class="grid-item texto">APELLIDO</div>
                 <div class="grid-item">{{ form.apellido }}</div>
                 <div class="grid-item texto">DNI</div>

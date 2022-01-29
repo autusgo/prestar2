@@ -7,11 +7,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/prestamos.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
     <!-- <link rel="shortcut icon" href="{%  static 'img/favicon.ico' %}"> -->
     <title>prest.ar</title>
-
-
 
   </head>
 
@@ -51,6 +48,9 @@
         <li><div class="botones button2"><i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;&nbsp;SOLICITUDES</div>
           <ul class="submenu">
             <li><a href="{% url 'solicitud_new' %}"><div class="subbotones subbutton4"><i class="bi bi-plus-lg"></i></span>&nbsp;&nbsp;&nbsp;NUEVA SOLICITUD</div></a></li>
+            {% if user.is_staff %}
+          <li><a href="{% url 'solicitud_list' %}"><div class="subbotones subbutton3"><i class="bi bi-stack"></i>&nbsp;&nbsp;&nbsp;VER SOLICITUDES</div></a></li>
+          {% endif %}
           </ul>
         </li>
       {% endif %}

@@ -333,6 +333,7 @@ we set it to max-height: 0, and hide the overflowed content.
 
 table {
   width: 100%;
+  color: #333;
 }
 
 th {
@@ -341,9 +342,10 @@ th {
 td {
   text-align: left;
   padding: 8px;
+  font-weight: lighter;
 }
 
-tr:nth-child(even) {
+tbody:nth-child(even) {
   background-color: #f2f2f2;
 }
 

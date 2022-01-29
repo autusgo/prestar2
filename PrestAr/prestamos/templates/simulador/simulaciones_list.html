@@ -3,7 +3,62 @@
 <header>
 	SIMULACIONES REALIZADAS
 </header>
-
+<script>
+	function sortTable(n) {
+	  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+	  table = document.getElementById("myTable");
+	  switching = true;
+	  // Set the sorting direction to ascending:
+	  dir = "asc"; 
+	  /* Make a loop that will continue until
+	  no switching has been done: */
+	  while (switching) {
+		// Start by saying: no switching is done:
+		switching = false;
+		rows = table.rows;
+		/* Loop through all table rows (except the
+		first, which contains table headers): */
+		for (i = 1; i < (rows.length - 1); i++) {
+		  // Start by saying there should be no switching:
+		  shouldSwitch = false;
+		  /* Get the two elements you want to compare,
+		  one from current row and one from the next: */
+		  x = rows[i].getElementsByTagName("TD")[n];
+		  y = rows[i + 1].getElementsByTagName("TD")[n];
+		  /* Check if the two rows should switch place,
+		  based on the direction, asc or desc: */
+		  if (dir == "asc") {
+			if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+			  // If so, mark as a switch and break the loop:
+			  shouldSwitch = true;
+			  break;
+			}
+		  } else if (dir == "desc") {
+			if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+			  // If so, mark as a switch and break the loop:
+			  shouldSwitch = true;
+			  break;
+			}
+		  }
+		}
+		if (shouldSwitch) {
+		  /* If a switch has been marked, make the switch
+		  and mark that a switch has been done: */
+		  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+		  switching = true;
+		  // Each time a switch is done, increase this count by 1:
+		  switchcount ++; 
+		} else {
+		  /* If no switching has been done AND the direction is "asc",
+		  set the direction to "desc" and run the while loop again. */
+		  if (switchcount == 0 && dir == "asc") {
+			dir = "desc";
+			switching = true;
+		  }
+		}
+	  }
+	}
+	</script>
 <main>
 	{% if user.is_authenticated %}
 	<form method="GET">
@@ -34,24 +89,28 @@
 	{% endif %}
 
 
-	<table>
+	<table id="myTable" class="display">
+		<thead>
 		<tr class="titulo mayus">
-		<th>ID #</th>
-		<th>APELLIDO</th>
-		<th>DNI</th>
-		<th>MONTO</th>
-		<th>CUOTAS</th>
-		<th>FECHA</th>
+		<th onclick="sortTable(0)">ID #</th>
+		<th onclick="sortTable(1)">APELLIDO</th>
+		<th onclick="sortTable(2)">DNI</th>
+		<th onclick="sortTable(3)">MONTO</th>
+		<th onclick="sortTable(4)">CUOTAS</th>
+		<th onclick="sortTable(5)">FECHA</th>
 		</tr>
+		</thead>
 		{% for simulacion in filter.qs %}
+		<tbody>
 		<tr >
 		<td style="text-align: center;"><a href="{% url 'simulacion_detail' pk=simulacion.pk %}"><i class="bi bi-file-earmark-spreadsheet"></i>&nbsp;&nbsp;&nbsp;{{ simulacion.id|stringformat:"09d" }}</a></td>
 		<td>{{ simulacion.apellido }}</td>
 		<td>{{ simulacion.dni }}</td>
 		<td>{{ simulacion.importe_solicitado }}</td>
 		<td>{{ simulacion.cant_cuotas }}</td>
-		<td>{{ simulacion.created_date|date:"SHORT_DATE_FORMAT" }}</td>
+		<td style="text-align: center;">{{ simulacion.created_date|date:"SHORT_DATETIME_FORMAT" }}</td>
 		</tr>
+		</tbody>
 		{% empty %}
 			<div class="grid-item texto">NO HAY RESULTADOS PARA LA BÚSQUEDA</div>
 	  {% endfor %}

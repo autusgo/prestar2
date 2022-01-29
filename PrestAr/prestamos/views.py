@@ -1,12 +1,12 @@
 from django.forms import formset_factory
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .filters import SimulacionFilter
+from .filters import SimulacionFilter, SolicitudFilter
 from .forms import *
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-
+from django.core.exceptions import ObjectDoesNotExist
 
 # def register(resquest):
 #     form = UserCreationForm()
@@ -27,24 +27,29 @@ def sim_index(request):
     return render(request, 'simulador/sim_index.html', {'filter': simulaciones})
 
 
-def simulaciones_list(request):
-    simulaciones = SimulacionFilter(
-        request.GET, queryset=Simulacion.objects.all())
-
-    return render(request, 'simulador/simulaciones_list.html', {'filter': simulaciones})
-
-
 def simulacion_detail(request, pk):
     simulacion = get_object_or_404(Simulacion, pk=pk)
     return render(request, 'simulador/simulacion_detail.html', {'simulacion': simulacion})
 
 
 def simulacion_new(request):
+    autor = request.user
     if request.method == "POST":
         form = SimulacionForm(request.POST)
+        # simulacion = request.user
+        # form.nombre = simulacion.nombre
+        # form.apellido = simulacion.apellido
+        # form.dni = simulacion.dni
+        # form.telefono = simulacion.telefono
+        # form.email = simulacion.username
+        # print(form.cant_cuotas)
+        # print(form.email)
+        # print(form)
         if form.is_valid():
+            print('aca1')
             simulacion = form.save(commit=False)
-            # Acá chequea que el monto de la simulación no super el SMVM, pero no tirar error de aviso
+
+            # Acá chequea que el monto de la simulación no super el SMVM
             if simulacion.importe_solicitado <= int(12*(simulacion.smvm.monto)):
                 if request.user.is_authenticated:
                     simulacion.author = request.user
@@ -55,11 +60,16 @@ def simulacion_new(request):
                 messages.error(
                     request, f'El monto solicitado supera los 12 salarios mínimos. Ingresar un monto inferior a ${maximo}')
     else:
-        form = SimulacionForm()
+        if autor.is_anonymous:
+            form = SimulacionForm()
+        else:
+            autor.email = autor.username
+            form = SimulacionForm(instance=autor)
     return render(request, 'simulador/simulacion_edit.html', {'form': form})
 
 
 def simulacion_edit(request, pk):
+    print('acá6')
     simulacion = get_object_or_404(Simulacion, pk=pk)
     if request.method == "POST":
         form = SimulacionForm(request.POST, instance=simulacion)
@@ -70,6 +80,13 @@ def simulacion_edit(request, pk):
     else:
         form = SimulacionForm(instance=simulacion)
     return render(request, 'simulador/simulacion_edit.html', {'form': form})
+
+
+def simulaciones_list(request):
+    simulaciones = SimulacionFilter(
+        request.GET, queryset=Simulacion.objects.order_by('-created_date'))
+
+    return render(request, 'simulador/simulaciones_list.html', {'filter': simulaciones})
 
 
 def simulacion_remove(request, pk):
@@ -142,6 +159,13 @@ def solicitud_edit(request, pk):
     else:
         form = SolicitudForm(instance=solicitud)
     return render(request, 'solicitudes/solicitud_edit.html', {'form': form})
+
+
+def solicitud_list(request):
+    solicitudes = SolicitudFilter(
+        request.GET, queryset=Solicitud.objects.order_by('-created_date'))
+
+    return render(request, 'solicitudes/solicitud_list.html', {'filter': solicitudes})
 
 
 # CONFIGURACIONES
