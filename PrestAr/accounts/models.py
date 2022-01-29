@@ -37,7 +37,7 @@ class Emprendedor(AbstractUser):
     ]
     NIVEL_EDUCATIVO = [
         ('Primario incompleto', 'Primario incompleto'),
-        ('prim_comp', 'Primario completo'),
+        ('Primario Completo', 'Primario completo'),
         ('Primario completo', 'Secundario incompleto'),
         ('Secundario completo', 'Secundario completo'),
         ('Terciario incompleto', 'Terciario incompleto'),
