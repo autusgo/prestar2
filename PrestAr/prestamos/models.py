@@ -89,12 +89,11 @@ class Simulacion(models.Model):
 class Domicilio(models.Model):
     PROVINCIAS_LISTA = [
         ('Buenos Aires', 'Buenos Aires'),
-        ('Ciudad Autónoma de Buenos Aires', 'Ciudad Autónoma de Buenos Aires'),
+        ('CABA', 'CABA'),
         ('Catamarca', 'Catamarca'),
         ('Chaco', 'Chaco'),
         ('Chubut', 'Chubut'),
         ('Córdoba', 'Córdoba'),
-        ('Honeydews', 'Honeydews'),
         ('Corrientes', 'Corrientes'),
         ('Entre Ríos', 'Entre Ríos'),
         ('Formosa', 'Formosa'),

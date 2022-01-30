@@ -62,7 +62,7 @@ class Emprendedor(AbstractUser):
         max_length=200, choices=NIVEL_EDUCATIVO, null=True)
     provincia = models.CharField(max_length=20)
     domicilio = models.ForeignKey(
-        "prestamos.Domicilio", on_delete=models.CASCADE, null=True)
+        "prestamos.Domicilio", on_delete=models.CASCADE)
 
     def age(self):
         age = int((date.today() - self.fec_nac).days / 365.25)

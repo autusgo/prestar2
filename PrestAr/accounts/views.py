@@ -33,12 +33,18 @@ def registerPage(request):
         if request.method == 'POST':
             form = EmprendedorCreationForm(request.POST)
             form1 = DomicilioCreationForm(request.POST)
+            print('acá1')
+            domicilio = form1.save()
+            dom_id = domicilio.id
+            emprendedor = form.save(commit=False)
+            emprendedor.domicilio_id = dom_id
+            print(emprendedor.domicilio_id)
+            edad = emprendedor.age()
             if form.is_valid() and form1.is_valid():
-                validacion_edad = form.save(commit=False)
-                edad = validacion_edad.age()
+                print('acá2')
                 if edad > 17:
-                    form.save()
-                    form1.save()
+                    domicilio.save()
+                    emprendedor.save()
                     user = form.cleaned_data.get('username')
                     messages.success(request, 'Se creó la cuenta para ' + user)
 

@@ -36,15 +36,7 @@ def simulacion_new(request):
     autor = request.user
     if request.method == "POST":
         form = SimulacionForm(request.POST)
-        # simulacion = request.user
-        # form.nombre = simulacion.nombre
-        # form.apellido = simulacion.apellido
-        # form.dni = simulacion.dni
-        # form.telefono = simulacion.telefono
-        # form.email = simulacion.username
-        # print(form.cant_cuotas)
-        # print(form.email)
-        # print(form)
+
         if form.is_valid():
             print('aca1')
             simulacion = form.save(commit=False)
