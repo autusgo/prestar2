@@ -34,14 +34,12 @@ def simulacion_detail(request, pk):
 
 def simulacion_new(request):
     autor = request.user
-    print('hola')
     if request.method == "POST":
         form = SimulacionForm(request.POST)
         tasa = TasaInteres.objects.get(pk=1)
         if form.is_valid():
             simulacion = form.save(commit=False)
             simulacion.tasa_anual = tasa
-            print(simulacion.tasa_anual)
             # Acá chequea que el monto de la simulación no super el SMVM
             if simulacion.importe_solicitado <= int(12*(simulacion.smvm.monto)):
                 if request.user.is_authenticated:
@@ -62,7 +60,6 @@ def simulacion_new(request):
 
 
 def simulacion_edit(request, pk):
-    print('acá6')
     simulacion = get_object_or_404(Simulacion, pk=pk)
     if request.method == "POST":
         form = SimulacionForm(request.POST, instance=simulacion)
@@ -116,7 +113,6 @@ def solicitud_detail(request, pk):
 def solicitud_new(request):
     if request.method == "POST":
         form = SolicitudForm(request.POST)
-        # print(form)
         if form.is_valid():
             solicitud = form.save(commit=False)
             solicitud.emprendedor = request.user
