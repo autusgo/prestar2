@@ -10,33 +10,33 @@
      			<div class="grid-item titulo">DATOS DEL EMPRENDIMIENTO</div>
 
            <div class="grid-item texto">DESCRIPCIÓN DEL EMPRENDIMIENTO</div>
-           <div class="grid-item">{{ form.descripcion_emp }}</div>
+           <div class="grid-item" title="Completá con una breve descripción del emprendimiento de al menos 150 caracteres">{{ form.descripcion_emp }}</div>
            <div class="grid-item texto">RUBRO ECONÓMICO</div>
            <div class="grid-item"> {{ form.rubro }}</div>
            <div class="grid-item texto">INICIO DE LA ACTIVIDAD</div>
-           <div class="grid-item"> {{ form.inicio_actividad }}</div>
+           <div class="grid-item" title="El emprendimiento debe tener una antigüedad mínima de 6 meses desde su comienzo"> {{ form.inicio_actividad }}</div>
            <div class="grid-item texto">TELÉFONO DE CONTACTO</div>
-           <div class="grid-item">{{ form.datos_contacto }}</div>
+           <div class="grid-item" title="Puede ser el mismo que tu teléfono personal">{{ form.datos_contacto }}</div>
            <div class="grid-item texto">PERSONAL FAMILIAR</div>
-           <div class="grid-item">{{ form.personal_familiar }}</div>
+           <div class="grid-item" title="Cantidad de familiares que trabajan en el emprendiemiento">{{ form.personal_familiar }}</div>
            <div class="grid-item texto">PERSONAL NO FAMILIAR</div>
-           <div class="grid-item">{{ form.personal_nofamiliar }}</div>
+           <div class="grid-item" title="Cantidad de personas NO familiares que trabajan en el emprendiemiento">{{ form.personal_nofamiliar }}</div>
            <div class="grid-item texto">INGRESOS TOTALES POR MES</div>
-           <div class="grid-item">{{ form.ingreso_emp_mes }}</div>
+           <div class="grid-item" title="Monto aproximado de ganancia bruta mensual del emprendimiento">{{ form.ingreso_emp_mes }}</div>
            <div class="grid-item texto">GASTOS TOTALES AL MES</div>
-           <div class="grid-item">{{ form.gastos_emp }}</div>
-           <div class="grid-item texto">INGRESOS FAMILIARES AL MES</div>
+           <div class="grid-item" title="Monto aproximado de gastos brutos mensuales del emprendimiento">{{ form.gastos_emp }}</div>
+           <!-- <div class="grid-item texto">INGRESOS FAMILIARES AL MES</div>
            <div class="grid-item">{{ form.ingresos_familiares_mes }}</div>
            <div class="grid-item texto">GASTOS FAMILIARES AL MES</div>
-           <div class="grid-item">{{ form.gastos_familiares_mes }}</div>
-           <div class="grid-item texto">NOTAS</div>
-           <div class="grid-item">{{ form.notas }}</div>
+           <div class="grid-item">{{ form.gastos_familiares_mes }}</div> -->
+           <div class="grid-item texto">NOTAS<p>(Campo opcional)</p></div>
+           <div class="grid-item" title="Completá con cualquier dato que creas importante aclarar">{{ form.notas }}</div>
            <div class="grid-item texto">IMPORTE SOLICITADO</div>
-           <div class="grid-item">{{ form.importe_solicitado }}</div>
+           <div class="grid-item" title="Monto total a solicitar">{{ form.importe_solicitado }}</div>
            <div class="grid-item texto">CANTIDAD DE CUOTAS</div>
-           <div class="grid-item">{{ form.cant_cuotas }}</div>
-           <div class="grid-item texto">TASA DE INTERÉS</div>
-           <div class="grid-item">{{ form.tasa_anual }}</div>
+           <div class="grid-item" title="¿En cuántos pagos vas a devolver el crédito?">{{ form.cant_cuotas }}</div>
+           <div class="grid-item texto">TASA DE INTERÉS %</div>
+           <div class="grid-item" title="TEA %">{{ form.tasa_anual }}</div>
 
         </div>
 

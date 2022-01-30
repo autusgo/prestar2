@@ -29,9 +29,9 @@
 						<div class="grid-item titulo">REGISTRAR UNA CUENTA NUEVA</div>
 				  
 						<div class="grid-item texto">CORREO ELECTRÓNICO</div>
-						<div class="grid-item"><input type="email" {{form.username}} </div>
+						<div class="grid-item" title="Tu email será tu nombre de usuario">{{form.username}} </div>
 						<div class="grid-item texto">CONTRASEÑA</div>
-						<div class="grid-item">{{form.password1}}</div>
+						<div class="grid-item" title="Mínimo 8 caracteres entre letras y números">{{form.password1}}</div>
 						<div class="grid-item texto">REPETIR CONTRASEÑA</div>
 						<div class="grid-item">{{form.password2}}</div>
 				  
@@ -40,11 +40,11 @@
 						<div class="grid-item titulo">DATOS PERSONALES</div>
 				  
 						<div class="grid-item texto">NOMBRES</div>
-						<div class="grid-item">{{form.nombre}}</div>
+						<div class="grid-item" title="Tal y como aparece en el DNI">{{form.nombre}}</div>
 						<div class="grid-item texto">APELLIDOS</div>
-						<div class="grid-item">{{form.apellido}}</div>
+						<div class="grid-item" title="Tal y como aparece en el DNI">{{form.apellido}}</div>
 						<div class="grid-item texto">FECHA DE NACIMIENTO</div>
-						<div class="grid-item">{{form.fec_nac}} </div>
+						<div class="grid-item" title="Tenés que ser mayor de 18 años">{{form.fec_nac}} </div>
 						<div class="grid-item texto">GÉNERO</div>
 						<div class="grid-item">{{form.genero}}</div>
 						<div class="grid-item texto">IDENTIDAD AUTOPERCIBIDA *</div>
@@ -54,9 +54,9 @@
 						<div class="grid-item texto">ESTADO CIVIL</div>
 						<div class="grid-item">{{form.estado_civil}}</div>
 						<div class="grid-item texto">TELÉFONO</div>
-						<div class="grid-item">{{form.telefono}}</div>
+						<div class="grid-item" title="Formato (0555) 555-5555">{{form.telefono}}</div>
 						<div class="grid-item texto">¿ES UN CELULAR?</div>
-						<div class="grid-item">{{form.celular}}</div>
+						<div class="grid-item" title="Si el número que pusiste es de un celular, marcá este casillero">{{form.celular}}</div>
 						<div class="grid-item texto">NIVEL EDUCATIVO ALCANZADO</div>
 						<div class="grid-item">{{form.educacion}}</div>
 				  
@@ -94,9 +94,9 @@
 						<div class="grid-item texto">LOCALIDAD</div>
 						<div class="grid-item">{{form1.localidad}}</div>
 						<div class="grid-item texto">CÓDIGO POSTAL</div>
-						<div class="grid-item">{{form1.cod_postal}}</div>
+						<div class="grid-item" itle="Puede ser con el nuevo o viejo formato">{{form1.cod_postal}}</div>
 						<div class="grid-item texto">CONDICIÓN DEL INMUEBLE</div>
-						<div class="grid-item">{{form1.condicion	}}</div>
+						<div class="grid-item">{{form1.condicion}}</div>
 				  
 					</div>
 					<button class="save btn btn-default">ENVIAR</button>

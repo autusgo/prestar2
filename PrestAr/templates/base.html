@@ -18,7 +18,12 @@
 
         <div class="menuheader"><img style="width: 200px" src="/static/img/prestar_negro.svg" alt="Prest.Ar"></div>
         <div class="menu menufooter">
-          {% if user.is_authenticated %}
+          
+          {% if user.is_staff %}
+          <p class="mayus"><i class="bi bi-key"></i>&nbsp;&nbsp;&nbsp;{{ user.nombre }}</p>
+          <br>
+          <p><a href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;&nbsp;CERRAR SESIÓN</span></a><p>
+          {% elif user.is_authenticated %}
           <p class="mayus"><i class="bi bi-person"></i>&nbsp;&nbsp;&nbsp;{{ user.nombre }}</p>
           <br>
           <p><a href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;&nbsp;CERRAR SESIÓN</span></a><p>

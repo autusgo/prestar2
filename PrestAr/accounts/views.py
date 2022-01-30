@@ -33,26 +33,27 @@ def registerPage(request):
         if request.method == 'POST':
             form = EmprendedorCreationForm(request.POST)
             form1 = DomicilioCreationForm(request.POST)
-            print('acá1')
-            domicilio = form1.save()
-            dom_id = domicilio.id
-            emprendedor = form.save(commit=False)
-            emprendedor.domicilio_id = dom_id
-            print(emprendedor.domicilio_id)
-            edad = emprendedor.age()
-            if form.is_valid() and form1.is_valid():
-                print('acá2')
-                if edad > 17:
-                    domicilio.save()
-                    emprendedor.save()
-                    user = form.cleaned_data.get('username')
-                    messages.success(request, 'Se creó la cuenta para ' + user)
+            if form1.is_valid():
+                domicilio = form1.save()
+                dom_id = domicilio.id
+                emprendedor = form.save(commit=False)
+                emprendedor.domicilio_id = dom_id
+                print(emprendedor.domicilio_id)
+                edad = emprendedor.age()
+                if form.is_valid():
+                    print('acá2')
+                    if edad > 17:
+                        domicilio.save()
+                        emprendedor.save()
+                        user = form.cleaned_data.get('username')
+                        messages.success(
+                            request, 'Se creó la cuenta para ' + user)
 
-                    return redirect('login')
-                else:
-                    print('Es menor')
-                    messages.error(
-                        request, 'El emprendedor debe ser mayor de 18 años de edad.')
+                        return redirect('login')
+                    else:
+                        print('Es menor')
+                        messages.error(
+                            request, 'El emprendedor debe ser mayor de 18 años de edad.')
             else:
                 messages.info(request, 'Datos inválidos')
 
