@@ -170,15 +170,15 @@ class Solicitud(models.Model):
     domicilio_viv = models.ForeignKey(
         Domicilio, on_delete=models.CASCADE, related_name='domicilioviv', null=True)
     domicilio_emp = models.ForeignKey(
-        Domicilio, on_delete=models.CASCADE, related_name='domicilioemp', null=True)
+        Domicilio, on_delete=models.CASCADE, related_name='domicilioemp')
     datos_contacto = models.IntegerField(blank=True)
     personal_familiar = models.IntegerField()
     personal_nofamiliar = models.IntegerField()
     ingreso_emp_mes = models.IntegerField()
     gastos_emp = models.IntegerField()
     resultado_emp = models.IntegerField(null=True)
-    ingresos_familiares_mes = models.IntegerField(null=True)
-    gastos_familiares_mes = models.IntegerField(null=True)
+    ingresos_familiares_mes = models.IntegerField(null=True, blank=True)
+    gastos_familiares_mes = models.IntegerField(null=True, blank=True)
     resultado_familiar = models.IntegerField(null=True)
     resultado_total = models.IntegerField(null=True)
     notas = models.TextField(blank=True)

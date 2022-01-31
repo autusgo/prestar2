@@ -26,7 +26,7 @@ class SolicitudForm(forms.ModelForm):
     class Meta:
         model = Solicitud
         fields = ['descripcion_emp', 'rubro', 'inicio_actividad', 'datos_contacto', 'personal_familiar', 'personal_nofamiliar',
-                  'ingreso_emp_mes', 'gastos_emp', 'ingresos_familiares_mes', 'gastos_familiares_mes', 'notas', 'importe_solicitado', 'cant_cuotas', 'tasa_anual']
+                  'ingreso_emp_mes', 'gastos_emp', 'notas', 'importe_solicitado', 'cant_cuotas', 'tasa_anual']
         widgets = {
             'inicio_actividad': DateInput(),
         }

@@ -121,6 +121,7 @@ def solicitud_new(request):
                 if solicitud.importe_solicitado <= int(12*(solicitud.smvm.monto)):
                     if request.user.is_authenticated:
                         solicitud.author = request.user
+                        solicitud.domicilio_emp = solicitud.author.domicilio
                     solicitud.save()
                     return redirect('solicitud_detail', pk=solicitud.pk)
                 else:

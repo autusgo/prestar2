@@ -21,17 +21,13 @@
           
           {% if user.is_staff %}
           <p class="mayus"><i class="bi bi-key"></i>&nbsp;&nbsp;&nbsp;{{ user.nombre }}</p>
-          <br>
-          <p><a href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;&nbsp;CERRAR SESIÓN</span></a><p>
+          <p><a href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;&nbsp;CERRAR SESIÓN</span></a></p>
           {% elif user.is_authenticated %}
           <p class="mayus"><i class="bi bi-person"></i>&nbsp;&nbsp;&nbsp;{{ user.nombre }}</p>
-          <br>
-          <p><a href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;&nbsp;CERRAR SESIÓN</span></a><p>
+          <p><a href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;&nbsp;CERRAR SESIÓN</span></a></p>
           {% else %}
-          <div>EL USUARIO NO SE ENCUENTRA AUTENTICADO</div>
-          <br>
-          <br>
-          <p><a href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i>&nbsp;&nbsp;&nbsp;ACCEDER</a><p>
+          <div><i class="bi bi-question-square"></i>&nbsp;&nbsp;&nbsp;USUARIO ANÓNIMO</div>
+          <p><a href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i>&nbsp;&nbsp;&nbsp;ACCEDER</a></p>
           {% endif %}
         </div>
         
@@ -39,7 +35,7 @@
         <!-- <li><a href="{% url 'sobre_creditos' %}"><div class="botones button3"><i class="bi bi-info-circle-fill"></i></span>&nbsp;&nbsp;&nbsp;SOBRE LOS CRÉDITOS</div></a></li> -->
         <li><a target="_blank" href="http://servicios.infoleg.gob.ar/infolegInternet/anexos/115000-119999/118062/norma.htm"><div class="botones button4"><i class="bi bi-shield"></i></i>&nbsp;&nbsp;&nbsp;LEY 26.117</div></a></li>
 
-        <li><a href="{% url 'sim_index' %}"><div class="botones button2"><i class="bi bi-camera-reels"></i>&nbsp;&nbsp;&nbsp;SIMULADOR</div></a>
+        <li><a href="{% url 'sim_index' %}"><div class="botones button2"><i class="bi bi-magic"></i>&nbsp;&nbsp;&nbsp;SIMULADOR</div></a>
         <ul class="submenu">
           <li class="subbotones subbutton5"><a href="{% url 'simulacion_new' %}"><i class="bi bi-plus-lg"></i>&nbsp;&nbsp;&nbsp;NUEVA SIMULACIÓN</a></li>
           {% if user.is_staff %}
