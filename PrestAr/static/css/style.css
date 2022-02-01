@@ -347,14 +347,19 @@ td {
   font-weight: lighter;
 }
 
-tbody:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
 .tr {
   padding: 10px;
   border-top: 1px solid #87baea;
   display: grid;
   align-items: left;
   font-size: 15px;
+}
+
+#more {
+  cursor: pointer;
+  background: #f2f2f2;
+}
+
+tbody:nth-child(even) tr:nth-child(odd) {
+  background-color: #f2f2f2;
 }

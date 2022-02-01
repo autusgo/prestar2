@@ -79,6 +79,13 @@ def simulaciones_list(request):
     return render(request, 'simulador/simulaciones_list.html', {'filter': simulaciones})
 
 
+def simulaciones_propias(request):
+    simulaciones = SimulacionFilter(
+        request.GET, queryset=Simulacion.objects.filter(author=request.user))
+    print(simulaciones)
+    return render(request, 'simulador/simulaciones_list.html', {'filter': simulaciones})
+
+
 def simulacion_remove(request, pk):
     simulacion = get_object_or_404(Simulacion, pk=pk)
     simulacion.delete()
@@ -86,6 +93,8 @@ def simulacion_remove(request, pk):
     simulaciones = SimulacionFilter(
         request.GET, queryset=Simulacion.objects.all())
     return render(request, 'simulador/simulaciones_list.html', {'filter': simulaciones})
+
+# OTRAS
 
 
 def sobre_conami(request):
@@ -108,8 +117,9 @@ def solicitud_detail(request, pk):
     solicitud = get_object_or_404(Solicitud, pk=pk)
     return render(request, 'solicitudes/solicitud_detail.html', {'solicitud': solicitud})
 
-
 # @login_required(login_url='accounts/login')
+
+
 def solicitud_new(request):
     if request.method == "POST":
         form = SolicitudForm(request.POST)
@@ -155,6 +165,13 @@ def solicitud_list(request):
     solicitudes = SolicitudFilter(
         request.GET, queryset=Solicitud.objects.order_by('-created_date'))
 
+    return render(request, 'solicitudes/solicitud_list.html', {'filter': solicitudes})
+
+
+def solicitudes_propias(request):
+    solicitudes = SolicitudFilter(
+        request.GET, queryset=Solicitud.objects.filter(author=request.user))
+    print(solicitudes)
     return render(request, 'solicitudes/solicitud_list.html', {'filter': solicitudes})
 
 

@@ -58,7 +58,9 @@
 		}
 	  }
 	}
+
 	</script>
+
 <main>
 	{% if user.is_authenticated %}
 	<form method="GET">
@@ -88,35 +90,66 @@
 	</form>
 	{% endif %}
 
+	
 
-	<table id="myTable" class="display">
+	<table id="myTable" class="tablesorter">
 		<thead>
-		<tr class="titulo mayus">
-		<th onclick="sortTable(0)">ID #</th>
-		<th onclick="sortTable(1)">APELLIDO</th>
-		<th onclick="sortTable(2)">DNI</th>
-		<th onclick="sortTable(3)">MONTO</th>
-		<th onclick="sortTable(4)">CUOTAS</th>
-		<th onclick="sortTable(5)">FECHA</th>
-		</tr>
+			<tr class="titulo mayus">
+				<th onclick="sortTable(0)">ID <i class="bi bi-chevron-expand"></i></th>
+				<th onclick="sortTable(1)">APELLIDO <i class="bi bi-chevron-expand"></i></th>
+				<th onclick="sortTable(2)">DNI <i class="bi bi-chevron-expand"></i></th>
+				<th onclick="sortTable(3)">MONTO <i class="bi bi-chevron-expand"></i></th>
+				<th onclick="sortTable(4)">CUOTAS <i class="bi bi-chevron-expand"></i></th>
+				<th onclick="sortTable(5)">FECHA <i class="bi bi-chevron-expand"></i></th>
+			</tr>
 		</thead>
-		{% for simulacion in filter.qs %}
+		
 		<tbody>
-		<tr >
-		<td style="text-align: center;"><a href="{% url 'simulacion_detail' pk=simulacion.pk %}"><i class="bi bi-file-earmark-spreadsheet"></i>&nbsp;&nbsp;&nbsp;{{ simulacion.id|stringformat:"09d" }}</a></td>
-		<td>{{ simulacion.apellido }}</td>
-		<td>{{ simulacion.dni }}</td>
-		<td>{{ simulacion.importe_solicitado }}</td>
-		<td>{{ simulacion.cant_cuotas }}</td>
-		<td style="text-align: center;">{{ simulacion.created_date|date:"SHORT_DATETIME_FORMAT" }}</td>
-		</tr>
+		{% for simulacion in filter.qs %}
+			<tr >
+				<td style="text-align: center;"><a href="{% url 'simulacion_detail' pk=simulacion.pk %}"><i class="bi bi-file-earmark-spreadsheet"></i>&nbsp;&nbsp;&nbsp;{{ simulacion.id|stringformat:"09d" }}</a></td>
+				<td>{{ simulacion.apellido }}</td>
+				<td>{{ simulacion.dni }}</td>
+				<td>{{ simulacion.importe_solicitado }}</td>
+				<td>{{ simulacion.cant_cuotas }}</td>
+				<td style="text-align: center;">{{ simulacion.created_date|date:"SHORT_DATETIME_FORMAT" }}</td>
+			</tr>
+		{% endfor %}
 		</tbody>
-		{% empty %}
-			<div class="grid-item texto">NO HAY RESULTADOS PARA LA BÚSQUEDA</div>
-	  {% endfor %}
+
+	
 	  </table>
 
 
+	  <script type="text/javascript">
+		var numShown = 10; // Initial rows shown & index
+	var numMore = 10;  // Increment
+	
+	var $table = $('table').find('tbody');  // tbody containing all the rows
+	var numRows = $table.find('tr').length; // Total # rows
+	
+	$(function () {
+		// Hide rows and add clickable div
+		$table.find('tr:gt(' + (numShown - 1) + ')').hide().end()
+			.after('<tbody id="more"><tr><td colspan="' +
+				   $table.find('tr:first td').length + '"><div>Mostrar <span>' +
+				   numMore + '</span> más <i class="bi bi-chevron-down"></i></div</tbody></td></tr>');
+	
+		$('#more').click(function() {
+			numShown = numShown + numMore;
+			// no more "show more" if done
+			if (numShown >= numRows) {
+				$('#more').remove();
+			}
+			// change rows remaining if less than increment
+			if (numRows - numShown < numMore) {
+				$('#more span').html(numRows - numShown);
+			}
+			$table.find('tr:lt(' + numShown + ')').show();
+		});
+	
+	});
+	</script>
   <!-- {% for simulacion in filter.qs %}
 
 <form target="_self"  method="POST" class="simulacion">
@@ -140,5 +173,6 @@
   {% empty %}
 	<div class="grid-item texto">NO HAY RESULTADOS PARA LA BÚSQUEDA</div>
   {% endfor %} -->
+
 </main>
 {% endblock %}

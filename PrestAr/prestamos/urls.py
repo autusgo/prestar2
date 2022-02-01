@@ -6,6 +6,8 @@ urlpatterns = [
     path('', views.sim_index, name='sim_index'),
     path('simulador/', views.sim_index, name='sim_index'),
     path('simulador/list/', views.simulaciones_list, name='simulaciones_list'),
+    path('simulador/propias/', views.simulaciones_propias,
+         name='simulaciones_propias'),
     path('simulador/<int:pk>/', views.simulacion_detail, name='simulacion_detail'),
     path('simulador/new/', views.simulacion_new, name='simulacion_new'),
     path('simulador/<int:pk>/edit/', views.simulacion_edit, name='simulacion_edit'),
@@ -20,6 +22,8 @@ urlpatterns = [
          views.solicitud_edit, name='solicitud_edit'),
     path('solicitudes/<int:pk>/', views.solicitud_detail, name='solicitud_detail'),
     path('solicitudes/list/', views.solicitud_list, name='solicitud_list'),
+    path('solicitudes/propias/', views.solicitudes_propias,
+         name='solicitudes_propias'),
 
     path('configuracion/', views.configuracion, name='configuracion'),
 
