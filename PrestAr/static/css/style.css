@@ -4,7 +4,7 @@ html {
 
 body {
   min-height: 100%;
-  font-family: "Nunito Sans", sans-serif !important;
+  font-family: "Encode Sans", sans-serif !important;
   display: grid;
   grid-template:
     "menu header"
@@ -34,7 +34,7 @@ a:hover {
     "button4"
     "button5"
     "button6";
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Encode Sans", sans-serif;
   font-weight: bold;
   text-decoration: none;
   list-style: none;
@@ -306,7 +306,7 @@ we set it to max-height: 0, and hide the overflowed content.
     "subbutton4"
     "subbutton5"
     "subbutton6";
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Encode Sans", sans-serif;
   font-weight: bold;
   text-decoration: none;
   list-style: none;

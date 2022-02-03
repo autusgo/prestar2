@@ -25,6 +25,33 @@
 
 	<main>
 		<form target="_self" method="POST" class="login">{% csrf_token %}
+			<div class="texto" style="color:red">
+
+				{% if messages %}
+					<div class="span12">
+				{% for message in messages %}
+					<div class="alert alert-{{ message.tags }}">
+						{{ message|safe }}
+					</div>
+				{% endfor %}
+					</div>
+				{% endif %}
+				
+				{% if form.non_field_errors %}
+				{% for error in form.non_field_errors %}
+					{{ error }}
+				{% endfor %}
+				{% endif %}
+		
+				{% for hidden in form.hidden_fields %}
+					{{ hidden }}
+				{% endfor %}
+		
+				{% for field in form %}
+
+					{{ field.errors.as_ul }}
+				{% endfor %}
+			</div>
 					<div class="caja">
 						<div class="grid-item titulo">REGISTRAR UNA CUENTA NUEVA</div>
 				  
@@ -35,6 +62,9 @@
 						<div class="grid-item texto">REPETIR CONTRASEÑA</div>
 						<div class="grid-item">{{form.password2}}</div>
 				  
+					</div>
+					<div class="texto">
+						<p>* Campos opcionales</p>
 					</div>
 					<div class="caja">
 						<div class="grid-item titulo">DATOS PERSONALES</div>
@@ -100,36 +130,6 @@
 				  
 					</div>
 					<button class="save btn btn-default">ENVIAR</button>
-					<div class="texto">
-						<p>* Opcional</p>
-					</div>
-					<div class="texto" style="color:red">
-
-						{% if messages %}
-						<div class="span12">
-						{% for message in messages %}
-							<div class="alert alert-{{ message.tags }}">
-								{{ message|safe }}
-							</div>
-						{% endfor %}
-						</div>
-						{% endif %}
-						
-						{% if form.non_field_errors %}
-						{% for error in form.non_field_errors %}
-							{{ error }}
-						{% endfor %}
-					{% endif %}
-			
-					{% for hidden in form.hidden_fields %}
-						{{ hidden }}
-					{% endfor %}
-			
-					{% for field in form %}
-	
-						{{ field.errors.as_ul }}
-					{% endfor %}
-					</div>
 
 			</form>
 

@@ -6,6 +6,32 @@
 
 <main>
     <form target="_self"  method="POST" class="simulacion-form">{% csrf_token %}
+        <div class="texto" style="color:red">
+            {% if messages %}
+                <div class="span12">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message|safe }}
+                </div>
+            {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                {{ error }}
+            {% endfor %}
+            {% endif %}
+
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form %}
+
+                {{ field.errors.as_ul }}
+            {% endfor %}
+        </div>
 			<div class="caja">
      			<div class="grid-item titulo">DATOS DEL EMPRENDIMIENTO</div>
 
@@ -41,33 +67,7 @@
         </div>
 
 		<button class="save btn btn-default">ENVIAR</button>
-        <div class="texto" style="color:red">
-						
-            {% if messages %}
-            <div class="span12">
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                    {{ message|safe }}
-                </div>
-            {% endfor %}
-            </div>
-            {% endif %}
 
-            {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
-                {{ error }}
-            {% endfor %}
-        {% endif %}
-
-        {% for hidden in form.hidden_fields %}
-            {{ hidden }}
-        {% endfor %}
-
-        {% for field in form %}
-
-            {{ field.errors.as_ul }}
-        {% endfor %}
-        </div>
 	</form>
 </main>
 {% endblock %}
