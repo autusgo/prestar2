@@ -70,22 +70,23 @@
 				<span>FILTRAR SIMULACIONES<i style="float:right; padding-right:20px" class="bi bi-search"></i></span>
 			</div>
 			<div class="grid-item texto" value="APELLIDO">APELLIDO</div>
-			<div class="grid-item" value="SIMULACION">{{ filter.form.apellido }}</div>
+			<div class="grid-input" value="SIMULACION">{{ filter.form.apellido }}</div>
 			<div class="grid-item texto" value="DNI">DNI</div>
-			<div class="grid-item" value="SIMULACION">{{ filter.form.dni }}</div>
+			<div class="grid-input" value="SIMULACION">{{ filter.form.dni }}</div>
 
 			<div class="grid-item texto" value="created_date">DESDE FECHA</div>
-			<div class="grid-item" value="SIMULACION">{{ filter.form.start_date }}</div>
+			<div class="grid-input" value="SIMULACION">{{ filter.form.start_date }}</div>
 			<div class="grid-item texto" value="created_date">HASTA FECHA</div>
-			<div class="grid-item" value="SIMULACION"> {{ filter.form.end_date }}</div>
+			<div class="grid-input" value="SIMULACION"> {{ filter.form.end_date }}</div>
 
 			<div class="grid-item texto" value="created_date">DESDE MONTO</div>
-			<div class="grid-item" value="FECHA">{{ filter.form.monto_desde }}</div>
+			<div class="grid-input" value="FECHA">{{ filter.form.monto_desde }}</div>
 			<div class="grid-item texto" value="monto">HASTA MONTO</div>
-			<div class="grid-item" value="MONTO">{{ filter.form.monto_hasta }}</div>
+			<div class="grid-input" value="MONTO">{{ filter.form.monto_hasta }}</div>
+			
 		</div>
 
-		<button class="save btn btn-outline-secondary" type="submit" value="FILTRAR">FILTRAR</button>
+		<button class="filtrar btn btn-outline-secondary" type="submit" value="FILTRAR">FILTRAR</button>
 
 	</form>
 	{% endif %}
@@ -157,17 +158,17 @@
      			<div class="grid-item titulo mayus"><a href="{% url 'simulacion_detail' pk=simulacion.pk %}"><i class="bi bi-bookmark"></i>&nbsp;&nbsp;#{{ simulacion.id|stringformat:"09d" }}</a></div>
 
           <div class="grid-item texto">NOMBRE</div>
-          <div class="grid-item">{{ simulacion.apellido }}</div>
+          <div class="grid-input">{{ simulacion.apellido }}</div>
           <div class="grid-item texto">MONTO SOLICITADO</div>
-          <div class="grid-item">$ {{ simulacion.importe_solicitado}}</div>
+          <div class="grid-input">$ {{ simulacion.importe_solicitado}}</div>
           <div class="grid-item texto">TASA ANUAL</div>
-          <div class="grid-item">{{ simulacion.tasa_anual }}%</div>
+          <div class="grid-input">{{ simulacion.tasa_anual }}%</div>
           <div class="grid-item texto">PAGOS</div>
-          <div class="grid-item">{{ simulacion.cant_cuotas }} cuotas</div>
+          <div class="grid-input">{{ simulacion.cant_cuotas }} cuotas</div>
           <div class="grid-item texto">VALOR DE LA CUOTA</div>
-          <div class="grid-item">$ {{ simulacion.calculo_cuota }}</div>
+          <div class="grid-input">$ {{ simulacion.calculo_cuota }}</div>
 					<div class="grid-item texto">SIMULADO EN</div>
-					<div class="grid-item">$ {{ simulacion.created_date | date }}</div>
+					<div class="grid-input">$ {{ simulacion.created_date | date }}</div>
 			</div>
 	</form>
   {% empty %}

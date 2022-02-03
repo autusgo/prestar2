@@ -46,6 +46,15 @@ class TasaInteres(models.Model):
 
 
 class Simulacion(models.Model):
+    CUOTAS_LISTA = [
+        ('1', '1'),
+        ('3', '3'),
+        ('6', '6'),
+        ('9', '9'),
+        ('12', '12'),
+        ('18', '18'),
+        ('24', '24'),
+    ]
     smvm = models.ForeignKey(
         SMVM, on_delete=models.CASCADE, null=True, default=1)
 
@@ -60,7 +69,7 @@ class Simulacion(models.Model):
         default=timezone.now)
     tasa_anual = models.ForeignKey(
         TasaInteres, on_delete=models.CASCADE, null=True, default=1)
-    cant_cuotas = models.SmallIntegerField()
+    cant_cuotas = models.CharField(max_length=200, choices=CUOTAS_LISTA)
     telefono = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     cuota_final = models.DecimalField(
@@ -73,8 +82,9 @@ class Simulacion(models.Model):
 
     def calculo_cuota(self):
         interes = int(self.tasa_anual.tasa)/100
+        cant_cuotas = int(self.cant_cuotas)
         calculo_cuota = round(self.importe_solicitado*(interes/12) /
-                              (1-(1+(interes/12))**(-self.cant_cuotas)), 2)
+                              (1-(1+(interes/12))**(-cant_cuotas)), 2)
         return round(calculo_cuota, 2)
 
     def save(self, *args, **kwargs):
@@ -150,6 +160,16 @@ class Domicilio(models.Model):
 
 class Solicitud(models.Model):
 
+    CUOTAS_LISTA = [
+        ('1', '1'),
+        ('3', '3'),
+        ('6', '6'),
+        ('9', '9'),
+        ('12', '12'),
+        ('18', '18'),
+        ('24', '24'),
+    ]
+
     RUBRO_LISTA = [
         ('Producción', 'Producción'),
         ('Comercialización', 'Comercialización'),
@@ -183,7 +203,7 @@ class Solicitud(models.Model):
     resultado_total = models.IntegerField(null=True)
     notas = models.TextField(blank=True)
     importe_solicitado = models.PositiveIntegerField()
-    cant_cuotas = models.IntegerField()
+    cant_cuotas = models.CharField(max_length=200, choices=CUOTAS_LISTA)
     tasa_anual = models.ForeignKey(
         TasaInteres, on_delete=models.CASCADE, null=True, default=1)
     destino1_texto = models.CharField(max_length=50, null=True)
@@ -202,8 +222,9 @@ class Solicitud(models.Model):
 
     def calculo_cuota(self):
         interes = int(self.tasa_anual.tasa)/100
+        cant_cuotas = int(self.cant_cuotas)
         calculo_cuota = round(self.importe_solicitado*(interes/12) /
-                              (1-(1+(interes/12))**(-self.cant_cuotas)), 2)
+                              (1-(1+(interes/12))**(-cant_cuotas)), 2)
         return round(calculo_cuota, 2)
 
     def minimo(self):
