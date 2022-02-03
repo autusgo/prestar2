@@ -63,9 +63,10 @@
 						<div class="grid-input">{{form.password2}}</div>
 				  
 					</div>
-					<div class="texto">
-						<p>* Campos opcionales</p>
+					<div class="copete texto" style="margin-left: 10px;">
+						¿Ya tenés cuenta? <a href="{% url 'login' %}" style="color:#87baea">Ingresá</a>
 					</div>
+					
 					<div class="caja">
 						<div class="grid-item titulo">DATOS PERSONALES</div>
 				  
@@ -90,6 +91,9 @@
 						<div class="grid-item texto">NIVEL EDUCATIVO ALCANZADO</div>
 						<div class="grid-input">{{form.educacion}}</div>
 				  
+					</div>
+					<div class="texto">
+						<p>* Campos opcionales</p>
 					</div>
 
 					<div class="caja">
@@ -132,11 +136,6 @@
 					<button class="save btn btn-default">ENVIAR</button>
 
 			</form>
-
-
-				<div class="copete texto">
-					¿Ya tenés cuenta? <a href="{% url 'login' %}" style="color:#87baea">Ingresá</a>
-				</div>
 
 
 		</main>
