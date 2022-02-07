@@ -7,6 +7,7 @@ from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import JsonResponse
 
 # def register(resquest):
 #     form = UserCreationForm()
@@ -83,7 +84,12 @@ def simulaciones_propias(request):
     simulaciones = SimulacionFilter(
         request.GET, queryset=Simulacion.objects.filter(author=request.user))
     print(simulaciones)
-    return render(request, 'simulador/simulaciones_list.html', {'filter': simulaciones})
+    return render(request, 'simulador/simulaciones_propias.html', {'filter': simulaciones})
+
+
+def jsondata(request):
+    data = list(Simulacion.objects.values())
+    return JsonResponse(data, safe=False)
 
 
 def simulacion_remove(request, pk):

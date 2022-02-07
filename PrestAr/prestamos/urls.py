@@ -13,6 +13,7 @@ urlpatterns = [
     path('simulador/<int:pk>/edit/', views.simulacion_edit, name='simulacion_edit'),
     path('simulador/<pk>/remove/', views.simulacion_remove,
          name='simulacion_remove'),
+    path("prueba/", views.jsondata, name="jsondata"),
 
     path('sobre_conami/', views.sobre_conami, name='sobre_conami'),
     path('sobre_creditos/', views.sobre_creditos, name='sobre_creditos'),

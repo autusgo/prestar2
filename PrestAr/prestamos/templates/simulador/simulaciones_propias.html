@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block content %}
+<header>
+	<span>SIMULACIONES REALIZADAS</span>
+</header>
+
+
+<main>
+
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr class="titulo mayus">
+                <th>ID </th>
+                <th >APELLIDO </th>
+                <th >DNI </th>
+                <th >MONTO </th>
+                <th >CUOTAS </th>
+                <th>TASA </th>
+                <th >FECHA </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for simulacion in filter.qs %}
+                <tr >
+                    <td style="text-align: center;"><a href="{% url 'simulacion_detail' pk=simulacion.pk %}"><i class="bi bi-file-earmark-spreadsheet"></i>&nbsp;&nbsp;&nbsp;{{ simulacion.id|stringformat:"09d" }}</a></td>
+                    <td>{{ simulacion.apellido }}</td>
+                    <td>{{ simulacion.dni }}</td>
+                    <td>$ {{ simulacion.importe_solicitado }}</td>
+                    <td>{{ simulacion.cant_cuotas }}</td>
+                    <td>{{ simulacion.tasa_anual }} %</td>
+                    <td style="text-align: center;">{{ simulacion.created_date|date:"SHORT_DATETIME_FORMAT" }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+    </table>
+
+      <script type="text/javascript">
+$(document).ready(function() {
+    $('#example').DataTable({
+        "language": {
+
+            "decimal":        ",",
+    "emptyTable":     "No hay información para mostrar",
+    "info": "Mostrando página _PAGE_ de _PAGES_",
+    "infoEmpty": "No hay registros disponibles",
+    "infoFiltered": "(filtrados de _MAX_ registros)",
+    "thousands":      ".",
+    "lengthMenu": "Mostrar _MENU_ registros",
+    "loadingRecords": "Cargando...",
+    "processing":     "Procesando...",
+    "search":         "Buscar:",
+    "zeroRecords": "No hay resultados para la búsqueda",
+    "paginate": {
+        "first":      "Primera",
+        "last":       "Última",
+        "next":       "Siguiente",
+        "previous":   "Anterior"
+    },
+    "aria": {
+        "sortAscending":  ": order en forma ascendente",
+        "sortDescending": ": ordenar en forma descendente"
+    }
+        }
+    });
+} );
+    </script>
+
+{% if user.is_authenticated %}
+<form method="GET" style="padding-top: 70px;">
+
+    <div class="caja">
+        <div class="grid-item titulo mayus">
+            <span>FILTRAR SIMULACIONES<i style="float:right; padding-right:20px" class="bi bi-search"></i></span>
+        </div>
+        <!-- <div class="grid-item texto" value="APELLIDO">APELLIDO</div>
+        <div class="grid-input" value="SIMULACION">{{ filter.form.apellido }}</div>
+        <div class="grid-item texto" value="DNI">DNI</div>
+        <div class="grid-input" value="SIMULACION">{{ filter.form.dni }}</div> -->
+
+        <div class="grid-item texto" value="created_date">DESDE FECHA</div>
+        <div class="grid-input" value="SIMULACION">{{ filter.form.start_date }}</div>
+        <div class="grid-item texto" value="created_date">HASTA FECHA</div>
+        <div class="grid-input" value="SIMULACION"> {{ filter.form.end_date }}</div>
+
+        <!-- <div class="grid-item texto" value="created_date">DESDE MONTO</div>
+        <div class="grid-input" value="FECHA">{{ filter.form.monto_desde }}</div>
+        <div class="grid-item texto" value="monto">HASTA MONTO</div>
+        <div class="grid-input" value="MONTO">{{ filter.form.monto_hasta }}</div> -->
+        
+    </div>
+
+    <button class="filtrar btn btn-outline-secondary" type="submit" value="FILTRAR">FILTRAR</button>
+
+</form>
+
+{% endif %}
+
+  <!-- {% for simulacion in filter.qs %}
+
+<form target="_self"  method="POST" class="simulacion">
+			<div class="caja">
+     			<div class="grid-item titulo mayus"><a href="{% url 'simulacion_detail' pk=simulacion.pk %}"><i class="bi bi-bookmark"></i>&nbsp;&nbsp;#{{ simulacion.id|stringformat:"09d" }}</a></div>
+
+          <div class="grid-item texto">NOMBRE</div>
+          <div class="grid-input">{{ simulacion.apellido }}</div>
+          <div class="grid-item texto">MONTO SOLICITADO</div>
+          <div class="grid-input">$ {{ simulacion.importe_solicitado}}</div>
+          <div class="grid-item texto">TASA ANUAL</div>
+          <div class="grid-input">{{ simulacion.tasa_anual }}%</div>
+          <div class="grid-item texto">PAGOS</div>
+          <div class="grid-input">{{ simulacion.cant_cuotas }} cuotas</div>
+          <div class="grid-item texto">VALOR DE LA CUOTA</div>
+          <div class="grid-input">$ {{ simulacion.calculo_cuota }}</div>
+					<div class="grid-item texto">SIMULADO EN</div>
+					<div class="grid-input">$ {{ simulacion.created_date | date }}</div>
+			</div>
+	</form>
+  {% empty %}
+	<div class="grid-item texto">NO HAY RESULTADOS PARA LA BÚSQUEDA</div>
+  {% endfor %} -->
+
+</main>
+
+{% endblock %}
