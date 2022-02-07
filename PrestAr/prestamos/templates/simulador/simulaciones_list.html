@@ -3,154 +3,102 @@
 <header>
 	<span>SIMULACIONES REALIZADAS</span>
 </header>
-<script>
-	function sortTable(n) {
-	  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-	  table = document.getElementById("myTable");
-	  switching = true;
-	  // Set the sorting direction to ascending:
-	  dir = "asc"; 
-	  /* Make a loop that will continue until
-	  no switching has been done: */
-	  while (switching) {
-		// Start by saying: no switching is done:
-		switching = false;
-		rows = table.rows;
-		/* Loop through all table rows (except the
-		first, which contains table headers): */
-		for (i = 1; i < (rows.length - 1); i++) {
-		  // Start by saying there should be no switching:
-		  shouldSwitch = false;
-		  /* Get the two elements you want to compare,
-		  one from current row and one from the next: */
-		  x = rows[i].getElementsByTagName("TD")[n];
-		  y = rows[i + 1].getElementsByTagName("TD")[n];
-		  /* Check if the two rows should switch place,
-		  based on the direction, asc or desc: */
-		  if (dir == "asc") {
-			if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-			  // If so, mark as a switch and break the loop:
-			  shouldSwitch = true;
-			  break;
-			}
-		  } else if (dir == "desc") {
-			if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-			  // If so, mark as a switch and break the loop:
-			  shouldSwitch = true;
-			  break;
-			}
-		  }
-		}
-		if (shouldSwitch) {
-		  /* If a switch has been marked, make the switch
-		  and mark that a switch has been done: */
-		  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-		  switching = true;
-		  // Each time a switch is done, increase this count by 1:
-		  switchcount ++; 
-		} else {
-		  /* If no switching has been done AND the direction is "asc",
-		  set the direction to "desc" and run the while loop again. */
-		  if (switchcount == 0 && dir == "asc") {
-			dir = "desc";
-			switching = true;
-		  }
-		}
-	  }
-	}
 
-	</script>
 
 <main>
-	{% if user.is_authenticated %}
-	<form method="GET">
 
-		<div class="caja">
-			<div class="grid-item titulo mayus">
-				<span>FILTRAR SIMULACIONES<i style="float:right; padding-right:20px" class="bi bi-search"></i></span>
-			</div>
-			<div class="grid-item texto" value="APELLIDO">APELLIDO</div>
-			<div class="grid-input" value="SIMULACION">{{ filter.form.apellido }}</div>
-			<div class="grid-item texto" value="DNI">DNI</div>
-			<div class="grid-input" value="SIMULACION">{{ filter.form.dni }}</div>
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr class="titulo mayus">
+                <th>ID </th>
+                <th >APELLIDO </th>
+                <th >DNI </th>
+                <th >IMPORTE </th>
+                <th >PAGOS </th>
+				<th >VALOR CUOTA </th>
+                <th>TASA </th>
+                <th >FECHA </th>
+            </tr>
+        </thead>
 
-			<div class="grid-item texto" value="created_date">DESDE FECHA</div>
-			<div class="grid-input" value="SIMULACION">{{ filter.form.start_date }}</div>
-			<div class="grid-item texto" value="created_date">HASTA FECHA</div>
-			<div class="grid-input" value="SIMULACION"> {{ filter.form.end_date }}</div>
+        <tbody>
+            {% for simulacion in filter.qs %}
+                <tr >
+                    <td style="text-align: center;"><a href="{% url 'simulacion_detail' pk=simulacion.pk %}"><i class="bi bi-file-earmark-spreadsheet"></i>&nbsp;&nbsp;&nbsp;{{ simulacion.id|stringformat:"09d" }}</a></td>
+                    <td>{{ simulacion.apellido }}</td>
+                    <td>{{ simulacion.dni }}</td>
+                    <td>$ {{ simulacion.importe_solicitado }}</td>
+                    <td style="text-align: center;">{{ simulacion.cant_cuotas }}</td>
+					<td>$ {{ simulacion.calculo_cuota }}</td>
+                    <td>{{ simulacion.tasa_anual }} %</td>
+                    <td style="text-align: center;">{{ simulacion.created_date|date:"SHORT_DATETIME_FORMAT" }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
 
-			<div class="grid-item texto" value="created_date">DESDE MONTO</div>
-			<div class="grid-input" value="FECHA">{{ filter.form.monto_desde }}</div>
-			<div class="grid-item texto" value="monto">HASTA MONTO</div>
-			<div class="grid-input" value="MONTO">{{ filter.form.monto_hasta }}</div>
-			
-		</div>
+    </table>
 
-		<button class="filtrar btn btn-outline-secondary" type="submit" value="FILTRAR">FILTRAR</button>
+      <script type="text/javascript">
+$(document).ready(function() {
+    $('#example').DataTable({
+        "language": {
 
-	</form>
-	{% endif %}
+            "decimal":        ",",
+    "emptyTable":     "No hay información para mostrar",
+    "info": "Mostrando página _PAGE_ de _PAGES_",
+    "infoEmpty": "No hay registros disponibles",
+    "infoFiltered": "(filtrados de _MAX_ registros)",
+    "thousands":      ".",
+    "lengthMenu": "Mostrar _MENU_ registros",
+    "loadingRecords": "Cargando...",
+    "processing":     "Procesando...",
+    "search":         "Buscar:",
+    "zeroRecords": "No hay resultados para la búsqueda",
+    "paginate": {
+        "first":      "Primera",
+        "last":       "Última",
+        "next":       "Siguiente",
+        "previous":   "Anterior"
+    },
+    "aria": {
+        "sortAscending":  ": order en forma ascendente",
+        "sortDescending": ": ordenar en forma descendente"
+    }
+        }
+    });
+} );
+    </script>
 
-	
+{% if user.is_authenticated %}
+<form method="GET" style="padding-top: 70px;">
 
-	<table id="myTable" class="tablesorter">
-		<thead>
-			<tr class="titulo mayus">
-				<th onclick="sortTable(0)">ID <i class="bi bi-chevron-expand"></i></th>
-				<th onclick="sortTable(1)">APELLIDO <i class="bi bi-chevron-expand"></i></th>
-				<th onclick="sortTable(2)">DNI <i class="bi bi-chevron-expand"></i></th>
-				<th onclick="sortTable(3)">MONTO <i class="bi bi-chevron-expand"></i></th>
-				<th onclick="sortTable(4)">CUOTAS <i class="bi bi-chevron-expand"></i></th>
-				<th onclick="sortTable(5)">FECHA <i class="bi bi-chevron-expand"></i></th>
-			</tr>
-		</thead>
-		
-		<tbody>
-		{% for simulacion in filter.qs %}
-			<tr >
-				<td style="text-align: center;"><a href="{% url 'simulacion_detail' pk=simulacion.pk %}"><i class="bi bi-file-earmark-spreadsheet"></i>&nbsp;&nbsp;&nbsp;{{ simulacion.id|stringformat:"09d" }}</a></td>
-				<td>{{ simulacion.apellido }}</td>
-				<td>{{ simulacion.dni }}</td>
-				<td>{{ simulacion.importe_solicitado }}</td>
-				<td>{{ simulacion.cant_cuotas }}</td>
-				<td style="text-align: center;">{{ simulacion.created_date|date:"SHORT_DATETIME_FORMAT" }}</td>
-			</tr>
-		{% endfor %}
-		</tbody>
+    <div class="caja">
+        <div class="grid-item titulo mayus">
+            <span>FILTRAR SIMULACIONES<i style="float:right; padding-right:20px" class="bi bi-search"></i></span>
+        </div>
+        <div class="grid-item texto" value="APELLIDO">APELLIDO</div>
+        <div class="grid-input" value="SIMULACION">{{ filter.form.apellido }}</div>
+        <div class="grid-item texto" value="DNI">DNI</div>
+        <div class="grid-input" value="SIMULACION">{{ filter.form.dni }}</div>
 
-	
-	  </table>
+        <div class="grid-item texto" value="created_date">DESDE FECHA</div>
+        <div class="grid-input" value="SIMULACION">{{ filter.form.start_date }}</div>
+        <div class="grid-item texto" value="created_date">HASTA FECHA</div>
+        <div class="grid-input" value="SIMULACION"> {{ filter.form.end_date }}</div>
 
+        <div class="grid-item texto" value="created_date">DESDE MONTO</div>
+        <div class="grid-input" value="FECHA">{{ filter.form.monto_desde }}</div>
+        <div class="grid-item texto" value="monto">HASTA MONTO</div>
+        <div class="grid-input" value="MONTO">{{ filter.form.monto_hasta }}</div>
+        
+    </div>
 
-	  <!-- <script type="text/javascript">
-		var numShown = 10; // Initial rows shown & index
-	var numMore = 10;  // Increment
-	
-	var $table = $('table').find('tbody');  // tbody containing all the rows
-	var numRows = $table.find('tr').length; // Total # rows
-	
-	$(function () {
-		// Hide rows and add clickable div
-		$table.find('tr:gt(' + (numShown - 1) + ')').hide().end()
-			.after('<tbody id="more"><tr><td colspan="' +
-				   $table.find('tr:first td').length + '"><div>Mostrar <span>' +
-				   numMore + '</span> más <i class="bi bi-chevron-down"></i></div</tbody></td></tr>');
-	
-		$('#more').click(function() {
-			numShown = numShown + numMore;
-			// no more "show more" if done
-			if (numShown >= numRows) {
-				$('#more').remove();
-			}
-			// change rows remaining if less than increment
-			if (numRows - numShown < numMore) {
-				$('#more span').html(numRows - numShown);
-			}
-			$table.find('tr:lt(' + numShown + ')').show();
-		});
-	
-	});
-	</script> -->
+    <button class="filtrar btn btn-outline-secondary" type="submit" value="FILTRAR">FILTRAR</button>
+
+</form>
+
+{% endif %}
+
   <!-- {% for simulacion in filter.qs %}
 
 <form target="_self"  method="POST" class="simulacion">
@@ -176,4 +124,5 @@
   {% endfor %} -->
 
 </main>
+
 {% endblock %}

@@ -11,10 +11,9 @@
         <thead>
             <tr class="titulo mayus">
                 <th>ID </th>
-                <th >APELLIDO </th>
-                <th >DNI </th>
-                <th >MONTO </th>
-                <th >CUOTAS </th>
+                <th >IMPORTE </th>
+                <th >PAGOS </th>
+                <th >VALOR CUOTA </th>
                 <th>TASA </th>
                 <th >FECHA </th>
             </tr>
@@ -24,10 +23,9 @@
             {% for simulacion in filter.qs %}
                 <tr >
                     <td style="text-align: center;"><a href="{% url 'simulacion_detail' pk=simulacion.pk %}"><i class="bi bi-file-earmark-spreadsheet"></i>&nbsp;&nbsp;&nbsp;{{ simulacion.id|stringformat:"09d" }}</a></td>
-                    <td>{{ simulacion.apellido }}</td>
-                    <td>{{ simulacion.dni }}</td>
                     <td>$ {{ simulacion.importe_solicitado }}</td>
                     <td>{{ simulacion.cant_cuotas }}</td>
+                    <td>$ {{ simulacion.calculo_cuota }}</td>
                     <td>{{ simulacion.tasa_anual }} %</td>
                     <td style="text-align: center;">{{ simulacion.created_date|date:"SHORT_DATETIME_FORMAT" }}</td>
                 </tr>
