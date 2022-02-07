@@ -13,7 +13,7 @@ class SimulacionForm(forms.ModelForm):
     class Meta:
         model = Simulacion
         fields = ['apellido', 'nombre', 'telefono', 'email', 'importe_solicitado',
-                  'cant_cuotas', 'tasa_anual', 'dni']
+                  'cant_cuotas', 'tasa_id', 'dni']
         # initial = 3
 
     # def __init__(self, *args, **kwargs):
@@ -26,7 +26,7 @@ class SolicitudForm(forms.ModelForm):
     class Meta:
         model = Solicitud
         fields = ['descripcion_emp', 'rubro', 'inicio_actividad', 'datos_contacto', 'personal_familiar', 'personal_nofamiliar',
-                  'ingreso_emp_mes', 'gastos_emp', 'notas', 'importe_solicitado', 'cant_cuotas', 'tasa_anual']
+                  'ingreso_emp_mes', 'gastos_emp', 'notas', 'importe_solicitado', 'cant_cuotas', 'tasa_id']
         widgets = {
             'inicio_actividad': DateInput(),
         }

@@ -37,11 +37,10 @@ def simulacion_new(request):
     autor = request.user
     if request.method == "POST":
         form = SimulacionForm(request.POST)
-        tasa = TasaInteres.objects.get(pk=1)
-        print(tasa.tasa)
+
         if form.is_valid():
             simulacion = form.save(commit=False)
-            simulacion.tasa_anual = int(tasa.tasa)
+
             # Acá chequea que el monto de la simulación no super el SMVM
             if simulacion.importe_solicitado <= int(12*(simulacion.smvm.monto)):
                 if request.user.is_authenticated:
@@ -122,6 +121,8 @@ def sobre_creditos(request):
 
 def solicitud_detail(request, pk):
     solicitud = get_object_or_404(Solicitud, pk=pk)
+    # solicitud.edad = int(date(solicitud.created_date) -
+    #                      solicitud.emprendedor.fec_nac)
     return render(request, 'solicitudes/solicitud_detail.html', {'solicitud': solicitud})
 
 # @login_required(login_url='accounts/login')
@@ -142,7 +143,7 @@ def solicitud_new(request):
                     solicitud.save()
                     return redirect('solicitud_detail', pk=solicitud.pk)
                 else:
-                    maximo = str(12*(solicitud.smvm.importe_solicitado))
+                    maximo = str(12*(solicitud.smvm.monto))
                     messages.error(
                         request, f'El monto solicitado supera los 12 salarios mínimos. Debe ser inferior a ${maximo}')
             else:

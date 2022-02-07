@@ -67,6 +67,8 @@ class Simulacion(models.Model):
     importe_solicitado = models.PositiveIntegerField()
     created_date = models.DateTimeField(
         default=timezone.now)
+    tasa_id = models.ForeignKey(
+        TasaInteres, on_delete=models.CASCADE, null=True, default=1)
     tasa_anual = models.PositiveIntegerField()
     cant_cuotas = models.CharField(max_length=200, choices=CUOTAS_LISTA)
     telefono = models.CharField(max_length=200)
@@ -80,7 +82,7 @@ class Simulacion(models.Model):
         self.save()
 
     def calculo_cuota(self):
-        interes = int(self.tasa_anual)/100
+        interes = int(self.tasa_id.tasa)/100
         cant_cuotas = int(self.cant_cuotas)
         calculo_cuota = round(self.importe_solicitado*(interes/12) /
                               (1-(1+(interes/12))**(-cant_cuotas)), 2)
@@ -89,6 +91,7 @@ class Simulacion(models.Model):
     def save(self, *args, **kwargs):
         # Toma el resultado de la función y lo guarda en el modelo
         self.cuota_final = self.calculo_cuota()
+        self.tasa_anual = self.tasa_id.tasa
         super(Simulacion, self).save(*args, **kwargs)
 
     def __unicode__(self):
@@ -203,8 +206,9 @@ class Solicitud(models.Model):
     notas = models.TextField(blank=True)
     importe_solicitado = models.PositiveIntegerField()
     cant_cuotas = models.CharField(max_length=200, choices=CUOTAS_LISTA)
-    tasa_anual = models.ForeignKey(
+    tasa_id = models.ForeignKey(
         TasaInteres, on_delete=models.CASCADE, null=True, default=1)
+    tasa_anual = models.PositiveIntegerField()
     destino1_texto = models.CharField(max_length=50, null=True)
     destino1_monto = models.IntegerField(null=True)
     destino2_texto = models.CharField(max_length=50, null=True)
@@ -213,6 +217,7 @@ class Solicitud(models.Model):
     destino3_monto = models.IntegerField(null=True)
     cuota_final = models.DecimalField(
         decimal_places=2, max_digits=9, null=True)
+    # edad = models.PositiveIntegerField(null=True)
 
     def publish(self):
         self.created_date = timezone.now()
@@ -220,7 +225,7 @@ class Solicitud(models.Model):
         self.save()
 
     def calculo_cuota(self):
-        interes = int(self.tasa_anual.tasa)/100
+        interes = int(self.tasa_id.tasa)/100
         cant_cuotas = int(self.cant_cuotas)
         calculo_cuota = round(self.importe_solicitado*(interes/12) /
                               (1-(1+(interes/12))**(-cant_cuotas)), 2)
@@ -234,9 +239,15 @@ class Solicitud(models.Model):
             minimo = False
         return minimo
 
+    # def edad(self):
+    #     edad = int((date(self.created_date) - self.emprendedor.fec_nac))
+    #     return edad
+
     def save(self, *args, **kwargs):
         # Toma el resultado de la función y lo guarda en el modelo
         self.cuota_final = self.calculo_cuota()
+        self.tasa_anual = self.tasa_id.tasa
+        # self.edad = self.edad()
         super(Solicitud, self).save(*args, **kwargs)
 
     def __unicode__(self):

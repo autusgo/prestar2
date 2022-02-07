@@ -9,6 +9,13 @@ class SimulacionAdmin(admin.ModelAdmin):
 admin.site.register(Simulacion, SimulacionAdmin)
 
 
+class SolicitudAdmin(admin.ModelAdmin):
+    list_display = ['id']
+
+
+admin.site.register(Solicitud, SolicitudAdmin)
+
+
 class TasaInteresAdmin(admin.ModelAdmin):
     list_display = ['tasa', 'created_date', 'author']
 
