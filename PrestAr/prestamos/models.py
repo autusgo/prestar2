@@ -67,8 +67,7 @@ class Simulacion(models.Model):
     importe_solicitado = models.PositiveIntegerField()
     created_date = models.DateTimeField(
         default=timezone.now)
-    tasa_anual = models.ForeignKey(
-        TasaInteres, on_delete=models.CASCADE, null=True, default=1)
+    tasa_anual = models.PositiveIntegerField()
     cant_cuotas = models.CharField(max_length=200, choices=CUOTAS_LISTA)
     telefono = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
@@ -81,7 +80,7 @@ class Simulacion(models.Model):
         self.save()
 
     def calculo_cuota(self):
-        interes = int(self.tasa_anual.tasa)/100
+        interes = int(self.tasa_anual)/100
         cant_cuotas = int(self.cant_cuotas)
         calculo_cuota = round(self.importe_solicitado*(interes/12) /
                               (1-(1+(interes/12))**(-cant_cuotas)), 2)
