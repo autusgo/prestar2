@@ -13,7 +13,7 @@
                 <th>ID </th>
                 <th >IMPORTE </th>
                 <th >PAGOS </th>
-                <th >VALOR CUOTA </th>
+                <th > CUOTA </th>
                 <th>TASA </th>
                 <th >FECHA </th>
             </tr>
@@ -27,7 +27,7 @@
                     <td>{{ simulacion.cant_cuotas }}</td>
                     <td>$ {{ simulacion.calculo_cuota }}</td>
                     <td>{{ simulacion.tasa_anual }} %</td>
-                    <td style="text-align: center;">{{ simulacion.created_date|date:"SHORT_DATETIME_FORMAT" }}</td>
+                    <td style="text-align: center;">{{ simulacion.created_date|date:"SHORT_DATE_FORMAT" }}</td>
                 </tr>
             {% endfor %}
             </tbody>

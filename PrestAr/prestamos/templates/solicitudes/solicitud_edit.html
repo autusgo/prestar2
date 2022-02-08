@@ -6,7 +6,7 @@
 
 <main>
     <form target="_self"  method="POST" class="simulacion-form">{% csrf_token %}
-        <div class="texto" style="color:red">
+        <div class="texto" style="color:red; padding:30px">
             {% if messages %}
                 <div class="span12">
             {% for message in messages %}

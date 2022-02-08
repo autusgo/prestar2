@@ -141,6 +141,8 @@ def solicitud_new(request):
                         solicitud.author = request.user
                         solicitud.domicilio_emp = solicitud.author.domicilio
                     solicitud.save()
+                    messages.success(
+                        request, 'Se generó una nueva solicitud')
                     return redirect('solicitud_detail', pk=solicitud.pk)
                 else:
                     maximo = str(12*(solicitud.smvm.monto))
@@ -179,8 +181,8 @@ def solicitud_list(request):
 def solicitudes_propias(request):
     solicitudes = SolicitudFilter(
         request.GET, queryset=Solicitud.objects.filter(author=request.user))
-    print(solicitudes)
-    return render(request, 'solicitudes/solicitud_list.html', {'filter': solicitudes})
+
+    return render(request, 'solicitudes/solicitud_propias.html', {'filter': solicitudes})
 
 
 # CONFIGURACIONES

@@ -11,11 +11,9 @@
         <thead>
             <tr class="titulo mayus">
                 <th>ID </th>
-                <th >APELLIDO </th>
-                <th >DNI </th>
                 <th >IMPORTE </th>
                 <th >PAGOS </th>
-				<th >CUOTA </th>
+                <th >CUOTA </th>
                 <th>TASA </th>
                 <th >FECHA </th>
             </tr>
@@ -25,17 +23,14 @@
             {% for solicitud in filter.qs %}
                 <tr >
                     <td style="text-align: center;"><a href="{% url 'solicitud_detail' pk=solicitud.pk %}"><i class="bi bi-file-earmark-spreadsheet"></i>&nbsp;&nbsp;&nbsp;{{ solicitud.id|stringformat:"09d" }}</a></td>
-                    <td style="text-align: left;">{{ solicitud.emprendedor.apellido }}</td>
-                    <td>{{ solicitud.emprendedor.dni }}</td>
                     <td>$ {{ solicitud.importe_solicitado }}</td>
-                    <td style="text-align: center;">{{ solicitud.cant_cuotas }}</td>
-					<td>$ {{ solicitud.calculo_cuota }}</td>
+                    <td>{{ solicitud.cant_cuotas }}</td>
+                    <td>$ {{ solicitud.calculo_cuota }}</td>
                     <td>{{ solicitud.tasa_anual }} %</td>
                     <td style="text-align: center;">{{ solicitud.created_date|date:"SHORT_DATE_FORMAT" }}</td>
                 </tr>
             {% endfor %}
             </tbody>
-
     </table>
 
       <script type="text/javascript">
@@ -76,20 +71,20 @@ $(document).ready(function() {
         <div class="grid-item titulo mayus">
             <span>FILTRAR SIMULACIONES<i style="float:right; padding-right:20px" class="bi bi-search"></i></span>
         </div>
-        <div class="grid-item texto" value="APELLIDO">APELLIDO</div>
+        <!-- <div class="grid-item texto" value="APELLIDO">APELLIDO</div>
         <div class="grid-input" value="SIMULACION">{{ filter.form.apellido }}</div>
         <div class="grid-item texto" value="DNI">DNI</div>
-        <div class="grid-input" value="SIMULACION">{{ filter.form.dni }}</div>
+        <div class="grid-input" value="SIMULACION">{{ filter.form.dni }}</div> -->
 
         <div class="grid-item texto" value="created_date">DESDE FECHA</div>
         <div class="grid-input" value="SIMULACION">{{ filter.form.start_date }}</div>
         <div class="grid-item texto" value="created_date">HASTA FECHA</div>
         <div class="grid-input" value="SIMULACION"> {{ filter.form.end_date }}</div>
 
-        <div class="grid-item texto" value="created_date">DESDE MONTO</div>
+        <!-- <div class="grid-item texto" value="created_date">DESDE MONTO</div>
         <div class="grid-input" value="FECHA">{{ filter.form.monto_desde }}</div>
         <div class="grid-item texto" value="monto">HASTA MONTO</div>
-        <div class="grid-input" value="MONTO">{{ filter.form.monto_hasta }}</div>
+        <div class="grid-input" value="MONTO">{{ filter.form.monto_hasta }}</div> -->
         
     </div>
 
@@ -103,7 +98,7 @@ $(document).ready(function() {
 
 <form target="_self"  method="POST" class="solicitud">
 			<div class="caja">
-     			<div class="grid-item titulo mayus"><a href="{% url 'solicitud_detail' pk=solicitud.pk %}"><i class="bi bi-bookmark"></i>&nbsp;&nbsp;#{{ solicitud.id|stringformat:"09d" }}</a></div>
+     			<div class="grid-item titulo mayus"><a href="{% url 'simulacion_detail' pk=solicitud.pk %}"><i class="bi bi-bookmark"></i>&nbsp;&nbsp;#{{ solicitud.id|stringformat:"09d" }}</a></div>
 
           <div class="grid-item texto">NOMBRE</div>
           <div class="grid-input">{{ solicitud.apellido }}</div>
