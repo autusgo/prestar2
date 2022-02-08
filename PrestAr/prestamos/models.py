@@ -82,7 +82,7 @@ class Simulacion(models.Model):
         self.save()
 
     def calculo_cuota(self):
-        interes = int(self.tasa_id.tasa)/100
+        interes = int(self.tasa_anual)/100
         cant_cuotas = int(self.cant_cuotas)
         calculo_cuota = round(self.importe_solicitado*(interes/12) /
                               (1-(1+(interes/12))**(-cant_cuotas)), 2)
@@ -225,7 +225,7 @@ class Solicitud(models.Model):
         self.save()
 
     def calculo_cuota(self):
-        interes = int(self.tasa_id.tasa)/100
+        interes = int(self.tasa_anual)/100
         cant_cuotas = int(self.cant_cuotas)
         calculo_cuota = round(self.importe_solicitado*(interes/12) /
                               (1-(1+(interes/12))**(-cant_cuotas)), 2)
