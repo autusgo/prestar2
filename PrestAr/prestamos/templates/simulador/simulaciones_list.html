@@ -20,7 +20,7 @@
                 <th >FECHA </th>
             </tr>
         </thead>
-
+        {% if user.is_staff %}
         <tbody>
             {% for simulacion in filter.qs %}
                 <tr >
@@ -34,6 +34,7 @@
                     <td style="text-align: center;">{{ simulacion.created_date|date:"SHORT_DATE_FORMAT" }}</td>
                 </tr>
             {% endfor %}
+            {% endif %}
             </tbody>
 
     </table>

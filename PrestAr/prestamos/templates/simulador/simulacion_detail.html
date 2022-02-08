@@ -12,7 +12,7 @@
 			<div class="caja">
         <div class="grid-item titulo mayus">
           <span><i class="bi bi-bookmark"></i>&nbsp;&nbsp; #{{ simulacion.id|stringformat:"09d" }}
-						{% if user.is_authenticated %}
+						{% if user.is_staff %}
               <a onclick="return confirm('¿Está seguro de que desea eliminar la simulación?')"; href="{% url 'simulacion_remove' pk=simulacion.pk %}"><span style="float:right" class="bi bi-trash"></span></a>
 						{% endif %}
           </span>

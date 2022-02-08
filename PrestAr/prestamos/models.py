@@ -90,8 +90,8 @@ class Simulacion(models.Model):
 
     def save(self, *args, **kwargs):
         # Toma el resultado de la función y lo guarda en el modelo
-        self.cuota_final = self.calculo_cuota()
         self.tasa_anual = self.tasa_id.tasa
+        self.cuota_final = self.calculo_cuota()
         super(Simulacion, self).save(*args, **kwargs)
 
     def __unicode__(self):
@@ -245,8 +245,8 @@ class Solicitud(models.Model):
 
     def save(self, *args, **kwargs):
         # Toma el resultado de la función y lo guarda en el modelo
-        self.cuota_final = self.calculo_cuota()
         self.tasa_anual = self.tasa_id.tasa
+        self.cuota_final = self.calculo_cuota()
         # self.edad = self.edad()
         super(Solicitud, self).save(*args, **kwargs)
 

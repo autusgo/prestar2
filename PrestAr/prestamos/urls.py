@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
 
-    path('', views.sim_index, name='sim_index'),
+    path('', views.sobre_conami, name='sobre_conami'),
     path('simulador/', views.sim_index, name='sim_index'),
     path('simulador/list/', views.simulaciones_list, name='simulaciones_list'),
     path('simulador/propias/', views.simulaciones_propias,
