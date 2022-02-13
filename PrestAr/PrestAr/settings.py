@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-^uh763m97q$+llf#tkcy6-+#l13vtcd88a1tkv_*f)3^!!fp92
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['prestar.azurewebsites.net', '127.0.0.1']
 
 
 # Application definition
@@ -49,12 +49,14 @@ AUTH_USER_MODEL = 'accounts.Emprendedor'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'PrestAr.urls'
@@ -134,7 +136,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# DEBUG_PROPAGATE_EXCEPTIONS = True
+
+
+# No sabemos bien que hace. Supuestamente ayuda a que no joda con errores de static files
+WHITENOISE_MANIFEST_STRICT = False
+
+
+CSRF_TRUSTED_ORIGINS = ['https://*.azurewebsites.net/', 'http://*.127.0.0.1']

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/25cc2461-c84c-4c02-9778-4db1bc699566/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/prestar",
+    "appService.deploySubpath": "."
+}
